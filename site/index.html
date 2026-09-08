@@ -191,6 +191,8 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   white-space: nowrap;
 }
 .btn[hidden], section[hidden] { display: none; }
+/* Belt and braces: keep the HubSpot chat launcher off this page. */
+#hubspot-messages-iframe-container, #hs-web-interactives-floating-container { display: none !important; }
 .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
 .btn--primary:hover { background: oklch(70% 0.128 188); }
 
@@ -901,6 +903,10 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 </script>
 
 <!-- HubSpot tracking code — portal 2697631 (NA) -->
+<!-- HubSpot chat widget is not staffed for this page: stop the conversations widget from loading.
+     Analytics and forms still work. To remove it at the source, Marketing can exclude this domain
+     in the HubSpot chatflow targeting rules. -->
+<script>window.hsConversationsSettings = { loadImmediately: false };</script>
 <script type="text/javascript" id="hs-script-loader" async defer src="https://js.hs-scripts.com/2697631.js"></script>
 </body>
 </html>
