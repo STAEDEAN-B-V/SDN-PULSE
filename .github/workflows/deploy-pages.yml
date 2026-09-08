@@ -1,0 +1,72 @@
+# ------------------------------------------------------------------------------
+# STAEDEAN Product Pulse - landing page deployment (GitHub Pages)
+#
+# Deploys product-pulse/site to GitHub Pages using the "GitHub Actions" Pages
+# source (not the legacy branch-based Pages source).
+#
+# One-time setup in the GitHub repo:
+#   1. Settings > Pages > Build and deployment > Source: "GitHub Actions".
+#   2. (Optional) Settings > Pages > Custom domain: set it to match site/CNAME
+#      (see docs/03-hosting-and-monthly-ops.md), then enable "Enforce HTTPS"
+#      once the certificate is issued.
+#   3. Push to main with changes under site/**, or run this workflow manually
+#      from the Actions tab (workflow_dispatch).
+# ------------------------------------------------------------------------------
+
+name: Deploy Product Pulse site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "site/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate site content
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate sessions.json is valid JSON
+        run: python -c "import json,sys; json.load(open('site/sessions.json'))"
+
+      - name: Confirm index.html exists
+        run: test -f site/index.html || (echo "site/index.html missing" && exit 1)
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      contents: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

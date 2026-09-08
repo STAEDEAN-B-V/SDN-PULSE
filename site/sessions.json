@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "programme": "STAEDEAN Product Pulse",
+    "note": "This is the only file edited monthly. Add the Teams registration URL when the webinar exists; add the YouTube recording URL after the pulse. Dates are ISO 8601 with the Europe/Amsterdam offset (+02:00 in CEST, +01:00 in CET)."
+  },
+  "sessions": [
+    {
+      "id": "pp-2026-07",
+      "date": "2026-07-14T14:00:00+02:00",
+      "title": "Summer release round-up: Data Modeling Studio and Security and Compliance Studio",
+      "teaser": "What shipped in the summer release for Data Modeling Studio and Security and Compliance Studio, and what it changes for your D365 F&SCM environment.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": "https://www.youtube.com/watch?v=PLACEHOLDER01",
+      "status": "past"
+    },
+    {
+      "id": "pp-2026-08",
+      "date": "2026-08-11T14:00:00+02:00",
+      "title": "Connectivity Studio: no-code integration patterns customers actually use",
+      "teaser": "Three integration patterns built in Connectivity Studio without custom code, and how to pick the right one for your data volumes.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": "https://www.youtube.com/watch?v=PLACEHOLDER02",
+      "status": "past"
+    },
+    {
+      "id": "pp-2026-09",
+      "date": "2026-09-15T14:00:00+02:00",
+      "title": "Product Pulse kickoff: the 2026-2027 roadmap in 30 minutes",
+      "teaser": "The season opener. Where the STAEDEAN portfolio is heading across Dynamics 365 F&SCM and Business Central, and which releases land first.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": "https://events.teams.microsoft.com/event/PLACEHOLDER-SEP/registration",
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2026-10",
+      "date": "2026-10-13T14:00:00+02:00",
+      "title": "Data Modeling Studio: faster data migration and copy between environments",
+      "teaser": "New data entity handling in Data Modeling Studio, plus a walkthrough of a go-live data load from staging to production.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": "https://events.teams.microsoft.com/event/PLACEHOLDER-OCT/registration",
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2026-11",
+      "date": "2026-11-10T14:00:00+01:00",
+      "title": "Security and Compliance Studio: segregation of duties without the spreadsheet",
+      "teaser": "How to review roles, resolve SoD conflicts and produce an audit trail inside D365, with the latest release changes.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": "https://events.teams.microsoft.com/event/PLACEHOLDER-NOV/registration",
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2026-12",
+      "date": "2026-12-08T14:00:00+01:00",
+      "title": "Rental: contract billing and equipment availability in the December release",
+      "teaser": "What is new in STAEDEAN Rental for D365 F&SCM: billing schedules, availability checks and the fixes customers asked for.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-01",
+      "date": "2027-01-12T14:00:00+01:00",
+      "title": "Business Central: what STAEDEAN ships for BC in 2027",
+      "teaser": "Our Business Central apps in one session: current capabilities, the 2027 plan, and how BC and F&SCM customers get the same data governance.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-02",
+      "date": "2027-02-09T14:00:00+01:00",
+      "title": "Food: batch traceability and quality from goods receipt to dispatch",
+      "teaser": "A short tour of STAEDEAN Food for D365 F&SCM, focused on traceability, catch weight and quality checks, plus the newest release notes.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-03",
+      "date": "2027-03-09T14:00:00+01:00",
+      "title": "Lean Manufacturing: production flows for mixed-mode manufacturers",
+      "teaser": "Kanban, production flows and takt time in D365. What the March release adds and where Lean Manufacturing fits next to discrete production.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-04",
+      "date": "2027-04-13T14:00:00+02:00",
+      "title": "Connectivity Studio: EDI onboarding for a new trading partner, start to finish",
+      "teaser": "One partner, one hour of setup. Message definitions, mapping and monitoring, demonstrated live in D365 F&SCM.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-05",
+      "date": "2027-05-11T14:00:00+02:00",
+      "title": "Spring release: what changes across the STAEDEAN portfolio",
+      "teaser": "The twice-yearly overview. Every product, the changes that matter, and the upgrade notes to read before you update.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-06",
+      "date": "2027-06-08T14:00:00+02:00",
+      "title": "Data governance in practice: keeping master data clean after go-live",
+      "teaser": "Data Modeling Studio and Security and Compliance Studio together. Ownership, approvals and audit, without leaving Dynamics 365.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-07",
+      "date": "2027-07-13T14:00:00+02:00",
+      "title": "Copilot and STAEDEAN: where AI helps inside D365 today",
+      "teaser": "An honest look at what Copilot does with our data model right now, what we are building, and what we are deliberately not doing yet.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    },
+    {
+      "id": "pp-2027-08",
+      "date": "2027-08-10T14:00:00+02:00",
+      "title": "Ask the product team: your questions, one session",
+      "teaser": "No slides. Send your questions in advance and the product team answers them live, across every STAEDEAN solution.",
+      "speakers": [
+        { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+      ],
+      "registrationUrl": null,
+      "recordingUrl": null,
+      "status": "upcoming"
+    }
+  ]
+}

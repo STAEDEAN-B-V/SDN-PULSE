@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="STAEDEAN Product Pulse">
+  <title>STAEDEAN Product Pulse</title>
+  <rect width="64" height="64" rx="12" fill="#1f2342"/>
+  <path d="M8 34h11l6-14 8 26 6-16 5 6h12" fill="none" stroke="#17c8be" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="staedean">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STAEDEAN Product Pulse — 30 minutes of product news, every month</title>
+<meta name="description" content="STAEDEAN Product Pulse is a free 30-minute online session with product news for Dynamics 365 Finance &amp; Supply Chain Management and Business Central. Register for the next pulse or watch a recording.">
+
+<!-- Open Graph / social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="STAEDEAN">
+<meta property="og:title" content="STAEDEAN Product Pulse">
+<meta property="og:description" content="30 minutes of product news, every month. Free, online via Teams, recording afterwards.">
+<meta property="og:url" content="https://pulse.staedean.com/">
+<meta property="og:image" content="https://pulse.staedean.com/assets/logo-staedean.svg">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="STAEDEAN Product Pulse">
+<meta name="twitter:description" content="30 minutes of product news, every month. Free, online via Teams, recording afterwards.">
+
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://pulse.staedean.com/">
+
+<!--
+  GitHub Pages cannot set custom HTTP response headers, so the Content-Security-Policy
+  that used to live in the previous hosting platform's config file is carried
+  here as a meta tag instead. Directives are unchanged EXCEPT `frame-ancestors`, which
+  is dropped because it has no effect in a <meta> CSP (it is only honored as an HTTP
+  response header) - see docs/03-hosting-and-monthly-ops.md for the clickjacking
+  implication and mitigation notes. If a new third-party host is ever needed
+  (script/style/img/connect/frame), update this tag, not a config file.
+-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.hubspot.com https://*.hs-scripts.com https://*.hsforms.net https://*.hs-analytics.net https://*.hsadspixel.net https://*.hscollectedforms.net https://*.usemessages.com https://*.hs-banner.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.youtube.com https://i.ytimg.com https://*.hubspot.com https://*.hsforms.com https://*.hubspotusercontent.com; connect-src 'self' https://*.hubspot.com https://*.hubapi.com https://*.hsforms.com https://*.hscollectedforms.net https://*.hs-banner.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://*.hubspot.com https://*.hsforms.com; base-uri 'self'; form-action 'self' https://*.hsforms.com">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ------------------------------------------------------------------
+   STAEDEAN theme tokens — light drop (default)
+   Source: .agents/skills/hallmark/references/themes/staedean.md
+   ------------------------------------------------------------------ */
+:root {
+  --color-paper:      oklch(99.0% 0.004 276);
+  --color-paper-2:    oklch(97.0% 0.006 276);
+  --color-paper-band: oklch(32.3% 0.114 257);   /* Sapphire Blue #00316c */
+
+  --color-ink:        oklch(26.9% 0.058 276);   /* Galaxy Black #1f2342 */
+  --color-ink-2:      oklch(45.0% 0.030 276);
+
+  --color-rule:       oklch(91.6% 0.006 276);
+  --color-rule-2:     oklch(94.5% 0.005 276);
+  --color-muted:      oklch(54.1% 0.010 276);
+  --color-neutral:    oklch(70.0% 0.008 276);
+
+  --color-accent:     oklch(75.2% 0.128 188);   /* Miami Teal #17c8be */
+  --color-accent-2:   oklch(78.0% 0.154 58);
+  --color-accent-ink: oklch(26.9% 0.058 276);
+
+  --color-alert:      oklch(67.9% 0.197 27);
+  --color-focus:      oklch(70.0% 0.180 188);
+
+  --font-display: "Gilroy", "Manrope", system-ui, sans-serif;
+  --font-body:    "Aptos", system-ui, "Segoe UI", "Inter", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 160ms; --dur-base: 240ms; --dur-slow: 360ms;
+  --radius-card: 10px; --radius-input: 8px; --radius-pill: 999px;
+
+  /* Full-bleed Galaxy band (hero + footer) — dark in both drops */
+  --band-bg:    oklch(26.9% 0.058 276);
+  --band-bg-2:  oklch(31.0% 0.055 276);
+  --band-ink:   oklch(97.0% 0.006 276);
+  --band-ink-2: oklch(80.0% 0.010 276);
+  --band-rule:  oklch(40.0% 0.030 276);
+
+  --shell: 1100px;
+}
+
+/* Galaxy drop — dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper:      oklch(26.9% 0.058 276);
+    --color-paper-2:    oklch(31.0% 0.055 276);
+    --color-paper-band: oklch(32.3% 0.114 257);
+
+    --color-ink:        oklch(97.0% 0.006 276);
+    --color-ink-2:      oklch(80.0% 0.010 276);
+
+    --color-rule:       oklch(40.0% 0.030 276);
+    --color-rule-2:     oklch(35.0% 0.040 276);
+    --color-muted:      oklch(70.0% 0.012 276);
+    --color-neutral:    oklch(55.0% 0.020 276);
+
+    --color-accent:     oklch(75.2% 0.128 188);
+    --color-accent-2:   oklch(78.0% 0.154 58);
+    --color-accent-ink: oklch(26.9% 0.058 276);
+
+    --color-alert:      oklch(67.9% 0.197 27);
+    --color-focus:      oklch(78.0% 0.180 188);
+
+    --band-bg:    oklch(22.5% 0.055 276);
+    --band-bg-2:  oklch(27.5% 0.055 276);
+    --band-ink:   oklch(97.0% 0.006 276);
+    --band-ink-2: oklch(80.0% 0.010 276);
+    --band-rule:  oklch(38.0% 0.030 276);
+  }
+}
+
+/* ---------------- base ---------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+html { scroll-behavior: smooth; scroll-padding-top: 2rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink-2);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin: 0 0 0.5em;
+  font-weight: 700;
+}
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 800; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+h3 { font-size: 1.125rem; letter-spacing: -0.01em; }
+p  { margin: 0 0 1rem; }
+a  { color: inherit; }
+
+.shell { max-width: var(--shell); margin-inline: auto; padding-inline: 1.5rem; }
+section { padding-block: clamp(3rem, 7vw, 5.5rem); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin: 0 0 1rem;
+  display: block;
+}
+.eyebrow::before {
+  content: ""; display: inline-block; width: 1.5em; height: 2px;
+  margin-right: 0.6em; vertical-align: middle; background: var(--color-accent);
+}
+
+.h-mark { position: relative; white-space: nowrap; z-index: 0; }
+.h-mark::after {
+  content: ""; position: absolute; left: -0.04em; right: -0.04em;
+  bottom: 0.02em; height: 0.44em;
+  background: var(--color-accent); opacity: 0.28;
+  border-radius: 2px; z-index: -1;
+}
+
+:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 3px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 99;
+  background: var(--color-accent); color: var(--color-accent-ink);
+  padding: 0.7rem 1.1rem; border-radius: 0 0 var(--radius-input) 0; font-weight: 600;
+}
+.skip-link:focus { left: 0; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------------- buttons ---------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+  padding: 0.72rem 1.3rem; border-radius: var(--radius-input);
+  border: 1px solid transparent; text-decoration: none; cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+  white-space: nowrap;
+}
+.btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
+.btn--primary:hover { background: oklch(70% 0.128 188); }
+
+.btn--ghost { background: transparent; color: var(--color-ink); border-color: var(--color-rule); }
+.btn--ghost:hover { border-color: var(--color-accent); }
+
+.on-band .btn--ghost { color: var(--band-ink); border-color: var(--band-rule); }
+.on-band .btn--ghost:hover { border-color: var(--color-accent); }
+
+.btn[aria-disabled="true"],
+.btn:disabled {
+  background: transparent; color: var(--color-muted);
+  border: 1px dashed var(--color-rule); cursor: not-allowed; font-weight: 500;
+}
+
+/* ---------------- bands ---------------- */
+.band-galaxy { background: var(--band-bg); color: var(--band-ink-2); }
+.band-galaxy h1, .band-galaxy h2, .band-galaxy h3 { color: var(--band-ink); }
+.band-galaxy .eyebrow { color: var(--band-ink-2); }
+
+.band-sapphire { background: var(--color-paper-band); color: oklch(88% 0.02 257); }
+.band-sapphire h2 { color: oklch(99% 0.004 276); }
+.band-sapphire .eyebrow { color: oklch(85% 0.02 257); }
+
+.band-paper-2 { background: var(--color-paper-2); }
+
+/* ---------------- hero ---------------- */
+.hero { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
+.hero__grid {
+  display: grid; gap: clamp(2rem, 5vw, 3.5rem);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 860px) {
+  .hero__grid { grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); align-items: center; }
+}
+.hero__sub { font-size: 1.125rem; max-width: 46ch; color: var(--band-ink-2); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.hero__brand { margin-bottom: 2.5rem; }
+.hero__brand img { height: 26px; width: auto; display: block; }
+
+/* date tile */
+.tile {
+  border: 1px solid var(--band-rule); border-radius: var(--radius-card);
+  background: var(--band-bg-2); padding: 1.5rem; text-align: left;
+}
+.tile__label {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 0.7rem; color: var(--color-accent); margin: 0 0 0.9rem;
+}
+.tile__day {
+  font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1;
+  color: var(--band-ink); font-variant-numeric: tabular-nums; letter-spacing: -0.03em;
+}
+.tile__month {
+  font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
+  text-transform: uppercase; letter-spacing: 0.06em; color: var(--band-ink); margin-top: 0.25rem;
+}
+.tile__time { font-size: 0.9rem; color: var(--band-ink-2); margin-top: 0.75rem; }
+.tile__title {
+  font-size: 0.95rem; color: var(--band-ink-2); margin-top: 1rem;
+  padding-top: 1rem; border-top: 1px solid var(--band-rule);
+}
+
+/* ---------------- value props ---------------- */
+.cols {
+  display: grid; gap: 2rem; grid-template-columns: 1fr; margin-top: 2.5rem;
+}
+@media (min-width: 760px) { .cols { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; } }
+.cols h3 { margin-bottom: 0.4rem; }
+.cols p { margin: 0; color: var(--color-ink-2); }
+.note-line {
+  margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-rule);
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--color-muted);
+}
+
+/* ---------------- speaker ---------------- */
+.speakers { display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.5rem; }
+@media (min-width: 760px) { .speakers { grid-template-columns: repeat(2, 1fr); } }
+.speaker {
+  display: flex; gap: 1.25rem; align-items: flex-start;
+  border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+  padding: 1.5rem; background: var(--color-paper);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.speaker:hover { border-color: var(--color-accent); }
+.speaker img {
+  width: 92px; height: 92px; border-radius: var(--radius-card);
+  object-fit: cover; flex: none; background: var(--color-paper-2);
+}
+.speaker h3 { margin-bottom: 0.15rem; }
+.speaker__role {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--color-muted); margin: 0 0 0.7rem;
+}
+.speaker p { font-size: 0.95rem; }
+.link-accent {
+  color: var(--color-ink); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+  border-bottom: 2px solid var(--color-accent); padding-bottom: 1px;
+}
+.link-accent:hover { color: var(--color-ink); border-bottom-color: var(--color-ink); }
+.speaker--empty { align-items: center; justify-content: center; border-style: dashed; color: var(--color-muted); text-align: center; }
+
+/* ---------------- upcoming list ---------------- */
+.sessions { list-style: none; margin: 2.5rem 0 0; padding: 0; border-top: 1px solid var(--color-rule); }
+.session {
+  display: grid; gap: 1.25rem; padding: 1.75rem 0;
+  border-bottom: 1px solid var(--color-rule);
+  grid-template-columns: 1fr;
+  scroll-margin-top: 2rem;
+}
+@media (min-width: 760px) {
+  .session { grid-template-columns: 112px minmax(0, 1fr) auto; align-items: start; gap: 2rem; }
+}
+.session:target { background: var(--color-paper-2); }
+.session__date {
+  border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+  padding: 0.85rem 0.5rem; text-align: center; width: 112px; background: var(--color-paper);
+}
+.session__day {
+  font-family: var(--font-display); font-weight: 800; font-size: 2rem; line-height: 1;
+  color: var(--color-ink); font-variant-numeric: tabular-nums;
+}
+.session__mon {
+  font-family: var(--font-display); font-weight: 700; font-size: 0.8rem;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-accent); margin-top: 0.25rem;
+}
+.session__yr { font-size: 0.72rem; color: var(--color-muted); margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
+.session__title { margin-bottom: 0.35rem; }
+.session__meta {
+  font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--color-muted); margin: 0 0 0.5rem;
+}
+.session__teaser { margin: 0; font-size: 0.95rem; max-width: 62ch; }
+.session__action { display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+.session__hint { font-size: 0.78rem; color: var(--color-muted); max-width: 20ch; line-height: 1.4; }
+.session--cancelled .session__title { text-decoration: line-through; }
+.badge-cancelled {
+  display: inline-block; font-family: var(--font-mono); font-size: 0.68rem;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-alert);
+  border: 1px solid var(--color-alert); border-radius: var(--radius-pill); padding: 0.15rem 0.6rem;
+}
+
+/* ---------------- past grid ---------------- */
+.past-grid {
+  display: grid; gap: 1.5rem; grid-template-columns: 1fr; margin-top: 2.5rem; padding: 0; list-style: none;
+}
+@media (min-width: 620px) { .past-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .past-grid { grid-template-columns: repeat(3, 1fr); } }
+.past-card {
+  border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+  overflow: hidden; display: flex; flex-direction: column; background: var(--color-paper);
+  transition: border-color var(--dur-base) var(--ease-out);
+}
+.past-card:hover { border-color: var(--color-accent); }
+.past-card__thumb {
+  display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  background: var(--color-paper-2); border-bottom: 1px solid var(--color-rule);
+}
+.past-card__body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.past-card__date {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--color-muted); margin: 0;
+}
+.past-card h3 { font-size: 1rem; margin: 0; }
+.past-card__link { margin-top: auto; padding-top: 0.5rem; }
+
+.show-all { margin-top: 2rem; }
+
+/* ---------------- subscribe band ---------------- */
+.subscribe__grid { display: grid; gap: 2.5rem; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 860px) { .subscribe__grid { grid-template-columns: minmax(0, 1fr) minmax(300px, 420px); } }
+.subscribe p { max-width: 48ch; }
+.form-slot {
+  background: oklch(99% 0.004 276); color: oklch(26.9% 0.058 276);
+  border-radius: var(--radius-card); padding: 1.5rem;
+}
+.form-slot__note {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: oklch(54.1% 0.010 276); margin: 1rem 0 0;
+}
+.form-fallback { display: grid; gap: 0.75rem; }
+.form-fallback label { font-size: 0.85rem; font-weight: 600; }
+.form-fallback input {
+  font: inherit; padding: 0.7rem 0.85rem; border-radius: var(--radius-input);
+  border: 1px solid oklch(91.6% 0.006 276); background: #fff; color: inherit; width: 100%;
+}
+
+/* ---------------- footer ---------------- */
+.footer { padding-block: 3rem; }
+.footer__grid {
+  display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem;
+  align-items: center; justify-content: space-between;
+}
+.footer img { height: 22px; width: auto; display: block; }
+.footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; }
+.footer a { color: var(--band-ink-2); text-decoration: none; border-bottom: 1px solid transparent; }
+.footer a:hover { color: var(--band-ink); border-bottom-color: var(--color-accent); }
+.footer__fine {
+  margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--band-rule);
+  font-size: 0.82rem; color: var(--band-ink-2);
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between;
+}
+
+/* ---------------- states ---------------- */
+.state {
+  border: 1px dashed var(--color-rule); border-radius: var(--radius-card);
+  padding: 1.5rem; color: var(--color-muted); font-size: 0.95rem; margin-top: 2.5rem;
+}
+.state--error { border-style: solid; border-color: var(--color-alert); color: var(--color-ink-2); }
+.state--error strong { color: var(--color-alert); }
+
+/* ---------------- motion ---------------- */
+.reveal { opacity: 0; transform: translateY(10px);
+          transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); }
+.reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .btn, .speaker, .past-card { transition: none; }
+}
+@media print { .btn { border: 1px solid #999; } }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- =========================== HERO =========================== -->
+<header class="band-galaxy on-band hero">
+  <div class="shell">
+    <div class="hero__brand">
+      <img src="./assets/logo-staedean-reversed.svg" alt="STAEDEAN" width="360" height="64">
+    </div>
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow">STAEDEAN Product Pulse</span>
+        <h1>30 minutes of <span class="h-mark">product news</span>, every month.</h1>
+        <p class="hero__sub">One short online session where our product team shows what shipped, what is coming, and what it means for your Dynamics 365 environment.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" id="hero-cta" href="#upcoming">Register for the next pulse</a>
+          <a class="btn btn--ghost" href="#past">Watch a past pulse</a>
+        </div>
+      </div>
+      <aside class="tile" id="hero-tile" aria-labelledby="hero-tile-label">
+        <p class="tile__label" id="hero-tile-label">Next pulse</p>
+        <div id="hero-tile-body">
+          <p class="tile__time">Loading the schedule…</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ==================== WHAT IS PRODUCT PULSE ==================== -->
+  <section id="what" aria-labelledby="what-h">
+    <div class="shell reveal">
+      <span class="eyebrow">What is Product Pulse</span>
+      <h2 id="what-h">Product news, straight from the people who build it.</h2>
+      <div class="cols">
+        <div>
+          <h3>What's new</h3>
+          <p>Releases, fixes and roadmap for the STAEDEAN solutions you run in Dynamics 365.</p>
+        </div>
+        <div>
+          <h3>Why it matters</h3>
+          <p>Each change shown in context: what customers do with it and when it is worth adopting.</p>
+        </div>
+        <div>
+          <h3>Ask anything</h3>
+          <p>Live Q&amp;A with the product team. No sales pitch, no scripted answers.</p>
+        </div>
+      </div>
+      <p class="note-line">Free &middot; Online via Microsoft Teams &middot; Recording afterwards</p>
+    </div>
+  </section>
+
+  <!-- ==================== SPEAKER ==================== -->
+  <section id="speaker" class="band-paper-2" aria-labelledby="speaker-h">
+    <div class="shell reveal">
+      <span class="eyebrow">Your host</span>
+      <h2 id="speaker-h">Who you will hear from</h2>
+      <div class="speakers">
+        <article class="speaker">
+          <img src="./assets/speaker-placeholder.svg" alt="Portrait of Tim Hermans" width="240" height="240">
+          <div>
+            <h3>Tim Hermans</h3>
+            <p class="speaker__role">Product Manager, STAEDEAN</p>
+            <p>Tim leads the product sessions and works with customers on how our solutions fit their Dynamics 365 setup. He has spent his career close to ERP implementations, which is why the demos use real scenarios rather than clean sample data.</p>
+            <a class="link-accent" href="https://www.linkedin.com/company/staedean/" rel="noopener">Connect on LinkedIn</a>
+          </div>
+        </article>
+        <article class="speaker speaker--empty">
+          <p>Most pulses bring a guest from the product or consulting team. Their name appears with the session below.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== UPCOMING ==================== -->
+  <section id="upcoming" aria-labelledby="upcoming-h">
+    <div class="shell reveal">
+      <span class="eyebrow">Upcoming pulses</span>
+      <h2 id="upcoming-h">Pick a date and register</h2>
+      <p>Registration is handled by Microsoft Teams. After you register, Teams sends the confirmation, the calendar invite and a reminder before the session.</p>
+      <ul class="sessions" id="upcoming-list" aria-live="polite"></ul>
+      <div id="upcoming-state"></div>
+    </div>
+  </section>
+
+  <!-- ==================== PAST ==================== -->
+  <section id="past" class="band-paper-2" aria-labelledby="past-h">
+    <div class="shell reveal">
+      <span class="eyebrow">Past pulses</span>
+      <h2 id="past-h">Missed one? Watch the recording</h2>
+      <ul class="past-grid" id="past-list" aria-live="polite"></ul>
+      <div id="past-state"></div>
+      <div class="show-all">
+        <button class="btn btn--ghost" id="show-all-past" hidden type="button">Show all past pulses</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SUBSCRIBE ==================== -->
+  <section id="subscribe" class="band-sapphire subscribe" aria-labelledby="subscribe-h">
+    <div class="shell reveal">
+      <div class="subscribe__grid">
+        <div>
+          <span class="eyebrow">Never miss a pulse</span>
+          <h2 id="subscribe-h">One email a month, nothing else.</h2>
+          <p>Leave your email address and we send you a short invite about ten days before each pulse, with the topic and the registration link. That is the only thing this list is used for, and you can unsubscribe from any of those emails.</p>
+        </div>
+        <div class="form-slot">
+          <!--
+            TODO (marketing / HubSpot admin): replace the fallback markup below with the
+            real HubSpot form embed.
+
+              1. In HubSpot, create the form "Product Pulse subscribe" (email field only)
+                 and set it to subscribe the contact to the "Product Pulse" subscription type.
+              2. Copy the form GUID and paste it into formId below.
+              3. Delete the <form class="form-fallback"> block and uncomment the script block.
+
+            portalId : 2697631   (STAEDEAN, NA region)
+            region   : na1
+            formId   : REPLACE-WITH-FORM-GUID
+          -->
+          <div id="hubspot-form-target">
+            <form class="form-fallback" id="subscribe-fallback" novalidate>
+              <label for="subscribe-email">Work email</label>
+              <input type="email" id="subscribe-email" name="email" autocomplete="email"
+                     placeholder="name@company.com" required>
+              <button class="btn btn--primary" type="submit">Keep me posted</button>
+            </form>
+          </div>
+          <p class="form-slot__note">Placeholder form &mdash; HubSpot embed pending</p>
+
+          <!-- HubSpot form embed (enable once the form GUID is known):
+          <script src="https://js.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              region: "na1",
+              portalId: "2697631",
+              formId: "REPLACE-WITH-FORM-GUID",
+              target: "#hubspot-form-target"
+            });
+          </script>
+          -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- =========================== FOOTER =========================== -->
+<footer class="band-galaxy on-band footer">
+  <div class="shell">
+    <div class="footer__grid">
+      <img src="./assets/logo-staedean-reversed.svg" alt="STAEDEAN" width="360" height="64">
+      <nav aria-label="Footer">
+        <a href="https://www.staedean.com/privacy-policy" rel="noopener">Privacy policy</a>
+        <a href="mailto:productpulse@staedean.com">productpulse@staedean.com</a>
+        <a href="https://www.staedean.com" rel="noopener">staedean.com</a>
+      </nav>
+    </div>
+    <div class="footer__fine">
+      <span>&copy; <span id="year">2026</span> STAEDEAN. All rights reserved.</span>
+      <span>Recordings hosted on YouTube. Sessions run on Microsoft Teams.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var TZ = "Europe/Amsterdam";
+  var UTM = "utm_source=landing&utm_medium=web&utm_campaign=product-pulse-2026";
+  var PAST_PREVIEW = 6;
+
+  var $ = function (sel) { return document.querySelector(sel); };
+
+  /* ---------- date helpers ---------- */
+
+  function parts(date) {
+    var out = {};
+    try {
+      /* en-US short months give "Sep"; en-GB gives the four-letter "Sept". */
+      new Intl.DateTimeFormat("en-US", {
+        timeZone: TZ, day: "2-digit", month: "short", year: "numeric",
+        weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false
+      }).formatToParts(date).forEach(function (p) { out[p.type] = p.value; });
+    } catch (e) { /* fall through */ }
+    return out;
+  }
+
+  /* "CET" / "CEST" from Intl; a generic label if the runtime only gives GMT+2 */
+  function tzLabel(date) {
+    try {
+      var v = new Intl.DateTimeFormat("en-GB", { timeZone: TZ, timeZoneName: "short" })
+        .formatToParts(date)
+        .filter(function (p) { return p.type === "timeZoneName"; })
+        .map(function (p) { return p.value; })[0];
+      if (v && /^CES?T$/.test(v)) { return v; }
+    } catch (e) { /* ignore */ }
+    return "CET/CEST";
+  }
+
+  function timeString(date) {
+    var p = parts(date);
+    var t = (p.hour && p.minute) ? p.hour + ":" + p.minute : "14:00";
+    return t + " " + tzLabel(date);
+  }
+
+  function longDate(date) {
+    var p = parts(date);
+    return [p.weekday, p.day, p.month, p.year].filter(Boolean).join(" ");
+  }
+
+  /* ---------- misc helpers ---------- */
+
+  function withUtm(url) {
+    if (!url) { return null; }
+    return url + (url.indexOf("?") === -1 ? "?" : "&") + UTM;
+  }
+
+  function youTubeId(url) {
+    if (!url) { return null; }
+    var m = String(url).match(/(?:v=|youtu\.be\/|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{6,})/);
+    return m ? m[1] : null;
+  }
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) { n.className = cls; }
+    if (text != null) { n.textContent = text; }
+    return n;
+  }
+
+  function speakerLine(session) {
+    var list = Array.isArray(session.speakers) ? session.speakers : [];
+    return list.map(function (s) {
+      return s && s.name ? (s.role ? s.name + " — " + s.role : s.name) : "";
+    }).filter(Boolean).join(" · ");
+  }
+
+  function note(container, message, isError) {
+    container.innerHTML = "";
+    var box = el("p", "state" + (isError ? " state--error" : ""));
+    if (isError) {
+      var strong = el("strong", null, "Schedule unavailable. ");
+      box.appendChild(strong);
+    }
+    box.appendChild(document.createTextNode(message));
+    container.appendChild(box);
+  }
+
+  /* ---------- renderers ---------- */
+
+  function renderHero(next) {
+    var body = $("#hero-tile-body");
+    var cta = $("#hero-cta");
+    body.innerHTML = "";
+
+    if (!next) {
+      body.appendChild(el("p", "tile__time", "The next season is being planned. Subscribe below and we will let you know."));
+      cta.setAttribute("href", "#subscribe");
+      cta.textContent = "Get told about the next pulse";
+      return;
+    }
+
+    var p = parts(next.date);
+    body.appendChild(el("div", "tile__day", p.day || ""));
+    body.appendChild(el("div", "tile__month", ((p.month || "") + " " + (p.year || "")).trim()));
+    body.appendChild(el("p", "tile__time", (p.weekday ? p.weekday + ", " : "") + timeString(next.date)));
+    body.appendChild(el("p", "tile__title", next.title || ""));
+
+    cta.setAttribute("href", "#session-" + next.id);
+  }
+
+  function renderUpcoming(list) {
+    var ul = $("#upcoming-list");
+    var state = $("#upcoming-state");
+    ul.innerHTML = "";
+    state.innerHTML = "";
+
+    if (!list.length) {
+      note(state, "No dates are published yet. Subscribe below and we will email you when the next season opens.");
+      return;
+    }
+
+    list.forEach(function (s) {
+      var p = parts(s.date);
+      var li = el("li", "session" + (s.status === "cancelled" ? " session--cancelled" : ""));
+      li.id = "session-" + s.id;
+
+      var d = el("div", "session__date");
+      d.appendChild(el("div", "session__day", p.day || ""));
+      d.appendChild(el("div", "session__mon", (p.month || "").toUpperCase()));
+      d.appendChild(el("div", "session__yr", p.year || ""));
+      li.appendChild(d);
+
+      var body = el("div", "session__body");
+      var meta = el("p", "session__meta", longDate(s.date) + " · " + timeString(s.date) + " · 30 min");
+      body.appendChild(meta);
+      var h3 = el("h3", "session__title", s.title || "Product Pulse");
+      body.appendChild(h3);
+      if (s.teaser) { body.appendChild(el("p", "session__teaser", s.teaser)); }
+      var who = speakerLine(s);
+      if (who) { body.appendChild(el("p", "session__meta", who)); }
+      li.appendChild(body);
+
+      var action = el("div", "session__action");
+      if (s.status === "cancelled") {
+        action.appendChild(el("span", "badge-cancelled", "Cancelled"));
+      } else if (s.registrationUrl) {
+        var a = el("a", "btn btn--primary", "Register");
+        a.href = withUtm(s.registrationUrl);
+        a.rel = "noopener";
+        a.setAttribute("aria-label", "Register for " + (s.title || "this pulse") + " on " + longDate(s.date));
+        action.appendChild(a);
+        action.appendChild(el("span", "session__hint", "Teams sends the calendar invite after you register."));
+      } else {
+        var b = el("span", "btn", "Registration opens soon");
+        b.setAttribute("role", "button");
+        b.setAttribute("aria-disabled", "true");
+        action.appendChild(b);
+        action.appendChild(el("span", "session__hint", "The date is fixed. The registration link follows closer to the session."));
+      }
+      li.appendChild(action);
+
+      ul.appendChild(li);
+    });
+  }
+
+  function renderPast(list) {
+    var ul = $("#past-list");
+    var state = $("#past-state");
+    var btn = $("#show-all-past");
+    ul.innerHTML = "";
+    state.innerHTML = "";
+    btn.hidden = true;
+
+    if (!list.length) {
+      note(state, "The first recordings appear here after the first pulse.");
+      return;
+    }
+
+    var expanded = false;
+
+    function paint() {
+      ul.innerHTML = "";
+      var shown = expanded ? list : list.slice(0, PAST_PREVIEW);
+      shown.forEach(function (s) {
+        var li = el("li", "past-card");
+        var id = youTubeId(s.recordingUrl);
+
+        if (id) {
+          var img = document.createElement("img");
+          img.className = "past-card__thumb";
+          img.src = "https://img.youtube.com/vi/" + id + "/hqdefault.jpg";
+          img.alt = "Video thumbnail for " + (s.title || "Product Pulse");
+          img.loading = "lazy";
+          img.width = 480; img.height = 270;
+          li.appendChild(img);
+        }
+
+        var body = el("div", "past-card__body");
+        body.appendChild(el("p", "past-card__date", longDate(s.date)));
+        body.appendChild(el("h3", null, s.title || "Product Pulse"));
+        var wrap = el("p", "past-card__link");
+        if (s.recordingUrl) {
+          var a = el("a", "link-accent", "Watch recording");
+          a.href = s.recordingUrl;
+          a.rel = "noopener";
+          a.target = "_blank";
+          a.setAttribute("aria-label", "Watch the recording of " + (s.title || "this pulse") + " (opens on YouTube)");
+          wrap.appendChild(a);
+        } else {
+          wrap.appendChild(el("span", "session__hint", "Recording coming soon."));
+        }
+        body.appendChild(wrap);
+        li.appendChild(body);
+        ul.appendChild(li);
+      });
+    }
+
+    paint();
+
+    if (list.length > PAST_PREVIEW) {
+      btn.hidden = false;
+      btn.setAttribute("aria-expanded", "false");
+      btn.addEventListener("click", function () {
+        expanded = !expanded;
+        btn.textContent = expanded ? "Show fewer past pulses" : "Show all past pulses";
+        btn.setAttribute("aria-expanded", String(expanded));
+        paint();
+      });
+    }
+  }
+
+  /* ---------- reveal ---------- */
+
+  function initReveal() {
+    var nodes = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      Array.prototype.forEach.call(nodes, function (n) { n.classList.add("is-in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    Array.prototype.forEach.call(nodes, function (n) { io.observe(n); });
+  }
+
+  /* ---------- boot ---------- */
+
+  function boot(data) {
+    var raw = Array.isArray(data) ? data : (data && data.sessions) || [];
+    var now = Date.now();
+
+    var all = raw.map(function (s) {
+      var d = new Date(s.date);
+      return {
+        id: s.id || ("s" + Math.random().toString(36).slice(2, 8)),
+        date: d,
+        valid: !isNaN(d.getTime()),
+        title: s.title,
+        teaser: s.teaser,
+        speakers: s.speakers,
+        registrationUrl: s.registrationUrl || null,
+        recordingUrl: s.recordingUrl || null,
+        status: s.status || "upcoming"
+      };
+    }).filter(function (s) { return s.valid; });
+
+    var upcoming = all
+      .filter(function (s) { return s.date.getTime() >= now; })
+      .sort(function (a, b) { return a.date - b.date; });
+
+    var past = all
+      .filter(function (s) { return s.date.getTime() < now; })
+      .sort(function (a, b) { return b.date - a.date; });
+
+    var next = upcoming.filter(function (s) { return s.status !== "cancelled"; })[0] || null;
+
+    renderHero(next);
+    renderUpcoming(upcoming);
+    renderPast(past);
+  }
+
+  function fail() {
+    renderHero(null);
+    note($("#upcoming-state"),
+      "We could not load the session list right now. Please refresh the page, or email productpulse@staedean.com and we will send you the dates.",
+      true);
+    $("#past-state").innerHTML = "";
+  }
+
+  document.getElementById("year").textContent = String(new Date().getFullYear());
+
+  var fb = document.getElementById("subscribe-fallback");
+  if (fb) {
+    fb.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      window.alert("This is a placeholder form. The HubSpot subscribe form is not connected yet.");
+    });
+  }
+
+  initReveal();
+
+  fetch("./sessions.json?v=" + Date.now(), { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) { throw new Error("HTTP " + r.status); }
+      return r.json();
+    })
+    .then(boot)
+    .catch(function (err) {
+      if (window.console && console.warn) { console.warn("sessions.json could not be loaded:", err); }
+      fail();
+    });
+})();
+</script>
+
+<!-- HubSpot tracking code — portal 2697631 (NA) -->
+<script type="text/javascript" id="hs-script-loader" async defer src="https://js.hs-scripts.com/2697631.js"></script>
+</body>
+</html>

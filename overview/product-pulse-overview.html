@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product Pulse: how it fits together</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* STAEDEAN light drop */
+  --color-paper:      #fcfcfd;
+  --color-paper-2:    #f5f5f5;
+  --color-paper-band: #00316c; /* Sapphire */
+  --color-ink:        #1f2342; /* Galaxy Black */
+  --color-ink-2:      #454869;
+  --color-rule:       #e3e3e6;
+  --color-rule-2:     #ececee;
+  --color-muted:      #6f6f7c;
+  --color-neutral:    #b3b3bd;
+  --color-accent:     #17c8be; /* Miami Teal */
+  --color-accent-2:   #ff9c46; /* Tangerine */
+  --color-accent-ink: #1f2342;
+  --color-alert:      #fa5a4f;
+  --color-focus:      #17c8be;
+  --color-support-purple: #6749c9;
+  --color-support-pink:   #ff95d2;
+  --color-support-sand:   #d7ba94;
+  --color-support-teal-d: #008c94;
+  --font-display: "Gilroy", "Manrope", system-ui, sans-serif;
+  --font-body:    "Aptos", system-ui, "Segoe UI", "Inter", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
+  --radius-card: 10px;
+  --radius-input: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-paper:      #1f2342; /* Galaxy Black */
+    --color-paper-2:    #262a4d;
+    --color-paper-band: #0a4488;
+    --color-ink:        #f5f5f7;
+    --color-ink-2:      #cfd1e0;
+    --color-rule:       #3a3e63;
+    --color-rule-2:     #33375a;
+    --color-muted:      #a6a8c0;
+    --color-neutral:    #6a6e94;
+    --color-accent:     #2fe0d5;
+    --color-accent-2:   #ffb069;
+    --color-accent-ink: #0f1128;
+    --color-alert:      #ff7a71;
+    --color-focus:      #2fe0d5;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink-2);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+
+h1, h2, h3, .display { font-family: var(--font-display); color: var(--color-ink); letter-spacing: -0.01em; font-weight: 700; }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.eyebrow::before { content: ""; display: inline-block; width: 1.4em; height: 2px; background: var(--color-accent); }
+
+.h-mark { position: relative; white-space: nowrap; }
+.h-mark::after {
+  content: ""; position: absolute; left: -0.04em; right: -0.04em;
+  bottom: 0.02em; height: 0.42em;
+  background: var(--color-accent); opacity: 0.28;
+  border-radius: 2px; z-index: -1;
+}
+
+header.hero {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--color-rule);
+}
+header.hero h1 { font-size: clamp(1.7rem, 3vw, 2.4rem); margin: 14px 0 10px; }
+header.hero p.purpose { font-size: 1.05rem; color: var(--color-ink-2); max-width: 62ch; margin: 0; }
+
+section { padding: 46px 0; border-bottom: 1px solid var(--color-rule); }
+section:last-of-type { border-bottom: none; }
+section h2 { font-size: 1.35rem; margin: 0 0 6px; }
+section .lede { color: var(--color-muted); font-size: 0.92rem; margin: 0 0 26px; max-width: 72ch; }
+
+/* Diagram */
+.diagram-frame {
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius-card);
+  background: var(--color-paper-2);
+  padding: 12px;
+}
+.diagram-frame svg { display: block; width: 100%; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 0.82rem; color: var(--color-muted); }
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-swatch { width: 22px; height: 2px; background: var(--color-ink-2); display: inline-block; }
+.legend-swatch.dashed { background: none; border-top: 2px dashed var(--color-support-purple); width: 22px; }
+
+/* Timeline */
+.timeline { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--color-rule); margin-left: 6px; }
+.tl-step { position: relative; padding: 0 0 28px 28px; }
+.tl-step:last-child { padding-bottom: 0; }
+.tl-step::before {
+  content: ""; position: absolute; left: -7px; top: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--color-accent); border: 2px solid var(--color-paper);
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+.tl-step .tl-when {
+  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--color-accent-2); font-weight: 600;
+}
+.tl-step h3 { font-size: 1rem; margin: 4px 0 4px; color: var(--color-ink); }
+.tl-step p { margin: 0; font-size: 0.9rem; color: var(--color-ink-2); }
+.tl-step .tl-owner {
+  display: inline-block; margin-top: 8px; font-family: var(--font-mono);
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--color-ink); background: var(--color-rule-2);
+  border: 1px solid var(--color-rule); border-radius: 999px; padding: 3px 10px;
+}
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+caption { caption-side: top; text-align: left; font-size: 0.8rem; color: var(--color-muted); margin-bottom: 10px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--color-rule); vertical-align: top; }
+thead th { font-family: var(--font-mono); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em; color: var(--color-muted); border-bottom: 1px solid var(--color-ink-2); }
+tbody tr:hover { background: var(--color-paper-2); }
+.group-row td { font-weight: 700; color: var(--color-ink); background: var(--color-paper-2); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; font-family: var(--font-mono); }
+.raci-cell { text-align: center; font-family: var(--font-mono); font-weight: 700; }
+.raci-r { color: var(--color-accent-ink); }
+.raci-a { color: var(--color-ink); }
+.raci-c { color: var(--color-muted); }
+.raci-i { color: var(--color-neutral); }
+.table-scroll { overflow-x: auto; border: 1px solid var(--color-rule); border-radius: var(--radius-card); }
+.table-scroll table { min-width: 640px; }
+code { font-family: var(--font-mono); font-size: 0.85em; background: var(--color-paper-2); padding: 1px 6px; border-radius: 4px; border: 1px solid var(--color-rule); }
+
+/* Decisions / open items */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+.card {
+  border: 1px solid var(--color-rule); border-radius: var(--radius-card);
+  padding: 20px 22px; background: var(--color-paper-2);
+}
+.card h3 { margin: 0 0 12px; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+.card h3 .dot { width: 8px; height: 8px; border-radius: 50%; }
+.card.decisions h3 .dot { background: var(--color-accent); }
+.card.open h3 .dot { background: var(--color-accent-2); }
+.card ul { margin: 0; padding-left: 20px; }
+.card li { margin-bottom: 10px; font-size: 0.9rem; }
+.card li:last-child { margin-bottom: 0; }
+
+/* Footer file map */
+footer { padding: 46px 0 60px; }
+footer h2 { font-size: 1.1rem; }
+.filemap {
+  font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.7;
+  background: var(--color-ink); color: #eef0f7;
+  border-radius: var(--radius-card); padding: 20px 24px; overflow-x: auto;
+  white-space: pre;
+}
+@media (prefers-color-scheme: dark) {
+  .filemap { background: #0e1026; }
+}
+.filemap .ws { color: var(--color-accent); }
+.filemap .cm { color: #8890b8; }
+
+.band-note {
+  background: var(--color-paper-band); color: #fff;
+  border-radius: var(--radius-card); padding: 18px 22px; margin-top: 22px;
+  font-size: 0.88rem;
+}
+.band-note strong { color: #fff; }
+
+@media print {
+  section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">STAEDEAN Product Pulse &mdash; programme overview</span>
+    <h1>Product Pulse: how it <span class="h-mark">fits together</span></h1>
+    <p class="purpose">One landing page, twelve Teams webinars and two HubSpot emails a year work as one system &mdash; this page is the map, the monthly checklist, and the RACI for Tim, marketing and IT.</p>
+  </header>
+
+  <section id="architecture">
+    <h2>Architecture</h2>
+    <p class="lede">Four systems, each doing one job. HubSpot only brings people to the page; Teams owns everything after someone registers.</p>
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to the monthly Teams webinar registration; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section; a dashed optional arrow shows Teams registrants syncing to HubSpot Marketing Events in phase 2.">
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#454869"></path>
+          </marker>
+          <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#6749c9"></path>
+          </marker>
+        </defs>
+
+        <style>
+          .node-box { fill: var(--color-paper); stroke: var(--color-ink-2); stroke-width: 1.4; }
+          .node-box.accent { stroke: var(--color-accent); stroke-width: 2; }
+          .node-box.phase2 { fill: none; stroke: #6749c9; stroke-width: 1.4; stroke-dasharray: 5 4; }
+          .node-title { fill: var(--color-ink); font-family: Manrope, sans-serif; font-weight: 700; font-size: 16px; }
+          .node-sub { fill: var(--color-muted); font-family: Manrope, sans-serif; font-size: 12px; }
+          .flow-line { stroke: #454869; stroke-width: 1.6; fill: none; }
+          .flow-line.dashed { stroke: #6749c9; stroke-dasharray: 6 5; }
+          .flow-label { fill: #454869; font-family: "JetBrains Mono", monospace; font-size: 11px; }
+          .flow-label.dashed-label { fill: #6749c9; }
+        </style>
+
+        <!-- Box A: HubSpot audience -->
+        <rect class="node-box" x="330" y="20" width="280" height="66" rx="10"></rect>
+        <text class="node-title" x="470" y="48" text-anchor="middle">HubSpot audience</text>
+        <text class="node-sub" x="470" y="68" text-anchor="middle">"Product Pulse" list &amp; subscription type</text>
+
+        <!-- Arrow A -> B -->
+        <line class="flow-line" x1="470" y1="86" x2="470" y2="150" marker-end="url(#arrow)"></line>
+        <text class="flow-label" x="486" y="108">season kickoff (1x/yr) +</text>
+        <text class="flow-label" x="486" y="122">monthly "next pulse" invite</text>
+        <text class="flow-label" x="486" y="136">(UTM link, discovery only)</text>
+
+        <!-- Box B: Landing page -->
+        <rect class="node-box accent" x="330" y="152" width="280" height="72" rx="10"></rect>
+        <text class="node-title" x="470" y="182" text-anchor="middle">Landing page</text>
+        <text class="node-sub" x="470" y="202" text-anchor="middle">GitHub Pages &middot; pulse.staedean.com</text>
+
+        <!-- Arrow B -> C -->
+        <line class="flow-line" x1="470" y1="224" x2="470" y2="290" marker-end="url(#arrow)"></line>
+        <text class="flow-label" x="486" y="248">"Register" click &rarr;</text>
+        <text class="flow-label" x="486" y="262">Teams registration page</text>
+        <text class="flow-label" x="486" y="276">(one URL per month)</text>
+
+        <!-- Box C: Teams webinar registration -->
+        <rect class="node-box accent" x="330" y="292" width="280" height="72" rx="10"></rect>
+        <text class="node-title" x="470" y="322" text-anchor="middle">Teams webinar</text>
+        <text class="node-sub" x="470" y="342" text-anchor="middle">organizer: Tim Hermans &middot; 1 of 12/season</text>
+
+        <!-- Arrow C -> D (confirmations) -->
+        <line class="flow-line" x1="610" y1="316" x2="700" y2="316" marker-end="url(#arrow)"></line>
+        <text class="flow-label" x="618" y="308">confirmation, invite,</text>
+
+        <!-- Box D: Teams confirmations/reminders -->
+        <rect class="node-box" x="702" y="286" width="270" height="82" rx="10"></rect>
+        <text class="node-title" x="837" y="314" text-anchor="middle" style="font-size:14px;">Teams: registrant comms</text>
+        <text class="node-sub" x="837" y="332" text-anchor="middle">confirmation &middot; calendar invite</text>
+        <text class="node-sub" x="837" y="348" text-anchor="middle">T-1h reminder &middot; cancellations</text>
+
+        <!-- Dashed arrow C -> E (phase 2) -->
+        <path class="flow-line dashed" d="M 610 350 C 720 370, 760 385, 790 410" marker-end="url(#arrow-dashed)"></path>
+        <text class="flow-label dashed-label" x="700" y="388">phase 2 (optional):</text>
+        <text class="flow-label dashed-label" x="700" y="402">registrant sync</text>
+
+        <!-- Box E: HubSpot Marketing Events (phase 2) -->
+        <rect class="node-box phase2" x="702" y="410" width="270" height="72" rx="10"></rect>
+        <text class="node-title" x="837" y="438" text-anchor="middle" style="font-size:14px; fill:#6749c9;">HubSpot Marketing Events</text>
+        <text class="node-sub" x="837" y="456" text-anchor="middle" style="fill:#6749c9;">phase 2 &middot; suppress from next invite</text>
+        <text class="node-sub" x="837" y="470" text-anchor="middle" style="fill:#6749c9;">(native Teams Webinars integration)</text>
+
+        <!-- Arrow C -> F (recording down) -->
+        <line class="flow-line" x1="470" y1="364" x2="470" y2="440" marker-end="url(#arrow)"></line>
+        <text class="flow-label" x="486" y="392">recording saved to</text>
+        <text class="flow-label" x="486" y="406">organizer's OneDrive</text>
+        <text class="flow-label" x="486" y="420">(tenant retention applies)</text>
+
+        <!-- Box F: Recording / OneDrive -->
+        <rect class="node-box" x="330" y="442" width="280" height="68" rx="10"></rect>
+        <text class="node-title" x="470" y="470" text-anchor="middle" style="font-size:14px;">Recording &mdash; Tim's OneDrive</text>
+        <text class="node-sub" x="470" y="488" text-anchor="middle">MP4, download promptly</text>
+
+        <!-- Arrow F -> G -->
+        <line class="flow-line" x1="470" y1="510" x2="470" y2="574" marker-end="url(#arrow)"></line>
+        <text class="flow-label" x="486" y="536">upload MP4</text>
+        <text class="flow-label" x="486" y="550">(unlisted)</text>
+
+        <!-- Box G: YouTube unlisted -->
+        <rect class="node-box accent" x="330" y="576" width="280" height="68" rx="10"></rect>
+        <text class="node-title" x="470" y="604" text-anchor="middle">YouTube (unlisted)</text>
+        <text class="node-sub" x="470" y="622" text-anchor="middle">one video per pulse</text>
+
+        <!-- Curved arrow G -> B "Past pulses" -->
+        <path class="flow-line" d="M 330 610 C 120 610, 120 188, 328 188" marker-end="url(#arrow)"></path>
+        <text class="flow-label" x="60" y="400" transform="rotate(-90 60 400)" text-anchor="middle">recording URL pasted into sessions.json &rarr; landing page "Past pulses"</text>
+
+        <!-- Legend note inside diagram: session file -->
+        <rect class="node-box" x="330" y="700" width="280" height="60" rx="10" stroke-dasharray="2 3"></rect>
+        <text class="node-sub" x="470" y="724" text-anchor="middle" style="font-size:12px;">Both edits (registration URL, recording URL)</text>
+        <text class="node-sub" x="470" y="740" text-anchor="middle" style="font-size:12px;">go into one file: site/sessions.json</text>
+        <line class="flow-line" x1="470" y1="644" x2="470" y2="700" marker-end="url(#arrow)" stroke-dasharray="2 3"></line>
+      </svg>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-swatch"></span> live flow (this round)</span>
+      <span class="legend-item"><span class="legend-swatch dashed"></span> phase 2, optional</span>
+      <span class="legend-item">accent border = the two customer-facing surfaces (landing page, webinar)</span>
+    </div>
+  </section>
+
+  <section id="timeline">
+    <h2>Monthly operating loop</h2>
+    <p class="lede">Repeats twelve times a season. Everything except the T-1h reminder is a manual, five-minute step.</p>
+    <div class="timeline">
+      <div class="tl-step">
+        <span class="tl-when">T&minus;30 days</span>
+        <h3>Create or verify next month's webinar</h3>
+        <p>Create the Teams webinar (or run the optional Graph script), then paste the registration URL into <code>site/sessions.json</code> and commit on GitHub &mdash; the Actions workflow auto-deploys.</p>
+        <span class="tl-owner">Tim (or IT, script, Tim stays organizer)</span>
+      </div>
+      <div class="tl-step">
+        <span class="tl-when">T&minus;10 days</span>
+        <h3>HubSpot monthly invite sends</h3>
+        <p>The "next pulse" email goes to the Product Pulse audience list, with the topic teaser and a UTM-tagged Register link to the landing page.</p>
+        <span class="tl-owner">Marketing</span>
+      </div>
+      <div class="tl-step">
+        <span class="tl-when">T&minus;1 hour</span>
+        <h3>Teams reminder</h3>
+        <p>Teams automatically emails every registrant a reminder. No manual step, nothing to configure per pulse.</p>
+        <span class="tl-owner">Automatic (Teams)</span>
+      </div>
+      <div class="tl-step">
+        <span class="tl-when">T&plus;0</span>
+        <h3>The pulse runs</h3>
+        <p>30 minutes, live Q&amp;A, recorded. Tim presents; a co-organizer can watch the chat.</p>
+        <span class="tl-owner">Tim</span>
+      </div>
+      <div class="tl-step">
+        <span class="tl-when">T&plus;1 day</span>
+        <h3>Publish the recording</h3>
+        <p>Download the MP4 from Tim's OneDrive, upload it to YouTube unlisted, paste the video URL into <code>sessions.json</code> and commit on GitHub so it appears under "Past pulses".</p>
+        <span class="tl-owner">Marketing (or Tim)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="raci">
+    <h2>RACI</h2>
+    <p class="lede">R = Responsible (does the work), A = Accountable (owns the outcome), C = Consulted, I = Informed.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Item</th><th class="raci-cell">Tim</th><th class="raci-cell">Marketing</th><th class="raci-cell">IT (Henry)</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="4">One-time setup</td></tr>
+          <tr><td>GitHub Pages + custom domain</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
+          <tr><td>GitHub repo + Actions workflow (fallback: <code>Deploy-Site.ps1</code>)</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
+          <tr><td>Create the 12 season webinars</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-c">C (script, app-only path)</td></tr>
+          <tr><td>HubSpot subscription type, list, campaign, templates</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
+          <tr><td>HubSpot tracking code + form embed on landing page</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (deploys to site)</td></tr>
+          <tr><td>YouTube channel setup</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
+          <tr><td>Tenant check: anonymous join + webinar features</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
+          <tr class="group-row"><td colspan="4">Monthly steps</td></tr>
+          <tr><td>Create/verify webinar, paste URL, commit</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-c">C</td></tr>
+          <tr><td>HubSpot monthly invite send</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>Teams T&minus;1h reminder</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I (automatic)</td></tr>
+          <tr><td>Run the pulse, record</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>Upload recording, update <code>sessions.json</code>, commit</td><td class="raci-cell raci-c">C</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="where">
+    <h2>Where things live</h2>
+    <p class="lede">Placeholders in <em>italics</em> are not confirmed yet &mdash; see Decisions &amp; open items below.</p>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Tool</th><th>URL / path</th><th>Owner</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Landing page</td><td>GitHub Pages</td><td><em>https://pulse.staedean.com</em> (domain TBD)</td><td>IT (Henry)</td></tr>
+          <tr><td>Site source</td><td>GitHub repo</td><td><em>github.com/STAEDEAN/product-pulse (org TBD)</em></td><td>IT (Henry)</td></tr>
+          <tr><td>Monthly edit file</td><td>JSON, hand-edited</td><td><code>product-pulse/site/sessions.json</code></td><td>Tim / Marketing</td></tr>
+          <tr><td>Site page</td><td>Static HTML</td><td><code>product-pulse/site/index.html</code></td><td>IT (Henry), build</td></tr>
+          <tr><td>Deploy workflow</td><td>GitHub Actions</td><td><code>product-pulse/.github/workflows/deploy-pages.yml</code></td><td>IT (Henry)</td></tr>
+          <tr><td>Deploy fallback (manual)</td><td>PowerShell helper script</td><td><code>product-pulse/scripts/Deploy-Site.ps1</code></td><td>IT (Henry)</td></tr>
+          <tr><td>Webinars</td><td>Microsoft Teams</td><td>Teams calendar &rarr; New meeting &rarr; Webinar</td><td>Tim</td></tr>
+          <tr><td>Webinar creation script (optional)</td><td>Microsoft Graph, <code>virtualEventWebinar</code></td><td><code>product-pulse/scripts/New-ProductPulseWebinars.ps1</code></td><td>IT (Henry) / Tim</td></tr>
+          <tr><td>Recordings, pre-upload</td><td>Tim's OneDrive</td><td>tenant retention policy applies</td><td>Tim</td></tr>
+          <tr><td>Recordings, published</td><td>YouTube, unlisted</td><td><em>channel TBD</em></td><td>Marketing</td></tr>
+          <tr><td>Discovery emails</td><td>HubSpot Marketing Hub</td><td>Campaign "Product Pulse 2026"</td><td>Marketing</td></tr>
+          <tr><td>Audience</td><td>HubSpot active list</td><td>"Product Pulse audience"</td><td>Marketing</td></tr>
+          <tr><td>Webinar runbook</td><td>Markdown</td><td><code>product-pulse/docs/01-webinar-runbook.md</code></td><td>Tim / IT</td></tr>
+          <tr><td>Email design doc</td><td>Markdown</td><td><code>product-pulse/docs/02-email-design.md</code></td><td>Marketing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <h2>Decisions &amp; open items</h2>
+    <p class="lede">What Henry already decided, and what still needs an answer before the season can be fully scheduled.</p>
+    <div class="two-col">
+      <div class="card decisions">
+        <h3><span class="dot"></span>Decided</h3>
+        <ul>
+          <li>Recordings are published to YouTube, unlisted.</li>
+          <li>Hosting is GitHub Pages, served directly from the GitHub repo via a GitHub Actions workflow, with a scripted fallback (<code>Deploy-Site.ps1</code>) for manual commit/push or a legacy branch-based Pages deploy.</li>
+          <li>This round's deliverable is a working landing page, the supporting docs and this HTML overview &mdash; not the live deployment.</li>
+          <li>HubSpot's role is discovery only: season kickoff plus one monthly invite. Teams owns every registrant communication after that (confirmation, calendar invite, reminder, cancellation).</li>
+        </ul>
+      </div>
+      <div class="card open">
+        <h3><span class="dot"></span>Open (not blocking the build)</h3>
+        <ul>
+          <li>Confirm the domain name (<em>pulse.staedean.com</em>?) and who owns DNS.</li>
+          <li>Fixed monthly slot and the remaining 2026 dates, from Tim.</li>
+          <li>IT tenant check: anonymous join enabled, Teams Enterprise webinar features present.</li>
+          <li>HubSpot admin to install the Teams Webinars integration and create the "Product Pulse" subscription type.</li>
+          <li>YouTube channel: existing STAEDEAN channel or a new one, and who uploads.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="band-note">
+      <strong>Reminder for the pitch:</strong> Graph's webinar API is delegated-only for creating webinars as another organizer &mdash; there is no pure app-only path. Either Tim creates the 12 webinars himself, or IT runs the script signed in as Tim (delegated), or IT registers an app with an application access policy scoped to Tim's account. Being Global Admin does not make Tim the organizer.
+    </div>
+  </section>
+
+  <footer>
+    <h2>File map</h2>
+    <p class="lede" style="margin-bottom:14px;">Everything for this programme lives under one folder.</p>
+    <div class="filemap"><span class="cm">product-pulse/</span>
+  <span class="ws">.github/workflows/</span>
+    deploy-pages.yml         <span class="cm"># GitHub Actions -&gt; GitHub Pages deploy</span>
+  <span class="ws">site/</span>                      <span class="cm"># deployable static site</span>
+    index.html               <span class="cm"># landing page, hand-rolled CSS, SDN theme</span>
+    sessions.json             <span class="cm"># the only file edited monthly</span>
+    assets/                  <span class="cm"># logos, speaker placeholder, favicon</span>
+    CNAME                    <span class="cm"># custom domain for GitHub Pages</span>
+    .nojekyll                <span class="cm"># skip Jekyll processing on Pages</span>
+  <span class="ws">scripts/</span>
+    New-ProductPulseWebinars.ps1   <span class="cm"># optional: create 12 webinars via Graph</span>
+    Deploy-Site.ps1                <span class="cm"># manual commit/push and gh-pages fallback</span>
+  <span class="ws">docs/</span>
+    01-webinar-runbook.md          <span class="cm"># Tim's step-by-step</span>
+    02-email-design.md             <span class="cm"># HubSpot audience, campaign, templates</span>
+    03-hosting-and-monthly-ops.md  <span class="cm"># GitHub setup, fallbacks, monthly loop</span>
+  <span class="ws">overview/</span>
+    product-pulse-overview.html    <span class="cm"># this page</span></div>
+  </footer>
+</div>
+
+</body>
+</html>
