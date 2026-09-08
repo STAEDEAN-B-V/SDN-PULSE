@@ -6,8 +6,10 @@ Audience: Henry (IT) for one-time setup; marketing / Tim for the monthly loop. N
 
 | | |
 | --- | --- |
-| Hosting | GitHub Pages, served directly from the GitHub repo (Pages source: **GitHub Actions**) |
-| Custom domain | e.g. `pulse.staedean.com` (final name and DNS ownership TBC - see Open items in the plan) |
+| Repo | [`github.com/STAEDEAN-B-V/SDN-PULSE`](https://github.com/STAEDEAN-B-V/SDN-PULSE) (public, org **STAEDEAN-B-V**, default branch `main`) |
+| Hosting | GitHub Pages, served directly from the GitHub repo (Pages source: **GitHub Actions**) - **DONE**, first deploy succeeded 2026-09-08 |
+| Live URL (current) | **<https://staedean-b-v.github.io/SDN-PULSE/>** (project-page subpath) - kept for now per the 2026-09-08 decision below |
+| Custom domain | `pulse.staedean.com` - **pending**, see section 2.4 |
 | HTTPS | Included, free, auto-renewing managed certificate |
 | Site content | `product-pulse/site/` - `index.html`, `sessions.json`, `assets/`, `CNAME`, `.nojekyll` |
 | Deploy path | GitHub repo, `main` branch, via `.github/workflows/deploy-pages.yml` |
@@ -46,16 +48,33 @@ Decide where the repo lives:
 
 1. Push to `main` with a change under `site/**` (or just push the initial commit), or trigger it manually: repo **Actions** tab > **Deploy Product Pulse site to GitHub Pages** > **Run workflow** (this uses the `workflow_dispatch` trigger).
 2. Watch the run: it has two jobs, `validate` (JSON sanity check) then `deploy` (needs `validate` to pass first).
-3. On success, the `deploy` job's environment shows the live URL (`https://<org-or-user>.github.io/product-pulse/` by default, before a custom domain is attached). Open it to confirm the page loads.
+3. On success, the `deploy` job's environment shows the live URL. **Done** - the live URL is <https://staedean-b-v.github.io/SDN-PULSE/> (first deploy succeeded 2026-09-08). Open it to confirm the page loads.
 
-### 2.4 Custom domain and DNS
+### 2.4 Custom domain and DNS - PENDING (deferred by decision)
 
-1. Repo **Settings > Pages > Custom domain**, enter `pulse.staedean.com` (or whatever is finally chosen), save.
-2. GitHub writes/expects `site/CNAME` to contain exactly that hostname - it already does (see section 5). **If the custom domain configured in GitHub Pages settings ever changes, `site/CNAME` must be updated to match, or deleted entirely if no custom domain is used** - a mismatch between the Settings value and the file causes GitHub to keep resetting or ignoring the domain.
-3. Ask whoever manages the `staedean.com` DNS zone to add a **CNAME** record: `pulse.staedean.com` -> `<org-or-user>.github.io`.
-4. Back in **Settings > Pages**, GitHub shows a DNS check status (pending / verified / error) once the record is visible. This can take anywhere from minutes to a few hours depending on DNS propagation.
-5. Once DNS check passes, GitHub provisions a free managed certificate automatically (can take up to ~24 hours, usually much faster). Tick **Enforce HTTPS** once it is available (the checkbox is disabled/greyed out until the certificate is ready).
-6. **Who owns DNS**: unconfirmed in the plan - flagged under "Open items for Henry / stakeholders" as needing the final domain name and DNS owner. Get the CNAME record added by whoever manages the `staedean.com` zone before relying on the custom domain in production.
+**Decision, 2026-09-08**: keep the current `https://staedean-b-v.github.io/SDN-PULSE/` URL for the moment. Switch to `pulse.staedean.com` later, when there's time to do the DNS + GitHub Pages settings change below. Because the site currently lives under the `/SDN-PULSE/` subpath, every link in `site/index.html` is a **relative** path, not root-absolute - this was verified by grepping for `href="/` and `src="/` in `site/index.html` (no hits). Keeping links relative means the later domain switch needs **no HTML change**.
+
+**Where DNS lives**: `staedean.com` is hosted at **EuroDNS** (nameservers `ns1`-`ns4.eurodns.com`). Henry has access to the EuroDNS control panel.
+
+**DNS record needed for the switch** (not yet created):
+
+| Field | Value |
+| --- | --- |
+| Type | CNAME |
+| Host | `pulse` |
+| Target | `staedean-b-v.github.io` (add the trailing dot, e.g. `staedean-b-v.github.io.`, if EuroDNS requires a fully-qualified target) |
+| TTL | 3600 |
+
+**Switch procedure, when ready:**
+
+1. In EuroDNS, add the CNAME record above under the `staedean.com` zone.
+2. Set the custom domain on the repo - either in the GitHub UI (**Settings > Pages > Custom domain**, enter `pulse.staedean.com`, save) or via the API: `gh api -X PUT repos/STAEDEAN-B-V/SDN-PULSE/pages -f cname=pulse.staedean.com`.
+3. Wait for GitHub's DNS check to go from pending to verified (minutes to a few hours depending on propagation).
+4. Once verified, GitHub provisions a free managed certificate automatically (up to ~24 hours, usually faster). Tick **Enforce HTTPS** once the checkbox becomes available.
+
+**Important - what actually sets the domain**: with the **GitHub Actions** Pages source (which this repo uses), a `CNAME` file inside the published site is **not** what configures the custom domain - the repo's **Settings > Pages** custom-domain value (or the `pages` API field) is the source of truth. `site/CNAME`, if present, is documentation only at this point and can be deleted without affecting anything; do not rely on it to set or change the live domain.
+
+**Optional hardening, deferred**: org-level domain verification for `staedean.com` (adding a TXT record such as `_github-pages-challenge-staedean-b-v` under `pulse.staedean.com`, done once per org in **GitHub org Settings > Pages**) was considered and deferred. It is not required for the CNAME custom-domain setup above to work; it mainly prevents domain takeover/squatting scenarios and can be added later as a hardening step.
 
 ### 2.5 Branch protection (suggested)
 
@@ -102,8 +121,8 @@ Run these after the first deploy and after any change that touches tracking/form
 - [ ] HubSpot tracking code (portal **2697631**) is present in `index.html`, loaded before `</body>` as per the design spec.
 - [ ] The live domain (`pulse.staedean.com` or whatever is finally chosen) is added under **HubSpot > Settings > Website > Domains & URLs > Tracking Code** so HubSpot treats it as a known/tracked domain, not an unrecognized one.
 - [ ] The placeholder HubSpot form `formId` in `index.html` (the "Never miss a pulse" embedded form) is replaced with the real form ID from the HubSpot form built per `docs/02-email-design.md` (subscription type "Product Pulse").
-- [ ] `site/CNAME` contains exactly the custom domain configured in **Settings > Pages > Custom domain** - if that domain ever changes, update or delete this file to match (see section 2.4).
-- [ ] If HubSpot, YouTube, or any other third party ever needs a new script/host, the `Content-Security-Policy` **meta tag** in the `<head>` of `site/index.html` must be updated first (`script-src`, `frame-src`, `img-src`, or `connect-src` as appropriate) or the browser will silently block it. Current CSP already allows: `js.hs-scripts.com`, `js.hsforms.net`, `js.hs-analytics.net`, `js.hsadspixel.net`, `js.hscollectedforms.net`, `js.usemessages.com` (scripts), `forms.hsforms.com` / `api.hubapi.com` / `forms.hscollectedforms.net` (forms/API), `www.youtube.com` / `www.youtube-nocookie.com` (video frames), `app.hubspot.com` (frame-src). Note: this meta-tag CSP has no `frame-ancestors` directive (not supported outside an HTTP response header), so it does not protect against the page being framed by another site - a minor regression versus the old header-based config, acceptable for a public marketing page with no login or sensitive actions.
+- [ ] `site/CNAME` is documentation-only under the GitHub Actions Pages source (see section 2.4) - not required while hosted at the default `staedean-b-v.github.io` URL; only relevant once/if the `pulse.staedean.com` switch happens, and even then the repo's Settings > Pages value is what actually governs the domain, not this file.
+- [ ] If HubSpot, YouTube, or any other third party ever needs a new script/host, the `Content-Security-Policy` **meta tag** in the `<head>` of `site/index.html` must be updated first (`script-src`, `frame-src`, `img-src`, or `connect-src` as appropriate) or the browser will silently block it. Current CSP already allows: `js.hs-scripts.com`, `js.hsforms.net`, `js.hs-analytics.net`, `js.hsadspixel.net`, `js.hscollectedforms.net`, `js.usemessages.com` (scripts), `forms.hsforms.com` / `api.hubapi.com` / `forms.hscollectedforms.net` (forms/API), `www.youtube.com` / `www.youtube-nocookie.com` (video frames), `app.hubspot.com` (frame-src). **Update, 2026-09-08**: the allowlist now also includes Google Ads and LinkedIn Insight hosts - `googletagmanager.com`, `google-analytics.com`, `doubleclick.net` (Google Ads) and `snap.licdn.com`, `px.ads.linkedin.com` (LinkedIn Insight) - because HubSpot's tracking script loads these tags as configured by Marketing in HubSpot; this is a pass-through of HubSpot's own configuration, not a hand-added third party. Note: this meta-tag CSP has no `frame-ancestors` directive (not supported outside an HTTP response header), so it does not protect against the page being framed by another site - a minor regression versus the old header-based config, acceptable for a public marketing page with no login or sensitive actions.
 
 ## 6. Monthly operating loop
 

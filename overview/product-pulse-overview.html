@@ -393,8 +393,8 @@ footer h2 { font-size: 1.1rem; }
           <tr><th>Component</th><th>Tool</th><th>URL / path</th><th>Owner</th></tr>
         </thead>
         <tbody>
-          <tr><td>Landing page</td><td>GitHub Pages</td><td><em>https://pulse.staedean.com</em> (domain TBD)</td><td>IT (Henry)</td></tr>
-          <tr><td>Site source</td><td>GitHub repo</td><td><em>github.com/STAEDEAN/product-pulse (org TBD)</em></td><td>IT (Henry)</td></tr>
+          <tr><td>Landing page</td><td>GitHub Pages</td><td><a href="https://staedean-b-v.github.io/SDN-PULSE/">https://staedean-b-v.github.io/SDN-PULSE/</a> (live; custom domain <em>pulse.staedean.com</em> pending)</td><td>IT (Henry)</td></tr>
+          <tr><td>Site source</td><td>GitHub repo</td><td><a href="https://github.com/STAEDEAN-B-V/SDN-PULSE">github.com/STAEDEAN-B-V/SDN-PULSE</a> (public)</td><td>IT (Henry)</td></tr>
           <tr><td>Monthly edit file</td><td>JSON, hand-edited</td><td><code>product-pulse/site/sessions.json</code></td><td>Tim / Marketing</td></tr>
           <tr><td>Site page</td><td>Static HTML</td><td><code>product-pulse/site/index.html</code></td><td>IT (Henry), build</td></tr>
           <tr><td>Deploy workflow</td><td>GitHub Actions</td><td><code>product-pulse/.github/workflows/deploy-pages.yml</code></td><td>IT (Henry)</td></tr>
@@ -420,7 +420,8 @@ footer h2 { font-size: 1.1rem; }
         <h3><span class="dot"></span>Decided</h3>
         <ul>
           <li>Recordings are published to YouTube, unlisted.</li>
-          <li>Hosting is GitHub Pages, served directly from the GitHub repo via a GitHub Actions workflow, with a scripted fallback (<code>Deploy-Site.ps1</code>) for manual commit/push or a legacy branch-based Pages deploy.</li>
+          <li>Hosting is GitHub Pages, served directly from the GitHub repo via a GitHub Actions workflow, with a scripted fallback (<code>Deploy-Site.ps1</code>) for manual commit/push or a legacy branch-based Pages deploy. <strong>Live</strong> as of 2026-09-08 at <a href="https://staedean-b-v.github.io/SDN-PULSE/">staedean-b-v.github.io/SDN-PULSE/</a>.</li>
+          <li>2026-09-08: keep the current <code>staedean-b-v.github.io/SDN-PULSE/</code> URL for now; switch to <code>pulse.staedean.com</code> later (DNS at EuroDNS, Henry has access).</li>
           <li>This round's deliverable is a working landing page, the supporting docs and this HTML overview &mdash; not the live deployment.</li>
           <li>HubSpot's role is discovery only: season kickoff plus one monthly invite. Teams owns every registrant communication after that (confirmation, calendar invite, reminder, cancellation).</li>
         </ul>
@@ -428,7 +429,7 @@ footer h2 { font-size: 1.1rem; }
       <div class="card open">
         <h3><span class="dot"></span>Open (not blocking the build)</h3>
         <ul>
-          <li>Confirm the domain name (<em>pulse.staedean.com</em>?) and who owns DNS.</li>
+          <li>Custom domain switch to <em>pulse.staedean.com</em> is pending - DNS is at EuroDNS (Henry has access); CNAME record and repo Settings > Pages change still to be done.</li>
           <li>Fixed monthly slot and the remaining 2026 dates, from Tim.</li>
           <li>IT tenant check: anonymous join enabled, Teams Enterprise webinar features present.</li>
           <li>HubSpot admin to install the Teams Webinars integration and create the "Product Pulse" subscription type.</li>
