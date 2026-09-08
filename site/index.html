@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>STAEDEAN Product Pulse — 30 minutes of product news, every month</title>
-<meta name="description" content="STAEDEAN Product Pulse is a free 30-minute online session with product news for Dynamics 365 Finance &amp; Supply Chain Management and Business Central. Register for the next pulse or watch a recording.">
+<meta name="description" content="STAEDEAN Product Pulse is a free 30-minute online session with product news for Dynamics 365 Finance &amp; Supply Chain Management and Business Central. Register for the next pulse.">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="STAEDEAN">
 <meta property="og:title" content="STAEDEAN Product Pulse">
-<meta property="og:description" content="30 minutes of product news, every month. Free, online via Teams, recording afterwards.">
+<meta property="og:description" content="30 minutes of product news, every month. Free and online.">
 <meta property="og:url" content="https://pulse.staedean.com/">
 <meta property="og:image" content="https://pulse.staedean.com/assets/logo-staedean.svg">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="STAEDEAN Product Pulse">
-<meta name="twitter:description" content="30 minutes of product news, every month. Free, online via Teams, recording afterwards.">
+<meta name="twitter:description" content="30 minutes of product news, every month. Free and online.">
 
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://pulse.staedean.com/">
@@ -190,6 +190,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
               color var(--dur-fast) var(--ease-out);
   white-space: nowrap;
 }
+.btn[hidden] { display: none; }
 .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
 .btn--primary:hover { background: oklch(70% 0.128 188); }
 
@@ -431,7 +432,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
         <p class="hero__sub">One short online session where our product team shows what shipped, what is coming, and what it means for your Dynamics 365 environment.</p>
         <div class="hero__actions">
           <a class="btn btn--primary" id="hero-cta" href="#upcoming">Register for the next pulse</a>
-          <a class="btn btn--ghost" href="#past">Watch a past pulse</a>
+          <a class="btn btn--ghost" id="hero-secondary-cta" href="#past">See past pulses</a>
         </div>
       </div>
       <aside class="tile" id="hero-tile" aria-labelledby="hero-tile-label">
@@ -462,10 +463,9 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
         </div>
         <div>
           <h3>Ask anything</h3>
-          <p>Live Q&amp;A with the product team. No sales pitch, no scripted answers.</p>
+          <p>Live Q&amp;A with the product team.</p>
         </div>
       </div>
-      <p class="note-line">Free &middot; Online via Microsoft Teams &middot; Recording afterwards</p>
     </div>
   </section>
 
@@ -496,7 +496,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
     <div class="shell reveal">
       <span class="eyebrow">Upcoming pulses</span>
       <h2 id="upcoming-h">Pick a date and register</h2>
-      <p>Registration is handled by Microsoft Teams. After you register, Teams sends the confirmation, the calendar invite and a reminder before the session.</p>
+      <p>Once registered, the invite lands in your inbox.</p>
       <ul class="sessions" id="upcoming-list" aria-live="polite"></ul>
       <div id="upcoming-state"></div>
     </div>
@@ -506,7 +506,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   <section id="past" class="band-paper-2" aria-labelledby="past-h">
     <div class="shell reveal">
       <span class="eyebrow">Past pulses</span>
-      <h2 id="past-h">Missed one? Watch the recording</h2>
+      <h2 id="past-h">Past pulses</h2>
       <ul class="past-grid" id="past-list" aria-live="polite"></ul>
       <div id="past-state"></div>
       <div class="show-all">
@@ -579,7 +579,6 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
     </div>
     <div class="footer__fine">
       <span>&copy; <span id="year">2026</span> STAEDEAN. All rights reserved.</span>
-      <span>Recordings hosted on YouTube. Sessions run on Microsoft Teams.</span>
     </div>
   </div>
 </footer>
@@ -720,8 +719,6 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
       var h3 = el("h3", "session__title", s.title || "Product Pulse");
       body.appendChild(h3);
       if (s.teaser) { body.appendChild(el("p", "session__teaser", s.teaser)); }
-      var who = speakerLine(s);
-      if (who) { body.appendChild(el("p", "session__meta", who)); }
       li.appendChild(body);
 
       var action = el("div", "session__action");
@@ -733,7 +730,6 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
         a.rel = "noopener";
         a.setAttribute("aria-label", "Register for " + (s.title || "this pulse") + " on " + longDate(s.date));
         action.appendChild(a);
-        action.appendChild(el("span", "session__hint", "Teams sends the calendar invite after you register."));
       } else {
         var b = el("span", "btn", "Registration opens soon");
         b.setAttribute("role", "button");
@@ -788,7 +784,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
           a.href = s.recordingUrl;
           a.rel = "noopener";
           a.target = "_blank";
-          a.setAttribute("aria-label", "Watch the recording of " + (s.title || "this pulse") + " (opens on YouTube)");
+          a.setAttribute("aria-label", "Watch the recording of " + (s.title || "this pulse"));
           wrap.appendChild(a);
         } else {
           wrap.appendChild(el("span", "session__hint", "Recording coming soon."));
@@ -864,6 +860,9 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
     renderHero(next);
     renderUpcoming(upcoming);
     renderPast(past);
+
+    var secondaryCta = $("#hero-secondary-cta");
+    if (secondaryCta) { secondaryCta.hidden = past.length === 0; }
   }
 
   function fail() {

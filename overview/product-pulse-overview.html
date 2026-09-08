@@ -379,6 +379,7 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Teams T&minus;1h reminder</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I (automatic)</td></tr>
           <tr><td>Run the pulse, record</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Upload recording, update <code>sessions.json</code>, commit</td><td class="raci-cell raci-c">C</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>Edit <code>sessions.json</code> (topic/date/links/cancel) &mdash; via Claude</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (backup, GitHub web editor)</td><td class="raci-cell raci-i">&mdash;</td></tr>
         </tbody>
       </table>
     </div>
@@ -395,7 +396,7 @@ footer h2 { font-size: 1.1rem; }
         <tbody>
           <tr><td>Landing page</td><td>GitHub Pages</td><td><a href="https://staedean-b-v.github.io/SDN-PULSE/">https://staedean-b-v.github.io/SDN-PULSE/</a> (live; custom domain <em>pulse.staedean.com</em> pending)</td><td>IT (Henry)</td></tr>
           <tr><td>Site source</td><td>GitHub repo</td><td><a href="https://github.com/STAEDEAN-B-V/SDN-PULSE">github.com/STAEDEAN-B-V/SDN-PULSE</a> (public)</td><td>IT (Henry)</td></tr>
-          <tr><td>Monthly edit file</td><td>JSON, hand-edited</td><td><code>product-pulse/site/sessions.json</code></td><td>Tim / Marketing</td></tr>
+          <tr><td>Monthly edit file</td><td>JSON, edited via Claude</td><td><code>product-pulse/site/sessions.json</code></td><td>Tim (via Claude), Marketing backup</td></tr>
           <tr><td>Site page</td><td>Static HTML</td><td><code>product-pulse/site/index.html</code></td><td>IT (Henry), build</td></tr>
           <tr><td>Deploy workflow</td><td>GitHub Actions</td><td><code>product-pulse/.github/workflows/deploy-pages.yml</code></td><td>IT (Henry)</td></tr>
           <tr><td>Deploy fallback (manual)</td><td>PowerShell helper script</td><td><code>product-pulse/scripts/Deploy-Site.ps1</code></td><td>IT (Henry)</td></tr>
@@ -407,6 +408,9 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Audience</td><td>HubSpot active list</td><td>"Product Pulse audience"</td><td>Marketing</td></tr>
           <tr><td>Webinar runbook</td><td>Markdown</td><td><code>product-pulse/docs/01-webinar-runbook.md</code></td><td>Tim / IT</td></tr>
           <tr><td>Email design doc</td><td>Markdown</td><td><code>product-pulse/docs/02-email-design.md</code></td><td>Marketing</td></tr>
+          <tr><td>Tim's editing guide</td><td>Markdown</td><td><code>product-pulse/docs/04-editing-for-tim.md</code></td><td>Tim / IT</td></tr>
+          <tr><td>Claude editing rules</td><td>Markdown</td><td><code>product-pulse/CLAUDE.md</code></td><td>IT (Henry)</td></tr>
+          <tr><td>Claude editing skill</td><td>Markdown</td><td><code>product-pulse/.claude/skills/pulse-editor/SKILL.md</code></td><td>IT (Henry)</td></tr>
         </tbody>
       </table>
     </div>
@@ -446,6 +450,9 @@ footer h2 { font-size: 1.1rem; }
     <h2>File map</h2>
     <p class="lede" style="margin-bottom:14px;">Everything for this programme lives under one folder.</p>
     <div class="filemap"><span class="cm">product-pulse/</span>
+  CLAUDE.md                  <span class="cm"># rules Claude follows when editing this repo</span>
+  <span class="ws">.claude/skills/pulse-editor/</span>
+    SKILL.md                 <span class="cm"># how Claude edits sessions.json for Tim</span>
   <span class="ws">.github/workflows/</span>
     deploy-pages.yml         <span class="cm"># GitHub Actions -&gt; GitHub Pages deploy</span>
   <span class="ws">site/</span>                      <span class="cm"># deployable static site</span>
@@ -461,6 +468,7 @@ footer h2 { font-size: 1.1rem; }
     01-webinar-runbook.md          <span class="cm"># Tim's step-by-step</span>
     02-email-design.md             <span class="cm"># HubSpot audience, campaign, templates</span>
     03-hosting-and-monthly-ops.md  <span class="cm"># GitHub setup, fallbacks, monthly loop</span>
+    04-editing-for-tim.md          <span class="cm"># Tim's guide to editing via Claude</span>
   <span class="ws">overview/</span>
     product-pulse-overview.html    <span class="cm"># this page</span></div>
   </footer>

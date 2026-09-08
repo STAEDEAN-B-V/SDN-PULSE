@@ -130,11 +130,18 @@ Owner column follows the plan's operating model (Tim as organizer/host; marketin
 
 | Timing | Task | Owner |
 | --- | --- | --- |
-| T-30 days | Create/publish the month's Teams webinar (see `docs/01-webinar-runbook.md`); copy its registration URL into `sessions.json` (`registrationUrl`), commit on GitHub | Tim |
+| T-30 days | Create/publish the month's Teams webinar (see `docs/01-webinar-runbook.md`); copy its registration URL into `sessions.json` (`registrationUrl`) via Claude (see `docs/04-editing-for-tim.md`), commit on GitHub | Tim |
 | T-10 days | Send the HubSpot "next pulse" invite (see `docs/02-email-design.md`) | Marketing |
 | T-1 hour | Teams sends its own reminder to registrants automatically | (automatic, Teams) |
 | T-0 | Run the pulse | Tim |
 | T+1 day | Download the recording, upload to YouTube unlisted, paste the URL into `sessions.json` (`recordingUrl`), set `status` to `past`, commit on GitHub | Tim or marketing |
+
+**Editing `sessions.json`**: Tim now does this via Claude in plain language
+(Claude reads the repo's `CLAUDE.md` and `.claude/skills/pulse-editor/`,
+validates, and commits/pushes for him) — see `docs/04-editing-for-tim.md`
+for the setup and example prompts. Marketing remains the backup path via
+the GitHub web editor described in section 2.6 above, for whenever Tim or
+the Claude/GitHub connector is unavailable.
 
 **Deploy trigger reminder**: a commit to `site/**` on `main` auto-redeploys via `.github/workflows/deploy-pages.yml` - no extra step, whether the edit was made through the GitHub web editor, a PR merge, or a local `git push` (with or without `Deploy-Site.ps1 -Mode Commit`). This replaces the old push-to-the-previous-CI-repo step one-for-one; everything else in the monthly loop is unchanged.
 
