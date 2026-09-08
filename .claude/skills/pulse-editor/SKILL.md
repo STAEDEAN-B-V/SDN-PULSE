@@ -31,7 +31,7 @@ procedure and worked examples.
 5. **Commit and push to `main`** with message `sessions: <what changed>`.
 6. **Confirm**: tell Tim the page redeploys automatically and should show
    the change within about a minute, and give the live URL:
-   https://staedean-b-v.github.io/SDN-PULSE/
+   https://pulse.staedean.com/
 
 ## Guardrails
 

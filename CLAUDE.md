@@ -2,7 +2,7 @@
 
 This repo publishes the STAEDEAN Product Pulse landing page via GitHub Pages
 (source: GitHub Actions, `.github/workflows/deploy-pages.yml`). Live URL:
-**https://staedean-b-v.github.io/SDN-PULSE/**. Repo: `STAEDEAN-B-V/SDN-PULSE`
+**https://pulse.staedean.com/**. Repo: `STAEDEAN-B-V/SDN-PULSE`
 (public — do not put secrets or tokens in any file here).
 
 ## The one rule
@@ -70,7 +70,7 @@ Examples: `sessions: add registration link for December pulse`,
 
 `.github/workflows/deploy-pages.yml` runs a JSON validation job, then
 redeploys the site — typically live within about a minute of the push. The
-live page is **https://staedean-b-v.github.io/SDN-PULSE/**.
+live page is **https://pulse.staedean.com/**.
 
 ## Also in this repo (do not edit unless asked)
 

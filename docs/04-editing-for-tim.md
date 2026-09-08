@@ -60,7 +60,7 @@ automatically — you don't need to reference them.
 - The page **redeploys automatically** — a GitHub Actions workflow checks
   the file is valid, then republishes the site.
 - Within about a minute, the live page reflects your change:
-  **https://staedean-b-v.github.io/SDN-PULSE/**
+  **https://pulse.staedean.com/**
 
 ## If Claude reports a validation error
 

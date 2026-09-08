@@ -8,7 +8,7 @@ Audience: Henry (IT) for one-time setup; marketing / Tim for the monthly loop. N
 | --- | --- |
 | Repo | [`github.com/STAEDEAN-B-V/SDN-PULSE`](https://github.com/STAEDEAN-B-V/SDN-PULSE) (public, org **STAEDEAN-B-V**, default branch `main`) |
 | Hosting | GitHub Pages, served directly from the GitHub repo (Pages source: **GitHub Actions**) - **DONE**, first deploy succeeded 2026-09-08 |
-| Live URL (current) | **<https://staedean-b-v.github.io/SDN-PULSE/>** (project-page subpath) - kept for now per the 2026-09-08 decision below |
+| Live URL (current) | **<https://pulse.staedean.com/>** (project-page subpath) - kept for now per the 2026-09-08 decision below |
 | Custom domain | `pulse.staedean.com` - **pending**, see section 2.4 |
 | HTTPS | Included, free, auto-renewing managed certificate |
 | Site content | `product-pulse/site/` - `index.html`, `sessions.json`, `assets/`, `CNAME`, `.nojekyll` |
@@ -48,11 +48,11 @@ Decide where the repo lives:
 
 1. Push to `main` with a change under `site/**` (or just push the initial commit), or trigger it manually: repo **Actions** tab > **Deploy Product Pulse site to GitHub Pages** > **Run workflow** (this uses the `workflow_dispatch` trigger).
 2. Watch the run: it has two jobs, `validate` (JSON sanity check) then `deploy` (needs `validate` to pass first).
-3. On success, the `deploy` job's environment shows the live URL. **Done** - the live URL is <https://staedean-b-v.github.io/SDN-PULSE/> (first deploy succeeded 2026-09-08). Open it to confirm the page loads.
+3. On success, the `deploy` job's environment shows the live URL. **Done** - the live URL is <https://pulse.staedean.com/> (first deploy succeeded 2026-09-08). Open it to confirm the page loads.
 
 ### 2.4 Custom domain and DNS - PENDING (deferred by decision)
 
-**Decision, 2026-09-08**: keep the current `https://staedean-b-v.github.io/SDN-PULSE/` URL for the moment. Switch to `pulse.staedean.com` later, when there's time to do the DNS + GitHub Pages settings change below. Because the site currently lives under the `/SDN-PULSE/` subpath, every link in `site/index.html` is a **relative** path, not root-absolute - this was verified by grepping for `href="/` and `src="/` in `site/index.html` (no hits). Keeping links relative means the later domain switch needs **no HTML change**.
+**Decision, 2026-09-08**: keep the current `https://pulse.staedean.com/` URL for the moment. Switch to `pulse.staedean.com` later, when there's time to do the DNS + GitHub Pages settings change below. Because the site currently lives under the `/SDN-PULSE/` subpath, every link in `site/index.html` is a **relative** path, not root-absolute - this was verified by grepping for `href="/` and `src="/` in `site/index.html` (no hits). Keeping links relative means the later domain switch needs **no HTML change**.
 
 **Where DNS lives**: `staedean.com` is hosted at **EuroDNS** (nameservers `ns1`-`ns4.eurodns.com`). Henry has access to the EuroDNS control panel.
 

@@ -2,7 +2,7 @@
 
 STAEDEAN Product Pulse: a monthly product webinar series. This repo holds the landing page (GitHub Pages) that lists upcoming and past sessions, plus the runbooks for running the series.
 
-**Live**: <https://staedean-b-v.github.io/SDN-PULSE/> (custom domain `pulse.staedean.com` planned, not yet switched over - see `docs/03-hosting-and-monthly-ops.md`).
+**Live**: <https://pulse.staedean.com/> (custom domain `pulse.staedean.com` planned, not yet switched over - see `docs/03-hosting-and-monthly-ops.md`).
 
 - `site/` is the published page; edit `site/sessions.json` monthly.
 - `docs/` runbooks for Tim (webinars), Marketing (HubSpot) and IT (hosting).
