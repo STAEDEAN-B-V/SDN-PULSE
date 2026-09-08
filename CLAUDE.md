@@ -20,9 +20,9 @@ Top level: `{ "meta": {...}, "sessions": [ {...}, ... ] }`.
 | --- | --- | --- | --- |
 | `id` | Stable identifier for the session | `pp-YYYY-MM`, one per month | `"pp-2026-11"` |
 | `date` | When the pulse runs | ISO 8601 with UTC offset, local time 14:00 Europe/Amsterdam. Use `+01:00` in winter (CET, roughly late Oct–late Mar) and `+02:00` in summer (CEST). Convention is the 2nd Tuesday of the month, but any date/time is allowed if that's what was asked for | `"2026-11-10T14:00:00+01:00"` |
-| `title` | Session title shown on the card | Plain text, **max 70 characters** | `"Rental: contract billing in the December release"` |
-| `teaser` | One-line description under the title | Plain text, **max 80 characters** | `"What's new in STAEDEAN Rental for D365 F&SCM."` |
-| `speakers` | Array of speaker objects | `{ "name": string, "role": string }`, at least one entry (usually Tim Hermans) | `[{ "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }]` |
+| `title` | Session title shown on the card | **Naming convention: `Product Pulse <Month>`** (e.g. `Product Pulse November`). Plain text, max 70 characters | `"Product Pulse November"` |
+| `teaser` | One-line description under the title. **This is where the topic goes**, since the title is always `Product Pulse <Month>` | Plain text, **max 80 characters** | `"What's new in STAEDEAN Rental for D365 F&SCM."` |
+| `speakers` | Array of speaker objects | `{ "name": string, "role": string }`, at least one entry (usually Tim Hermans) | `[{ "name": "Tim Hermans", "role": "Industry Director, STAEDEAN" }]` |
 | `registrationUrl` | Teams webinar registration link | Must start with `https://events.teams.microsoft.com/` — otherwise use `null` | `"https://events.teams.microsoft.com/event/.../registration"` or `null` |
 | `recordingUrl` | Published recording link | Must be a `youtube.com` or `youtu.be` URL — otherwise use `null` | `"https://www.youtube.com/watch?v=abc123"` or `null` |
 | `status` | Lifecycle state | `upcoming` \| `past` \| `cancelled` | `"upcoming"` |

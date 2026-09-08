@@ -156,7 +156,7 @@ Before (webinar not yet created):
   "title": "Rental: contract billing and equipment availability in the December release",
   "teaser": "What is new in STAEDEAN Rental for D365 F&SCM: billing schedules, availability checks and the fixes customers asked for.",
   "speakers": [
-    { "name": "Tim Hermans", "role": "Product Manager, STAEDEAN" }
+    { "name": "Tim Hermans", "role": "Industry Director, STAEDEAN" }
   ],
   "registrationUrl": null,
   "recordingUrl": null,
