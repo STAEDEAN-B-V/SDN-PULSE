@@ -190,7 +190,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
               color var(--dur-fast) var(--ease-out);
   white-space: nowrap;
 }
-.btn[hidden] { display: none; }
+.btn[hidden], section[hidden] { display: none; }
 .btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
 .btn--primary:hover { background: oklch(70% 0.128 188); }
 
@@ -863,6 +863,8 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 
     var secondaryCta = $("#hero-secondary-cta");
     if (secondaryCta) { secondaryCta.hidden = past.length === 0; }
+    var pastSection = $("#past");
+    if (pastSection) { pastSection.hidden = past.length === 0; }
   }
 
   function fail() {
