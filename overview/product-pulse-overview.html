@@ -114,7 +114,6 @@ section .lede { color: var(--color-muted); font-size: 0.92rem; margin: 0 0 26px;
 .legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 14px; font-size: 0.82rem; color: var(--color-muted); }
 .legend-item { display: flex; align-items: center; gap: 8px; }
 .legend-swatch { width: 22px; height: 2px; background: var(--color-ink-2); display: inline-block; }
-.legend-swatch.dashed { background: none; border-top: 2px dashed var(--color-support-purple); width: 22px; }
 
 /* Timeline */
 .timeline { display: flex; flex-direction: column; gap: 0; border-left: 2px solid var(--color-rule); margin-left: 6px; }
@@ -203,33 +202,27 @@ footer h2 { font-size: 1.1rem; }
   <header class="hero">
     <span class="eyebrow">STAEDEAN Product Pulse &mdash; programme overview</span>
     <h1>Product Pulse: how it <span class="h-mark">fits together</span></h1>
-    <p class="purpose">One landing page, a season of Teams webinars created by hand in Teams, and two HubSpot emails a year work as one system &mdash; this page is the map, the monthly checklist, and the RACI for Tim, marketing and IT.</p>
+    <p class="purpose">One landing page, a season of Teams webinars created by hand in Teams, and a season kickoff email plus a T-2 reminder from HubSpot work as one system &mdash; this page is the map, the once-per-season setup, the monthly checklist, and the RACI for Tim, marketing and IT.</p>
   </header>
 
   <section id="architecture">
     <h2>Architecture</h2>
     <p class="lede">Four systems, each doing one job. HubSpot only brings people to the page; Teams owns everything after someone registers.</p>
     <div class="diagram-frame">
-      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to the monthly Teams webinar registration, for a webinar Tim creates by hand in Teams; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section; a dashed optional arrow shows Teams registrants syncing to HubSpot Marketing Events in phase 2.">
+      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to a Teams webinar registration, for webinars Tim creates by hand in Teams; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section.">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#454869"></path>
-          </marker>
-          <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#6749c9"></path>
           </marker>
         </defs>
 
         <style>
           .node-box { fill: var(--color-paper); stroke: var(--color-ink-2); stroke-width: 1.4; }
           .node-box.accent { stroke: var(--color-accent); stroke-width: 2; }
-          .node-box.phase2 { fill: none; stroke: #6749c9; stroke-width: 1.4; stroke-dasharray: 5 4; }
           .node-title { fill: var(--color-ink); font-family: Manrope, sans-serif; font-weight: 700; font-size: 16px; }
           .node-sub { fill: var(--color-muted); font-family: Manrope, sans-serif; font-size: 12px; }
           .flow-line { stroke: #454869; stroke-width: 1.6; fill: none; }
-          .flow-line.dashed { stroke: #6749c9; stroke-dasharray: 6 5; }
           .flow-label { fill: #454869; font-family: "JetBrains Mono", monospace; font-size: 11px; }
-          .flow-label.dashed-label { fill: #6749c9; }
         </style>
 
         <!-- Box A: HubSpot audience -->
@@ -240,7 +233,7 @@ footer h2 { font-size: 1.1rem; }
         <!-- Arrow A -> B -->
         <line class="flow-line" x1="470" y1="86" x2="470" y2="150" marker-end="url(#arrow)"></line>
         <text class="flow-label" x="486" y="108">season kickoff (1x/yr) +</text>
-        <text class="flow-label" x="486" y="122">monthly "next pulse" invite</text>
+        <text class="flow-label" x="486" y="122">T-2 reminder per pulse</text>
         <text class="flow-label" x="486" y="136">(UTM link, discovery only)</text>
 
         <!-- Box B: Landing page -->
@@ -252,7 +245,7 @@ footer h2 { font-size: 1.1rem; }
         <line class="flow-line" x1="470" y1="224" x2="470" y2="290" marker-end="url(#arrow)"></line>
         <text class="flow-label" x="486" y="248">"Register" click &rarr;</text>
         <text class="flow-label" x="486" y="262">Teams registration page</text>
-        <text class="flow-label" x="486" y="276">(one URL per month)</text>
+        <text class="flow-label" x="486" y="276">(all 8 URLs added at season start)</text>
 
         <!-- Box C: Teams webinar registration -->
         <rect class="node-box accent" x="330" y="292" width="280" height="72" rx="10"></rect>
@@ -268,17 +261,6 @@ footer h2 { font-size: 1.1rem; }
         <text class="node-title" x="837" y="314" text-anchor="middle" style="font-size:14px;">Teams: registrant comms</text>
         <text class="node-sub" x="837" y="332" text-anchor="middle">confirmation &middot; calendar invite</text>
         <text class="node-sub" x="837" y="348" text-anchor="middle">T-1h reminder &middot; cancellations</text>
-
-        <!-- Dashed arrow C -> E (phase 2) -->
-        <path class="flow-line dashed" d="M 610 350 C 720 370, 760 385, 790 410" marker-end="url(#arrow-dashed)"></path>
-        <text class="flow-label dashed-label" x="968" y="386" text-anchor="end">phase 2 (optional):</text>
-        <text class="flow-label dashed-label" x="968" y="399" text-anchor="end">registrant sync</text>
-
-        <!-- Box E: HubSpot Marketing Events (phase 2) -->
-        <rect class="node-box phase2" x="702" y="410" width="270" height="72" rx="10"></rect>
-        <text class="node-title" x="837" y="438" text-anchor="middle" style="font-size:14px; fill:#6749c9;">HubSpot Marketing Events</text>
-        <text class="node-sub" x="837" y="456" text-anchor="middle" style="fill:#6749c9;">phase 2 &middot; suppress from next invite</text>
-        <text class="node-sub" x="837" y="470" text-anchor="middle" style="fill:#6749c9;">(native Teams Webinars integration)</text>
 
         <!-- Arrow C -> F (recording down) -->
         <line class="flow-line" x1="470" y1="364" x2="470" y2="440" marker-end="url(#arrow)"></line>
@@ -313,26 +295,27 @@ footer h2 { font-size: 1.1rem; }
       </svg>
     </div>
     <div class="legend">
-      <span class="legend-item"><span class="legend-swatch"></span> live flow (this round)</span>
-      <span class="legend-item"><span class="legend-swatch dashed"></span> phase 2, optional</span>
+      <span class="legend-item"><span class="legend-swatch"></span> live flow</span>
       <span class="legend-item">accent border = the two customer-facing surfaces (landing page, webinar)</span>
     </div>
   </section>
 
   <section id="timeline">
-    <h2>Monthly operating loop</h2>
-    <p class="lede">Repeats eight times a season. Every step is a manual, five-minute step.</p>
+    <h2>Once per season, then the monthly loop</h2>
+    <p class="lede">All 8 webinars are set up once, at season start, so attendees can register for several pulses in advance. Only three steps then repeat, once per pulse.</p>
+    <div class="card" style="margin-bottom: 24px;">
+      <h3 style="margin-bottom:10px;">Once per season</h3>
+      <ul style="margin:0; padding-left: 20px; font-size: 0.9rem;">
+        <li style="margin-bottom:8px;">Tim creates all 8 webinars in Teams, in one sitting.</li>
+        <li style="margin-bottom:8px;">All 8 registration URLs are pasted into <code>sessions.json</code>, in one batch.</li>
+        <li>HubSpot audience segment, subscription type, the season kickoff email, and the 8 scheduled T-2 reminder emails are set up.</li>
+      </ul>
+    </div>
     <div class="timeline">
       <div class="tl-step">
-        <span class="tl-when">T&minus;30 days</span>
-        <h3>Tim creates next month's webinar</h3>
-        <p>Tim creates next month's webinar manually in Teams and copies the registration link, then pastes the registration URL into <code>site/sessions.json</code> and commits on GitHub &mdash; the Actions workflow auto-deploys.</p>
-        <span class="tl-owner">Tim</span>
-      </div>
-      <div class="tl-step">
-        <span class="tl-when">T&minus;10 days</span>
-        <h3>HubSpot monthly invite sends</h3>
-        <p>The "next pulse" email goes to the Product Pulse audience list, with the topic teaser and a UTM-tagged Register link to the landing page.</p>
+        <span class="tl-when">T&minus;2 days</span>
+        <h3>HubSpot sends the reminder email</h3>
+        <p>The T-2 reminder goes to the "Product Pulse audience" segment, with the topic teaser and a UTM-tagged Register link to the landing page.</p>
         <span class="tl-owner">Marketing</span>
       </div>
       <div class="tl-step">
@@ -368,14 +351,14 @@ footer h2 { font-size: 1.1rem; }
           <tr class="group-row"><td colspan="4">One-time setup</td></tr>
           <tr><td>GitHub Pages + custom domain</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
           <tr><td>GitHub repo + Actions workflow (fallback: <code>Deploy-Site.ps1</code>)</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
-          <tr><td>Create the 8 season webinars (manual, in Teams)</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">&mdash;</td></tr>
-          <tr><td>HubSpot subscription type, list, campaign, templates</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
+          <tr><td>Create all 8 season webinars, in one sitting (manual, in Teams)</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>Paste all 8 registration URLs into <code>sessions.json</code>, in one batch</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (backup, GitHub web editor)</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>HubSpot subscription type, list, campaign, templates, kickoff + 8 reminder emails</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
           <tr><td>HubSpot tracking code + form embed on landing page</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (deploys to site)</td></tr>
           <tr><td>YouTube channel setup</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
           <tr><td>Tenant check: anonymous join + webinar features</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
           <tr class="group-row"><td colspan="4">Monthly steps</td></tr>
-          <tr><td>Create webinar manually in Teams, paste URL, commit</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">&mdash;</td></tr>
-          <tr><td>HubSpot monthly invite send</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>HubSpot T&minus;2 reminder send</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Teams T&minus;1h reminder</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I (automatic)</td></tr>
           <tr><td>Run the pulse, record</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Upload recording, update <code>sessions.json</code>, commit</td><td class="raci-cell raci-c">C</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
@@ -428,6 +411,8 @@ footer h2 { font-size: 1.1rem; }
           <li>This round's deliverable is a working landing page, the supporting docs and this HTML overview &mdash; not the live deployment.</li>
           <li>HubSpot's role is discovery only: season kickoff plus one monthly invite. Teams owns every registrant communication after that (confirmation, calendar invite, reminder, cancellation).</li>
           <li>2026-09-09: webinars are created manually in Teams; the scripted Graph-based creation was dropped (Graph webinar creation is delegated-only and 8 per season does not justify the tooling).</li>
+          <li>2026-09-09: all webinars for the season are created in one go so attendees can register for several pulses in advance.</li>
+          <li>2026-09-09: the HubSpot Marketing Events registrant sync (phase 2) is dropped; the setup stays simple, at the cost of registrants receiving both the HubSpot reminder and the Teams reminder.</li>
         </ul>
       </div>
       <div class="card open">
@@ -436,7 +421,7 @@ footer h2 { font-size: 1.1rem; }
           <li>Custom domain switch to <em>pulse.staedean.com</em> is pending - DNS is at EuroDNS (Henry has access); CNAME record and repo Settings > Pages change still to be done.</li>
           <li>Fixed monthly slot and the remaining 2026 dates, from Tim.</li>
           <li>IT tenant check: anonymous join enabled, Teams Enterprise webinar features present.</li>
-          <li>HubSpot admin to install the Teams Webinars integration and create the "Product Pulse" subscription type.</li>
+          <li>HubSpot admin to create the "Product Pulse" subscription type.</li>
           <li>YouTube channel: existing STAEDEAN channel or a new one, and who uploads.</li>
         </ul>
       </div>

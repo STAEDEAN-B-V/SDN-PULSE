@@ -6,11 +6,11 @@ Audience: Tim Hermans (host). No Teams admin or scripting knowledge assumed.
 
 Product Pulse is a monthly product-news session. Microsoft Teams webinars **cannot recur** - there is no "repeat monthly" option like a normal meeting. That means:
 
-> **One webinar per month. Each one is a separate Teams webinar with its own registration link.**
+> **One webinar per pulse. Each one is a separate Teams webinar with its own registration link.**
 
 There is no way around this in Teams today. The upside: each pulse gets its own registration page, its own attendee list, and its own attendance report, which is actually what we want for tracking.
 
-Webinars are created manually by Tim in the Teams calendar - there is no scripted or automated creation. This runbook documents that one procedure end to end: create the webinar in Teams, publish it, paste the registration link into the landing page, run the pulse, then publish the recording.
+**All 8 webinars for the season are created in one sitting, at season start** - not one per month. Doing them all at once means people can browse the landing page and register for several upcoming pulses in advance, rather than waiting for each month's webinar to appear. Webinars are created manually by Tim in the Teams calendar - there is no scripted or automated creation. This runbook documents that one procedure end to end: create all 8 webinars in Teams, publish each, paste the 8 registration links into the landing page in one batch, then run each pulse and publish its recording afterward.
 
 ## Why there is no script
 
@@ -27,7 +27,7 @@ Before creating any webinar, confirm these are in place:
 
 ## Standard settings
 
-Use the same settings every month so Product Pulse looks and behaves consistently.
+Use the same settings for every one of the 8 webinars so Product Pulse looks and behaves consistently.
 
 | Setting | Value |
 | --- | --- |
@@ -68,9 +68,9 @@ Note: capacity, waitlist, manual-approval and the registration field list are se
 
 The website is the follow-the-webinar side of this: whatever date/time Tim actually sets in Teams for a given month is what must appear in `site/sessions.json` for that month's session - the page and the webinar must never disagree. If a date changes in Teams after the page was already updated, update `sessions.json` again to match.
 
-### Where to paste the link
+### Where to paste the links
 
-Open `site/sessions.json` in the Product Pulse repo and paste the URL into the matching session's `registrationUrl` field:
+Once all 8 webinars are created and published, open `site/sessions.json` in the Product Pulse repo and paste each URL into its matching session's `registrationUrl` field, in a single batch edit for the season:
 
 ```json
 {

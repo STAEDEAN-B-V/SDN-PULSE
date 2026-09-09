@@ -128,13 +128,21 @@ Run these after the first deploy and after any change that touches tracking/form
 
 Owner column follows the plan's operating model (Tim as organizer/host; marketing helps with comms; Henry/IT only for infra).
 
+**Once per season** (a single setup session at season start, not repeated monthly):
+
+- Tim creates all 8 webinars for the season in Teams in one sitting (see `docs/01-webinar-runbook.md`).
+- All 8 registration URLs are pasted into `sessions.json` (`registrationUrl`) in one batch via Claude (see `docs/04-editing-for-tim.md`), committed on GitHub.
+
+The recurring monthly loop is then only:
+
 | Timing | Task | Owner |
 | --- | --- | --- |
-| T-30 days | Create/publish the month's Teams webinar (see `docs/01-webinar-runbook.md`); copy its registration URL into `sessions.json` (`registrationUrl`) via Claude (see `docs/04-editing-for-tim.md`), commit on GitHub | Tim |
-| T-10 days | Send the HubSpot "next pulse" invite (see `docs/02-email-design.md`) | Marketing |
+| T-2 days | Send the HubSpot reminder email (see `docs/02-email-design.md`) | Marketing |
 | T-1 hour | Teams sends its own reminder to registrants automatically | (automatic, Teams) |
 | T-0 | Run the pulse | Tim |
 | T+1 day | Download the recording, upload to YouTube unlisted, paste the URL into `sessions.json` (`recordingUrl`), set `status` to `past`, commit on GitHub | Tim or marketing |
+
+Any pulse whose webinar does not exist yet (e.g. one added late, or before next season's batch has been created) shows a disabled "Registration opens soon" button on the landing page instead of a registration link (see `docs/01-webinar-runbook.md`).
 
 **Editing `sessions.json`**: Tim now does this via Claude in plain language
 (Claude reads the repo's `CLAUDE.md` and `.claude/skills/pulse-editor/`,
@@ -164,7 +172,7 @@ Before (webinar not yet created):
 }
 ```
 
-T-30, after the webinar is published (paste the registration URL, `status` stays `"upcoming"`):
+At season start, once the webinar is published (paste the registration URL, `status` stays `"upcoming"`):
 
 ```json
   "registrationUrl": "https://events.teams.microsoft.com/event/88b245ac-b0b2-f1aa-e34a-c81c27abdac2@f9448ec4-804b-46af-b810-62085248da33",
