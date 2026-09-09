@@ -30,16 +30,34 @@
   implication and mitigation notes. If a new third-party host is ever needed
   (script/style/img/connect/frame), update this tag, not a config file.
 -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.hubspot.com https://*.hs-scripts.com https://*.hsforms.net https://*.hs-analytics.net https://*.hsadspixel.net https://*.hscollectedforms.net https://*.usemessages.com https://*.hs-banner.com https://www.googletagmanager.com https://*.google-analytics.com https://snap.licdn.com https://*.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://img.youtube.com https://i.ytimg.com https://*.hubspot.com https://*.hsforms.com https://*.hubspotusercontent.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.doubleclick.net https://px.ads.linkedin.com https://*.licdn.com; connect-src 'self' https://*.hubspot.com https://*.hubapi.com https://*.hsforms.com https://*.hscollectedforms.net https://*.hs-banner.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.doubleclick.net https://px.ads.linkedin.com; frame-src https://td.doubleclick.net https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://*.hubspot.com https://*.hsforms.com; base-uri 'self'; form-action 'self' https://*.hsforms.com">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://*.hubspot.com https://*.hs-scripts.com https://*.hsforms.net https://*.hs-analytics.net https://*.hsadspixel.net https://*.hscollectedforms.net https://*.usemessages.com https://*.hs-banner.com https://www.googletagmanager.com https://*.google-analytics.com https://snap.licdn.com https://*.licdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://staedean.com; img-src 'self' data: https://img.youtube.com https://i.ytimg.com https://*.hubspot.com https://*.hsforms.com https://*.hubspotusercontent.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.doubleclick.net https://px.ads.linkedin.com https://*.licdn.com; connect-src 'self' https://*.hubspot.com https://*.hubapi.com https://*.hsforms.com https://*.hscollectedforms.net https://*.hs-banner.com https://*.google-analytics.com https://*.googletagmanager.com https://*.google.com https://*.doubleclick.net https://px.ads.linkedin.com; frame-src https://td.doubleclick.net https://www.googletagmanager.com https://www.youtube.com https://www.youtube-nocookie.com https://*.hubspot.com https://*.hsforms.com; base-uri 'self'; form-action 'self' https://*.hsforms.com">
 
+<link rel="preconnect" href="https://staedean.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <!-- Brand tokens (colours, fonts, spacing, radii). Marketing's edit surface — see docs/05-brand-changes-for-marketing.md -->
 <link rel="stylesheet" href="./theme.css">
 
 <style>
+/* ---------------- brand webfonts ----------------
+   Gilroy is STAEDEAN's licensed brand face. We load the exact same files
+   staedean.com serves, from staedean.com's own CDN, so this page renders
+   identically to the main site and we redistribute nothing ourselves.
+   Both files are single-weight (400); heavier headings are synthesised by
+   the browser, which is what the main site does too. */
+@font-face {
+  font-family: "Gilroy SemiBold";
+  src: url("https://staedean.com/hubfs/raw_assets/public/StaedeanTheme/fonts/gilroy-semibold.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Gilroy Medium";
+  src: url("https://staedean.com/hubfs/raw_assets/public/StaedeanTheme/fonts/gilroy-medium.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+
 /* ------------------------------------------------------------------
    STAEDEAN component styles. Tokens live in theme.css (loaded above);
    this block only consumes those custom properties, it does not
@@ -71,7 +89,7 @@ h1, h2, h3, .display {
   margin: 0 0 0.5em;
   font-weight: 700;
 }
-h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 800; }
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 700; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
 h3 { font-size: 1.125rem; letter-spacing: -0.01em; }
 p  { margin: 0 0 1rem; }
@@ -190,7 +208,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   font-size: 0.7rem; color: var(--color-teal); margin: 0 0 0.9rem;
 }
 .tile__day {
-  font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1;
+  font-family: var(--font-display); font-weight: 700; font-size: 3.4rem; line-height: 1;
   color: var(--band-ink); font-variant-numeric: tabular-nums; letter-spacing: -0.03em;
 }
 .tile__month {
@@ -260,7 +278,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   padding: 0.85rem 0.5rem; text-align: center; width: 112px; background: var(--color-paper);
 }
 .session__day {
-  font-family: var(--font-display); font-weight: 800; font-size: 2rem; line-height: 1;
+  font-family: var(--font-display); font-weight: 700; font-size: 2rem; line-height: 1;
   color: var(--color-ink); font-variant-numeric: tabular-nums;
 }
 .session__mon {
