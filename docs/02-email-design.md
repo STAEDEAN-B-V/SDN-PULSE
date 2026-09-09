@@ -92,7 +92,7 @@ Menu path: **Marketing → Campaigns → Create campaign.**
 |---|---|
 | Campaign name | Product Pulse 2026 |
 | Owner | Tim Hermans (or the marketing admin managing sends) |
-| Assets attached | Season kickoff email, all 12 monthly invite emails, the landing page (as an external asset — see below) |
+| Assets attached | Season kickoff email, all 8 monthly invite emails, the landing page (as an external asset — see below) |
 
 ### 3.2 Attaching the external landing page
 
@@ -119,7 +119,7 @@ Note: the landing page's own "Register" buttons use a separate, simpler UTM set 
 
 ### 3.4 Tracking settings for the external domain
 
-Because the landing page lives on a separate domain (e.g. `pulse.staedean.com`) from HubSpot's own hosted pages, register it so tracked visits and campaign attribution work:
+Because the landing page lives on a separate domain (`pulse.staedean.com`) from HubSpot's own hosted pages, register it so tracked visits and campaign attribution work:
 
 Menu path: **Settings → Tracking & Analytics → Tracking Code → Advanced Tracking tab → add the external domain/subdomain.**
 
@@ -192,11 +192,11 @@ Do not use Red (#fa5a4f) in these emails — reserved for accents elsewhere per 
 
 ## 5. Sending mechanics
 
-### 5.1 Recommended: 12 scheduled sends cloned from one template
+### 5.1 Recommended: one scheduled send per pulse, cloned from one template
 
 For the monthly invite, **clone the template/email 12 times (one per pulse) and schedule each individually**, rather than building a workflow keyed off a custom "next pulse date" property.
 
-**Why this is simpler for 12 sends/year:**
+**Why this is simpler for a handful of sends per season:**
 - No property to maintain (`next_pulse_date` or similar) that must stay in sync with `sessions.json` and the Teams webinar schedule — one more thing to get out of sync.
 - No workflow logic (delay branches, re-enrollment guards) to build, test, and debug.
 - Content changes every month anyway (topic teaser, date) — a static scheduled send is edited and reviewed like any other one-off campaign email, which matches how marketing already works with single sends.
@@ -210,7 +210,7 @@ For the monthly invite, **clone the template/email 12 times (one per pulse) and 
 4. On the email's **Settings** tab: set **Subscription type** = Product Pulse; **From name** = Tim Hermans; **Reply-to** = Tim's address (see 5.2); confirm **Campaign** = Product Pulse 2026.
 5. On the **Recipients** tab: send list = "Product Pulse audience" active segment (Section 2.3); exclude the internal staff list here if it's being sent separately, or include both if the internal list should get the same monthly cadence.
 6. On the **Send/Schedule** step: choose **Schedule for later**, set the date ~10 days before that month's pulse, and enable **Adjusted send time** (delivers within 5 minutes of the scheduled time, smooths deliverability — no exact-minute requirement here).
-7. Review and schedule. Repeat for each of the 12 months — do this in a single setup session at season kickoff so all 12 are queued and only content needs occasional last-minute tweaks (e.g. if a topic teaser changes).
+7. Review and schedule. Repeat for each pulse in the season (8 for the 2026-2027 season: Nov 2026 - Jun 2027) — do this in a single setup session at season kickoff so all of them are queued and only content needs occasional last-minute tweaks (e.g. if a topic teaser changes).
 
 Do the same clone-and-schedule for the kickoff — it's a single one-off send using the kickoff template, no scheduling loop needed.
 
@@ -297,7 +297,7 @@ Open/click rates below STAEDEAN's usual benchmark, or a big gap between clicks a
 - [ ] Attach the landing page as an external website page asset on the campaign (Section 3.2).
 - [ ] Build the STAEDEAN-colour email template (Section 4.c).
 - [ ] Draft and schedule the season kickoff email (Section 4.a).
-- [ ] Clone and schedule all 12 monthly invite emails for the season (Section 5.1), each with correct date/topic/UTM.
+- [ ] Clone and schedule one monthly invite email per pulse (8 for the 2026-2027 season) (Section 5.1), each with correct date/topic/UTM.
 - [ ] Confirm From/Reply-to mailbox for Tim is monitored (Section 5.3).
 - [ ] Set up the monthly KPI tracking table (Section 7.2) wherever marketing keeps reporting (this doc, a shared sheet, or a HubSpot dashboard).
 
