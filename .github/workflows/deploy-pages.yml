@@ -62,6 +62,15 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Cache-bust theme.css
+        # GitHub Pages serves CSS with max-age=600, so a returning visitor can see
+        # stale styling for up to 10 minutes after Marketing changes a token.
+        # Stamping the commit SHA onto the stylesheet URL makes every deploy a new
+        # URL, so changes appear immediately and nothing needs bumping by hand.
+        run: |
+          sed -i "s|\./theme\.css|./theme.css?v=${GITHUB_SHA::8}|g" site/index.html
+          grep -o 'theme\.css?v=[0-9a-f]*' site/index.html || (echo "cache-bust failed" && exit 1)
+
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v4
         with:
