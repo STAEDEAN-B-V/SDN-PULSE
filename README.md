@@ -7,6 +7,6 @@ STAEDEAN Product Pulse: a monthly product webinar series. This repo holds the la
 - `site/` is the published page; edit `site/sessions.json` monthly.
 - `docs/` runbooks for Tim (webinars), Marketing (HubSpot) and IT (hosting).
 - `overview/` one-page visual overview.
-- `scripts/` PowerShell helpers.
+- `scripts/` PowerShell deploy helper (webinars are created manually by Tim in Teams).
 
 Deployed by `.github/workflows/deploy-pages.yml` on push to `main`.

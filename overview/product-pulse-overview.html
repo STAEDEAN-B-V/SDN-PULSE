@@ -203,14 +203,14 @@ footer h2 { font-size: 1.1rem; }
   <header class="hero">
     <span class="eyebrow">STAEDEAN Product Pulse &mdash; programme overview</span>
     <h1>Product Pulse: how it <span class="h-mark">fits together</span></h1>
-    <p class="purpose">One landing page, twelve Teams webinars and two HubSpot emails a year work as one system &mdash; this page is the map, the monthly checklist, and the RACI for Tim, marketing and IT.</p>
+    <p class="purpose">One landing page, a season of Teams webinars created by hand in Teams, and two HubSpot emails a year work as one system &mdash; this page is the map, the monthly checklist, and the RACI for Tim, marketing and IT.</p>
   </header>
 
   <section id="architecture">
     <h2>Architecture</h2>
     <p class="lede">Four systems, each doing one job. HubSpot only brings people to the page; Teams owns everything after someone registers.</p>
     <div class="diagram-frame">
-      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to the monthly Teams webinar registration; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section; a dashed optional arrow shows Teams registrants syncing to HubSpot Marketing Events in phase 2.">
+      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to the monthly Teams webinar registration, for a webinar Tim creates by hand in Teams; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section; a dashed optional arrow shows Teams registrants syncing to HubSpot Marketing Events in phase 2.">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#454869"></path>
@@ -257,11 +257,11 @@ footer h2 { font-size: 1.1rem; }
         <!-- Box C: Teams webinar registration -->
         <rect class="node-box accent" x="330" y="292" width="280" height="72" rx="10"></rect>
         <text class="node-title" x="470" y="322" text-anchor="middle">Teams webinar</text>
-        <text class="node-sub" x="470" y="342" text-anchor="middle">organizer: Tim Hermans &middot; 1 of 12/season</text>
+        <text class="node-sub" x="470" y="342" text-anchor="middle">created manually by Tim &middot; 1 of 8/season</text>
 
         <!-- Arrow C -> D (confirmations) -->
         <line class="flow-line" x1="610" y1="316" x2="700" y2="316" marker-end="url(#arrow)"></line>
-        <text class="flow-label" x="618" y="308">confirmation, invite,</text>
+        <text class="flow-label" x="616" y="308">confirmation</text>
 
         <!-- Box D: Teams confirmations/reminders -->
         <rect class="node-box" x="702" y="286" width="270" height="82" rx="10"></rect>
@@ -271,8 +271,8 @@ footer h2 { font-size: 1.1rem; }
 
         <!-- Dashed arrow C -> E (phase 2) -->
         <path class="flow-line dashed" d="M 610 350 C 720 370, 760 385, 790 410" marker-end="url(#arrow-dashed)"></path>
-        <text class="flow-label dashed-label" x="700" y="388">phase 2 (optional):</text>
-        <text class="flow-label dashed-label" x="700" y="402">registrant sync</text>
+        <text class="flow-label dashed-label" x="968" y="386" text-anchor="end">phase 2 (optional):</text>
+        <text class="flow-label dashed-label" x="968" y="399" text-anchor="end">registrant sync</text>
 
         <!-- Box E: HubSpot Marketing Events (phase 2) -->
         <rect class="node-box phase2" x="702" y="410" width="270" height="72" rx="10"></rect>
@@ -321,13 +321,13 @@ footer h2 { font-size: 1.1rem; }
 
   <section id="timeline">
     <h2>Monthly operating loop</h2>
-    <p class="lede">Repeats twelve times a season. Everything except the T-1h reminder is a manual, five-minute step.</p>
+    <p class="lede">Repeats eight times a season. Every step is a manual, five-minute step.</p>
     <div class="timeline">
       <div class="tl-step">
         <span class="tl-when">T&minus;30 days</span>
-        <h3>Create or verify next month's webinar</h3>
-        <p>Create the Teams webinar (or run the optional Graph script), then paste the registration URL into <code>site/sessions.json</code> and commit on GitHub &mdash; the Actions workflow auto-deploys.</p>
-        <span class="tl-owner">Tim (or IT, script, Tim stays organizer)</span>
+        <h3>Tim creates next month's webinar</h3>
+        <p>Tim creates next month's webinar manually in Teams and copies the registration link, then pastes the registration URL into <code>site/sessions.json</code> and commits on GitHub &mdash; the Actions workflow auto-deploys.</p>
+        <span class="tl-owner">Tim</span>
       </div>
       <div class="tl-step">
         <span class="tl-when">T&minus;10 days</span>
@@ -368,13 +368,13 @@ footer h2 { font-size: 1.1rem; }
           <tr class="group-row"><td colspan="4">One-time setup</td></tr>
           <tr><td>GitHub Pages + custom domain</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
           <tr><td>GitHub repo + Actions workflow (fallback: <code>Deploy-Site.ps1</code>)</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
-          <tr><td>Create the 12 season webinars</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-c">C (script, app-only path)</td></tr>
+          <tr><td>Create the 8 season webinars (manual, in Teams)</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>HubSpot subscription type, list, campaign, templates</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
           <tr><td>HubSpot tracking code + form embed on landing page</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (deploys to site)</td></tr>
           <tr><td>YouTube channel setup</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
           <tr><td>Tenant check: anonymous join + webinar features</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
           <tr class="group-row"><td colspan="4">Monthly steps</td></tr>
-          <tr><td>Create/verify webinar, paste URL, commit</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-c">C</td></tr>
+          <tr><td>Create webinar manually in Teams, paste URL, commit</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>HubSpot monthly invite send</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Teams T&minus;1h reminder</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I (automatic)</td></tr>
           <tr><td>Run the pulse, record</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">&mdash;</td></tr>
@@ -400,8 +400,7 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Site page</td><td>Static HTML</td><td><code>product-pulse/site/index.html</code></td><td>IT (Henry), build</td></tr>
           <tr><td>Deploy workflow</td><td>GitHub Actions</td><td><code>product-pulse/.github/workflows/deploy-pages.yml</code></td><td>IT (Henry)</td></tr>
           <tr><td>Deploy fallback (manual)</td><td>PowerShell helper script</td><td><code>product-pulse/scripts/Deploy-Site.ps1</code></td><td>IT (Henry)</td></tr>
-          <tr><td>Webinars</td><td>Microsoft Teams</td><td>Teams calendar &rarr; New meeting &rarr; Webinar</td><td>Tim</td></tr>
-          <tr><td>Webinar creation script (optional)</td><td>Microsoft Graph, <code>virtualEventWebinar</code></td><td><code>product-pulse/scripts/New-ProductPulseWebinars.ps1</code></td><td>IT (Henry) / Tim</td></tr>
+          <tr><td>Webinars</td><td>Microsoft Teams</td><td>Teams calendar &rarr; New meeting &rarr; Webinar (created manually)</td><td>Tim</td></tr>
           <tr><td>Recordings, pre-upload</td><td>Tim's OneDrive</td><td>tenant retention policy applies</td><td>Tim</td></tr>
           <tr><td>Recordings, published</td><td>YouTube, unlisted</td><td><em>channel TBD</em></td><td>Marketing</td></tr>
           <tr><td>Discovery emails</td><td>HubSpot Marketing Hub</td><td>Campaign "Product Pulse 2026"</td><td>Marketing</td></tr>
@@ -428,6 +427,7 @@ footer h2 { font-size: 1.1rem; }
           <li>2026-09-08: custom domain <code>pulse.staedean.com</code> is live over HTTPS (CNAME at EuroDNS to <code>staedean-b-v.github.io</code>); the old <code>staedean-b-v.github.io/SDN-PULSE/</code> address redirects to it.</li>
           <li>This round's deliverable is a working landing page, the supporting docs and this HTML overview &mdash; not the live deployment.</li>
           <li>HubSpot's role is discovery only: season kickoff plus one monthly invite. Teams owns every registrant communication after that (confirmation, calendar invite, reminder, cancellation).</li>
+          <li>2026-09-09: webinars are created manually in Teams; the scripted Graph-based creation was dropped (Graph webinar creation is delegated-only and 8 per season does not justify the tooling).</li>
         </ul>
       </div>
       <div class="card open">
@@ -442,7 +442,7 @@ footer h2 { font-size: 1.1rem; }
       </div>
     </div>
     <div class="band-note">
-      <strong>Reminder for the pitch:</strong> Graph's webinar API is delegated-only for creating webinars as another organizer &mdash; there is no pure app-only path. Either Tim creates the 12 webinars himself, or IT runs the script signed in as Tim (delegated), or IT registers an app with an application access policy scoped to Tim's account. Being Global Admin does not make Tim the organizer.
+      <strong>Reminder for the pitch:</strong> Microsoft Graph's webinar create/publish endpoints are delegated-only ("Application: Not supported") - there is no pure app-only path for creating a webinar as another organizer. Being Global Admin does not make Tim the organizer either. With 8 webinars a season, Tim creates them all himself, by hand, in the Teams calendar.
     </div>
   </section>
 
@@ -462,7 +462,6 @@ footer h2 { font-size: 1.1rem; }
     CNAME                    <span class="cm"># custom domain for GitHub Pages</span>
     .nojekyll                <span class="cm"># skip Jekyll processing on Pages</span>
   <span class="ws">scripts/</span>
-    New-ProductPulseWebinars.ps1   <span class="cm"># optional: create 12 webinars via Graph</span>
     Deploy-Site.ps1                <span class="cm"># manual commit/push and gh-pages fallback</span>
   <span class="ws">docs/</span>
     01-webinar-runbook.md          <span class="cm"># Tim's step-by-step</span>

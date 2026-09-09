@@ -78,6 +78,6 @@ live page is **https://pulse.staedean.com/**.
   editing guide (`docs/04-editing-for-tim.md`).
 - `overview/product-pulse-overview.html` — one-page visual overview (RACI,
   file map).
-- `scripts/` — PowerShell helpers (webinar creation, deploy fallback).
+- `scripts/` — PowerShell helper (deploy fallback). Webinars are created manually by Tim in Teams; there is no creation script.
 - `.claude/skills/pulse-editor/` — the skill that governs how Claude makes
   routine `sessions.json` edits when Tim asks in plain language.

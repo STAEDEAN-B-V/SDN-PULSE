@@ -247,7 +247,7 @@ HubSpot has a native **Microsoft Teams webinars** integration under **Marketing 
 ### 6.2 What IT must do (one-time)
 
 - Connect the integration under **Marketing → Marketing Events settings** (or via the HubSpot App Marketplace listing for Microsoft Teams) — this requires a Microsoft 365 admin consent step, since the connector reads webinar data via Microsoft Graph's `virtualEventWebinar` APIs.
-- Confirm the connecting account/app has read access to Tim's organizer webinars specifically — the same application-access-policy consideration as Workstream 2's scripted webinar creation applies here (an app-only integration needs a Teams application access policy scoped to Tim's mailbox/organizer identity, not just Global Admin/tenant-wide consent).
+- Confirm the connecting account/app has read access to Tim's organizer webinars specifically — an app-only integration needs a Teams application access policy scoped to Tim's mailbox/organizer identity, not just Global Admin/tenant-wide consent.
 - HubSpot's own setup article did not surface the exact PowerShell/consent screen sequence in this pass (see "not confirmed" note below) — IT should walk the in-app connector's setup wizard directly when this phase is scheduled, and capture the actual steps into this doc afterward.
 
 ### 6.3 Using "Registered" as a suppression list
@@ -329,5 +329,5 @@ Open/click rates below STAEDEAN's usual benchmark, or a big gap between clicks a
 ### Not confirmed in this pass (verify in-portal before phase 2 build)
 
 - The exact in-app connector name/location for enabling the Microsoft Teams Webinars integration specifically (the general Marketing Events article confirms it exists and auto-syncs, but its own dedicated setup article was not reachable during this research pass).
-- Whether connecting the Teams integration requires a PowerShell/application-access-policy step comparable to Workstream 2's app-only webinar creation, or whether standard Microsoft 365 admin consent in the connector wizard is sufficient — confirm directly in the connector's setup flow when phase 2 is scheduled.
+- Whether connecting the Teams integration requires a PowerShell/application-access-policy step, or whether standard Microsoft 365 admin consent in the connector wizard is sufficient — confirm directly in the connector's setup flow when phase 2 is scheduled.
 - Whether **Send Time Optimization** (per-contact adaptive timing, distinct from "Adjusted send time") is available on this Marketing Hub Professional portal or requires Enterprise/a minimum list size — confirm in-portal under the email scheduling step.
