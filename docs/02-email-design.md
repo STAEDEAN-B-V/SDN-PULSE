@@ -13,14 +13,15 @@ HubSpot's job in Product Pulse is **discovery only**: get the right people to th
 **HubSpot does:**
 - Hold the "Product Pulse" subscription and the audience list.
 - Send the season kickoff email (once).
-- Send a T-2 reminder email before each pulse (2 days out).
-- Report on opens/clicks/landing-page sessions per send.
+- Send a T-2 reminder email before each pulse (2 days out), suppressed for contacts already registered for that pulse (Section 4.b, Section 6.4).
+- Receive registrant, attendee and cancellation data synced back from the Teams webinar via the native Microsoft Teams Webinars integration (Section 6) — this is part of the design, not an optional add-on.
+- Report on opens/clicks/landing-page sessions per send, and registration/attendance per pulse from real synced data (Section 7).
 
 **HubSpot explicitly does not:**
 - Send registration confirmations, calendar invites, reminders, or cancellation notices — **Teams owns all of that** once someone clicks "Register" and completes Teams webinar registration.
+- Create or publish webinars in Teams. The Microsoft Teams Webinars integration (Section 6) is **one-way (Teams → HubSpot)** — webinars are still created manually by Tim in the Teams calendar (`01-webinar-runbook.md`); that decision is unchanged.
 - Host or link recordings by email — recordings are published on the landing page's "Past pulses" section (YouTube unlisted), not emailed out.
 - Run a nurture/drip sequence. Two emails per year (kickoff) plus one per month (reminder) — nothing more.
-- Sync registrants back from Teams. Registrations are not synced to HubSpot at all — the setup is kept deliberately simple (see the trade-off note in Section 4.b), so the T-2 reminder always goes to the whole audience segment, not just people who haven't registered yet.
 
 If a future request asks HubSpot to "remind registrants" or "send the recording," that is out of scope for this design and duplicates what Teams already does — push back to the landing page + Teams model first.
 
@@ -122,7 +123,7 @@ Because the landing page lives on a separate domain (`pulse.staedean.com`) from 
 
 Menu path: **Settings → Tracking & Analytics → Tracking Code → Advanced Tracking tab → add the external domain/subdomain.**
 
-Do this once, during setup (Section 7), before the first send goes out.
+Do this once, during setup (Section 8), before the first send goes out.
 
 ---
 
@@ -154,7 +155,7 @@ Both emails are written in Tim Hermans's voice: calm, informative, product-news 
 
 **Goal:** Remind the audience of the specific upcoming date/topic and drive a single click to register on the landing page. A short-horizon nudge, not a save-the-date for the whole year — just the next one.
 
-**Note on who receives this:** registrations are not synced back to HubSpot (see Section 1), so this reminder goes to the entire "Product Pulse audience" segment, including people who have already registered via Teams. Teams separately sends its own reminder to registrants only. This means a registrant may receive two reminders from two different systems in the run-up to a pulse — an accepted trade-off for keeping the setup simple, rather than building a registrant-sync integration just to suppress a handful of duplicate emails.
+**Note on who receives this:** the send list is the "Product Pulse audience" segment **AND NOT** already Registered for that pulse's Marketing Event (Section 6.4) — so a registrant receives only the Teams T-1h reminder, not a second one from HubSpot. The suppression segment is what prevents the overlap between the two systems. Fallback, if the Teams Webinars integration is ever unavailable: send to the whole audience segment and accept the overlap, or suppress manually from a Teams registrant export.
 
 **Subject line options:**
 - "2 days to go: {topic}"
@@ -237,29 +238,79 @@ Document this here for completeness; do not build it unless the recommended path
 
 ---
 
-## 6. Reporting
+## 6. Microsoft Teams Webinars integration
 
-### 6.1 Campaign dashboard
+This is part of the design, not an optional phase-2 add-on: it is what makes the T-2 reminder suppress already-registered contacts (Section 4.b) and what turns the KPI table in Section 7 from an estimate into real numbers.
+
+### 6.1 What it is
+
+HubSpot has a native **Microsoft Teams webinars** integration under Marketing Events. It is **one-way: Teams → HubSpot**. It does **not** create, publish or otherwise manage webinars in Teams — webinars are still created manually by Tim in the Teams calendar (`01-webinar-runbook.md`); that decision is unchanged. The integration only reads back what already happened on a webinar that already exists in Teams.
+
+### 6.2 What syncs
+
+Once a webinar is connected, its data syncs into the HubSpot **Marketing Events** object:
+- Registrant, attendee and cancellation counts.
+- Event name, date and time, organizer and description.
+- Per-contact timeline events showing join time, leave time and attendance duration.
+- Per-contact status — **Registered**, **Attended**, **Cancelled**, **No Show** — usable as segment/list filters, and marketing event data can also drive workflow enrollment.
+
+**Thin-contact caveat:** a registrant not already in HubSpot is created as a new contact with **only First Name, Last Name and Email**. A previously deleted contact is not automatically recreated by a new registration.
+
+**Tier requirement:** the connector itself is available on every HubSpot plan; the workflow-enrollment features that key off marketing event data need Professional or Enterprise. STAEDEAN is on Marketing Hub Professional, so both are covered.
+
+### 6.3 One-time setup
+
+Needs a HubSpot admin **and** a Microsoft admin, in this order:
+
+1. Install the HubSpot app in Microsoft Teams **at admin level**, not user level.
+2. Connect the integration on the HubSpot side (Marketing → Marketing Events settings, or the HubSpot App Marketplace listing for Microsoft Teams).
+3. In PowerShell, connect to Microsoft Teams and grant an application access policy for HubSpot's app, scoped to the webinar organizer (Tim Hermans):
+
+   ```powershell
+   # Confirm Tim's exact userPrincipalName in Entra ID first.
+   # The tenant pattern is Firstname.Lastname@staedean.com, but verify before running.
+   Connect-MicrosoftTeams
+   New-CsApplicationAccessPolicy -Identity "HubSpotTeamsWebinarsPolicy" -AppIds "0493df14-0cd5-4c89-b413-e0b9b90bbb17" -Description "HubSpot Teams Webinars integration"
+   Grant-CsApplicationAccessPolicy -PolicyName "HubSpotTeamsWebinarsPolicy" -Identity "tim.hermans@staedean.com"
+   ```
+
+**Organizer-scoping caveat:** the access policy only covers webinars created by the organizer it is scoped to. If Tim stops being the organizer, or someone else creates a Product Pulse webinar, the policy has to be re-granted to the new organizer or that webinar's data will not sync — see the related note in `01-webinar-runbook.md`.
+
+### 6.4 Using "Registered" as the T-2 suppression filter
+
+1. Build a segment/list filter: **Marketing event registration** → "Registered for" → the specific pulse's Teams webinar event.
+2. On the T-2 reminder's **Recipients** tab, send to "Product Pulse audience" **AND NOT** that filter (Section 4.b) — a registrant then gets only the Teams T-1h reminder, not a second send from HubSpot.
+3. The same object's **Attended** filter is available after the pulse, feeding the attendance side of the KPI table (Section 7) without a separate export from Teams.
+
+Sources: [Use HubSpot and Microsoft Teams webinars](https://knowledge.hubspot.com/integrations/use-hubspot-and-microsoft-teams-webinars), [Use marketing events](https://knowledge.hubspot.com/integrations/use-marketing-events).
+
+---
+
+## 7. Reporting
+
+### 7.1 Campaign dashboard
 
 Use the **Product Pulse 2026** campaign's built-in reporting (Marketing → Campaigns → Product Pulse 2026) for the standing view: sent/delivered, open rate, click rate, click-through to the external landing page (from the attached external asset), and influenced contacts/customers if revenue attribution matters later.
 
-### 6.2 Monthly KPI table
+### 7.2 Monthly KPI table
 
-Track per pulse (marketing fills this in monthly — pull email stats from the cloned send, landing sessions from the landing page's analytics/HubSpot tracking, registrations/attendees from Teams):
+Track per pulse (marketing fills this in monthly — pull email stats from the cloned send, landing sessions from the landing page's analytics/HubSpot tracking, and registered/attended/no-show counts plus attendance duration directly from the Marketing Event record, Section 6.2, rather than estimating):
 
-| Month | Sent | Opened | Clicked | Landing sessions | Registrations (Teams) | Attendees |
-|---|---|---|---|---|---|---|
-| Sep 2026 | | | | | | |
-| Oct 2026 | | | | | | |
-| ... | | | | | | |
+| Month | Sent | Opened | Clicked | Landing sessions | Registered | Attended | No-show | Avg. attendance duration |
+|---|---|---|---|---|---|---|---|---|
+| Sep 2026 | | | | | | | | |
+| Oct 2026 | | | | | | | | |
+| ... | | | | | | | | |
+
+Attendance also shows per contact on the contact record's timeline (join time, leave time, duration), so an individual attendee's engagement can be checked without pulling the whole table.
 
 Open/click rates below STAEDEAN's usual benchmark, or a big gap between clicks and registrations, are the signal to revisit subject lines or the landing page's upcoming-pulse copy — not to add more emails.
 
 ---
 
-## 7. Checklists
+## 8. Checklists
 
-### 7.1 One-time setup (before first send)
+### 8.1 One-time setup (before first send)
 
 - [ ] Create subscription type "Product Pulse" (Section 2.1).
 - [ ] Create custom contact property `product_pulse_opt_in` (Section 2.2).
@@ -273,18 +324,23 @@ Open/click rates below STAEDEAN's usual benchmark, or a big gap between clicks a
 - [ ] Draft and schedule the season kickoff email (Section 4.a).
 - [ ] Clone and schedule one T-2 reminder email per pulse (8 for the 2026-2027 season) (Section 5.1), each with correct date/topic/UTM.
 - [ ] Confirm From/Reply-to mailbox for Tim is monitored (Section 5.3).
-- [ ] Set up the monthly KPI tracking table (Section 6.2) wherever marketing keeps reporting (this doc, a shared sheet, or a HubSpot dashboard).
+- [ ] Set up the monthly KPI tracking table (Section 7.2) wherever marketing keeps reporting (this doc, a shared sheet, or a HubSpot dashboard).
+- [ ] Install the HubSpot app in Microsoft Teams at admin level (Section 6.3) — Marketing + IT.
+- [ ] Connect the Microsoft Teams Webinars integration on the HubSpot side (Section 6.3) — Marketing + IT.
+- [ ] In PowerShell, grant the Teams application access policy for HubSpot's app, scoped to Tim as organizer (Section 6.3) — IT.
+- [ ] Build the "Registered for this pulse" suppression segment and wire it into the T-2 reminder's exclusion list (Section 6.4) — Marketing.
 
-### 7.2 Monthly checklist (marketing, ongoing)
+### 8.2 Monthly checklist (marketing, ongoing)
 
 - [ ] T-2 days before the pulse: confirm that month's cloned reminder still has the correct topic teaser (sync with Tim/`sessions.json`) before it sends.
+- [ ] Before that same T-2 send: confirm the suppression segment (Section 6.4) has picked up that pulse's registrants.
 - [ ] Confirm the CTA link's UTM `utm_content` matches that month.
 - [ ] After send: spot-check open/click numbers land in the normal range; flag anomalies.
-- [ ] After the pulse: update the KPI table (Section 6.2) with landing sessions, registrations, attendees.
+- [ ] After the pulse: update the KPI table (Section 7.2) with landing sessions, registered/attended/no-show counts, and attendance duration.
 
 ---
 
-## 8. Sources
+## 9. Sources
 
 - [Create subscriptions for buyers / subscription types overview](https://knowledge.hubspot.com/subscriptions/create-subscriptions)
 - [How do subscription preferences and types work](https://knowledge.hubspot.com/contacts/how-do-subscription-preferences-and-types-work) — subscription type creation path and fields
@@ -297,6 +353,8 @@ Open/click rates below STAEDEAN's usual benchmark, or a big gap between clicks a
 - [Set up sources tracking](https://knowledge.hubspot.com/reports/set-up-sources-tracking) — Advanced Tracking / external domain registration
 - [Create and send marketing emails](https://knowledge.hubspot.com/marketing-email/create-and-send-marketing-emails) — cloning, scheduling, adjusted send time, send speed
 - [Set up an email frequency safeguard](https://knowledge.hubspot.com/marketing-email/set-up-an-email-frequency-safeguard) — confirms Enterprise-only
+- [Use HubSpot and Microsoft Teams webinars](https://knowledge.hubspot.com/integrations/use-hubspot-and-microsoft-teams-webinars) — one-way sync, setup steps, access policy
+- [Use marketing events](https://knowledge.hubspot.com/integrations/use-marketing-events) — Marketing Events object, segment filters, thin-contact creation behaviour
 
 ### Not confirmed in this pass (verify in-portal)
 

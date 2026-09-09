@@ -24,6 +24,7 @@ Before creating any webinar, confirm these are in place:
 2. **Tenant "anonymous join" enabled.** External (non-STAEDEAN) people need to be able to register and join. IT must confirm the tenant meeting policy allows anonymous/external join. If this is off, external registrants will not be able to complete registration or join.
 3. **You are the organizer.** For Product Pulse, Tim Hermans is the organizer of every webinar.
 4. **Marketing as co-organizer.** Add a marketing team member as co-organizer on each webinar so they can help manage registration, branding and chat without needing to be the account that created the webinar.
+5. **Tim stays the organizer HubSpot's access policy is scoped to.** The HubSpot Microsoft Teams Webinars integration (`docs/02-email-design.md`, Section 6) only pulls registration and attendance data for webinars created by the organizer its PowerShell application access policy was granted for — currently Tim. If someone else creates a Product Pulse webinar, or Tim is replaced as organizer, that webinar's registration data will not sync to HubSpot until IT re-grants the policy to the new organizer.
 
 ## Standard settings
 

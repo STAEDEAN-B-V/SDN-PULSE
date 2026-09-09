@@ -209,7 +209,7 @@ footer h2 { font-size: 1.1rem; }
     <h2>Architecture</h2>
     <p class="lede">Four systems, each doing one job. HubSpot only brings people to the page; Teams owns everything after someone registers.</p>
     <div class="diagram-frame">
-      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to a Teams webinar registration, for webinars Tim creates by hand in Teams; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section.">
+      <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Product Pulse architecture: HubSpot audience receives discovery emails pointing to the landing page; the landing page links to a Teams webinar registration, for webinars Tim creates by hand in Teams; Teams sends confirmations and reminders and stores the recording in Tim's OneDrive; the recording is uploaded to YouTube unlisted and linked back on the landing page's past pulses section; the Teams webinar also syncs registrant, attendee and cancellation data one-way back into HubSpot Marketing Events, feeding the T-2 reminder's suppression segment and the attendance reporting.">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0,0 L10,5 L0,10 z" fill="#454869"></path>
@@ -262,6 +262,17 @@ footer h2 { font-size: 1.1rem; }
         <text class="node-sub" x="837" y="332" text-anchor="middle">confirmation &middot; calendar invite</text>
         <text class="node-sub" x="837" y="348" text-anchor="middle">T-1h reminder &middot; cancellations</text>
 
+        <!-- Arrow C -> E (registrant/attendance data synced back to HubSpot) -->
+        <path class="flow-line" d="M 610 350 C 720 372, 760 388, 790 410" marker-end="url(#arrow)"></path>
+        <text class="flow-label" x="968" y="384" text-anchor="end">registrant + attendance data</text>
+        <text class="flow-label" x="968" y="397" text-anchor="end">synced back to HubSpot</text>
+
+        <!-- Box E: HubSpot Marketing Events -->
+        <rect class="node-box" x="702" y="410" width="270" height="72" rx="10"></rect>
+        <text class="node-title" x="837" y="438" text-anchor="middle" style="font-size:14px;">HubSpot Marketing Events</text>
+        <text class="node-sub" x="837" y="456" text-anchor="middle">registered &middot; attended &middot; no-show</text>
+        <text class="node-sub" x="837" y="470" text-anchor="middle">feeds T-2 suppression + reporting</text>
+
         <!-- Arrow C -> F (recording down) -->
         <line class="flow-line" x1="470" y1="364" x2="470" y2="440" marker-end="url(#arrow)"></line>
         <text class="flow-label" x="486" y="392">recording saved to</text>
@@ -309,13 +320,14 @@ footer h2 { font-size: 1.1rem; }
         <li style="margin-bottom:8px;">Tim creates all 8 webinars in Teams, in one sitting.</li>
         <li style="margin-bottom:8px;">All 8 registration URLs are pasted into <code>sessions.json</code>, in one batch.</li>
         <li>HubSpot audience segment, subscription type, the season kickoff email, and the 8 scheduled T-2 reminder emails are set up.</li>
+        <li>The HubSpot &lt;-&gt; Microsoft Teams Webinars integration is installed and connected, and its access policy is scoped to Tim as organizer, so registrant and attendance data syncs back automatically (see the architecture diagram above).</li>
       </ul>
     </div>
     <div class="timeline">
       <div class="tl-step">
         <span class="tl-when">T&minus;2 days</span>
         <h3>HubSpot sends the reminder email</h3>
-        <p>The T-2 reminder goes to the "Product Pulse audience" segment, with the topic teaser and a UTM-tagged Register link to the landing page.</p>
+        <p>The T-2 reminder goes to the "Product Pulse audience" segment excluding people already Registered for that pulse (synced from Teams), with the topic teaser and a UTM-tagged Register link to the landing page. Registrants get only the Teams T-1h reminder instead.</p>
         <span class="tl-owner">Marketing</span>
       </div>
       <div class="tl-step">
@@ -357,6 +369,7 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>HubSpot tracking code + form embed on landing page</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (deploys to site)</td></tr>
           <tr><td>YouTube channel setup</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C</td></tr>
           <tr><td>Tenant check: anonymous join + webinar features</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td></tr>
+          <tr><td>HubSpot Teams Webinars integration setup (app install, connect, PowerShell access policy)</td><td class="raci-cell raci-c">C (organizer being scoped)</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-a">R / A</td></tr>
           <tr class="group-row"><td colspan="4">Monthly steps</td></tr>
           <tr><td>HubSpot T&minus;2 reminder send</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Teams T&minus;1h reminder</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I</td><td class="raci-cell raci-i">I (automatic)</td></tr>
@@ -412,7 +425,7 @@ footer h2 { font-size: 1.1rem; }
           <li>HubSpot's role is discovery only: season kickoff plus one monthly invite. Teams owns every registrant communication after that (confirmation, calendar invite, reminder, cancellation).</li>
           <li>2026-09-09: webinars are created manually in Teams; the scripted Graph-based creation was dropped (Graph webinar creation is delegated-only and 8 per season does not justify the tooling).</li>
           <li>2026-09-09: all webinars for the season are created in one go so attendees can register for several pulses in advance.</li>
-          <li>2026-09-09: the HubSpot Marketing Events registrant sync (phase 2) is dropped; the setup stays simple, at the cost of registrants receiving both the HubSpot reminder and the Teams reminder.</li>
+          <li>2026-09-09: the HubSpot &lt;-&gt; Microsoft Teams Webinars registrant sync is reinstated as part of the design (not an optional phase). Deciding reason: real attendance reporting (registered/attended/no-show, attendance duration) instead of an estimate; suppressing registrants from the T-2 reminder is the second benefit.</li>
         </ul>
       </div>
       <div class="card open">
@@ -422,6 +435,7 @@ footer h2 { font-size: 1.1rem; }
           <li>Fixed monthly slot and the remaining 2026 dates, from Tim.</li>
           <li>IT tenant check: anonymous join enabled, Teams Enterprise webinar features present.</li>
           <li>HubSpot admin to create the "Product Pulse" subscription type.</li>
+          <li>HubSpot admin + Microsoft admin to complete the Teams Webinars integration setup: install the HubSpot Teams app at admin level, connect it in HubSpot, and grant the PowerShell application access policy scoped to Tim as organizer (<code>docs/02-email-design.md</code>, Section 6).</li>
           <li>YouTube channel: existing STAEDEAN channel or a new one, and who uploads.</li>
         </ul>
       </div>

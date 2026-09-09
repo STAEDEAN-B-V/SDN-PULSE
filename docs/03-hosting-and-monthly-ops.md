@@ -137,7 +137,7 @@ The recurring monthly loop is then only:
 
 | Timing | Task | Owner |
 | --- | --- | --- |
-| T-2 days | Send the HubSpot reminder email (see `docs/02-email-design.md`) | Marketing |
+| T-2 days | Send the HubSpot reminder email, suppressed for contacts already Registered for that pulse via the Teams Webinars integration (see `docs/02-email-design.md`, Section 6) | Marketing |
 | T-1 hour | Teams sends its own reminder to registrants automatically | (automatic, Teams) |
 | T-0 | Run the pulse | Tim |
 | T+1 day | Download the recording, upload to YouTube unlisted, paste the URL into `sessions.json` (`recordingUrl`), set `status` to `past`, commit on GitHub | Tim or marketing |
