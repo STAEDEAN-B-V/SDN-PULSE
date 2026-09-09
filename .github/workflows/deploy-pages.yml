@@ -21,6 +21,7 @@ on:
       - main
     paths:
       - "site/**"
+      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch: {}
 
 permissions:
