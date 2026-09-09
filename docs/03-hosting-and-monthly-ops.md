@@ -153,6 +153,17 @@ the Claude/GitHub connector is unavailable.
 
 **Deploy trigger reminder**: a commit to `site/**` on `main` auto-redeploys via `.github/workflows/deploy-pages.yml` - no extra step, whether the edit was made through the GitHub web editor, a PR merge, or a local `git push` (with or without `Deploy-Site.ps1 -Mode Commit`). This replaces the old push-to-the-previous-CI-repo step one-for-one; everything else in the monthly loop is unchanged.
 
+### Who edits what
+
+Two files are the sanctioned, routine edit surfaces - everything else in the
+repo is Henry's:
+
+| File | What it controls | Who | How |
+| --- | --- | --- | --- |
+| `site/sessions.json` | Session content - dates, topics, registration and recording links | Tim | Via Claude, see `docs/04-editing-for-tim.md` |
+| `site/theme.css` | Visual tokens - colours, fonts, spacing, radii | Marketing | Via Claude, see `docs/05-brand-changes-for-marketing.md` |
+| Everything else (`index.html` structure/JS, workflows, scripts, docs) | Structural changes and deployment | Henry | Direct edit, reviewed live before it ships |
+
 ### Exact JSON edit example (one session, both edits)
 
 Before (webinar not yet created):

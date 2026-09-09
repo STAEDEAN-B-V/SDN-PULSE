@@ -376,6 +376,7 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Run the pulse, record</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Upload recording, update <code>sessions.json</code>, commit</td><td class="raci-cell raci-c">C</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-i">&mdash;</td></tr>
           <tr><td>Edit <code>sessions.json</code> (topic/date/links/cancel) &mdash; via Claude</td><td class="raci-cell raci-a">R / A</td><td class="raci-cell raci-c">C (backup, GitHub web editor)</td><td class="raci-cell raci-i">&mdash;</td></tr>
+          <tr><td>Change the page's look (colours, fonts, footer styling) &mdash; via Claude</td><td class="raci-cell raci-i">&mdash;</td><td class="raci-cell raci-a">R</td><td class="raci-cell raci-a">C / A</td></tr>
         </tbody>
       </table>
     </div>
@@ -393,6 +394,7 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Landing page</td><td>GitHub Pages</td><td><a href="https://pulse.staedean.com/">https://pulse.staedean.com/</a> (live; custom domain <em>pulse.staedean.com</em> pending)</td><td>IT (Henry)</td></tr>
           <tr><td>Site source</td><td>GitHub repo</td><td><a href="https://github.com/STAEDEAN-B-V/SDN-PULSE">github.com/STAEDEAN-B-V/SDN-PULSE</a> (public)</td><td>IT (Henry)</td></tr>
           <tr><td>Monthly edit file</td><td>JSON, edited via Claude</td><td><code>product-pulse/site/sessions.json</code></td><td>Tim (via Claude), Marketing backup</td></tr>
+          <tr><td>Brand/visual edit file</td><td>CSS, edited via Claude</td><td><code>product-pulse/site/theme.css</code></td><td>Marketing (via Claude)</td></tr>
           <tr><td>Site page</td><td>Static HTML</td><td><code>product-pulse/site/index.html</code></td><td>IT (Henry), build</td></tr>
           <tr><td>Deploy workflow</td><td>GitHub Actions</td><td><code>product-pulse/.github/workflows/deploy-pages.yml</code></td><td>IT (Henry)</td></tr>
           <tr><td>Deploy fallback (manual)</td><td>PowerShell helper script</td><td><code>product-pulse/scripts/Deploy-Site.ps1</code></td><td>IT (Henry)</td></tr>
@@ -404,8 +406,10 @@ footer h2 { font-size: 1.1rem; }
           <tr><td>Webinar runbook</td><td>Markdown</td><td><code>product-pulse/docs/01-webinar-runbook.md</code></td><td>Tim / IT</td></tr>
           <tr><td>Email design doc</td><td>Markdown</td><td><code>product-pulse/docs/02-email-design.md</code></td><td>Marketing</td></tr>
           <tr><td>Tim's editing guide</td><td>Markdown</td><td><code>product-pulse/docs/04-editing-for-tim.md</code></td><td>Tim / IT</td></tr>
+          <tr><td>Marketing's brand-change guide</td><td>Markdown</td><td><code>product-pulse/docs/05-brand-changes-for-marketing.md</code></td><td>Marketing / IT</td></tr>
           <tr><td>Claude editing rules</td><td>Markdown</td><td><code>product-pulse/CLAUDE.md</code></td><td>IT (Henry)</td></tr>
-          <tr><td>Claude editing skill</td><td>Markdown</td><td><code>product-pulse/.claude/skills/pulse-editor/SKILL.md</code></td><td>IT (Henry)</td></tr>
+          <tr><td>Claude editing skill (sessions)</td><td>Markdown</td><td><code>product-pulse/.claude/skills/pulse-editor/SKILL.md</code></td><td>IT (Henry)</td></tr>
+          <tr><td>Claude editing skill (brand)</td><td>Markdown</td><td><code>product-pulse/.claude/skills/brand-editor/SKILL.md</code></td><td>IT (Henry)</td></tr>
         </tbody>
       </table>
     </div>
@@ -426,6 +430,7 @@ footer h2 { font-size: 1.1rem; }
           <li>2026-09-09: webinars are created manually in Teams; the scripted Graph-based creation was dropped (Graph webinar creation is delegated-only and 8 per season does not justify the tooling).</li>
           <li>2026-09-09: all webinars for the season are created in one go so attendees can register for several pulses in advance.</li>
           <li>2026-09-09: the HubSpot &lt;-&gt; Microsoft Teams Webinars registrant sync is reinstated as part of the design (not an optional phase). Deciding reason: real attendance reporting (registered/attended/no-show, attendance duration) instead of an estimate; suppressing registrants from the T-2 reminder is the second benefit.</li>
+          <li>2026-09-09: the page was aligned to staedean.com styling (coral CTAs, light-only, slim footer) and Marketing can now change visual tokens themselves via Claude.</li>
         </ul>
       </div>
       <div class="card open">
@@ -452,10 +457,13 @@ footer h2 { font-size: 1.1rem; }
   CLAUDE.md                  <span class="cm"># rules Claude follows when editing this repo</span>
   <span class="ws">.claude/skills/pulse-editor/</span>
     SKILL.md                 <span class="cm"># how Claude edits sessions.json for Tim</span>
+  <span class="ws">.claude/skills/brand-editor/</span>
+    SKILL.md                 <span class="cm"># how Claude edits theme.css for Marketing</span>
   <span class="ws">.github/workflows/</span>
     deploy-pages.yml         <span class="cm"># GitHub Actions -&gt; GitHub Pages deploy</span>
   <span class="ws">site/</span>                      <span class="cm"># deployable static site</span>
     index.html               <span class="cm"># landing page, hand-rolled CSS, SDN theme</span>
+    theme.css                <span class="cm"># visual tokens, the only file edited for brand changes</span>
     sessions.json             <span class="cm"># the only file edited monthly</span>
     assets/                  <span class="cm"># logos, speaker placeholder, favicon</span>
     CNAME                    <span class="cm"># custom domain for GitHub Pages</span>
@@ -467,6 +475,7 @@ footer h2 { font-size: 1.1rem; }
     02-email-design.md             <span class="cm"># HubSpot audience, campaign, templates</span>
     03-hosting-and-monthly-ops.md  <span class="cm"># GitHub setup, fallbacks, monthly loop</span>
     04-editing-for-tim.md          <span class="cm"># Tim's guide to editing via Claude</span>
+    05-brand-changes-for-marketing.md <span class="cm"># Marketing's guide to theme.css via Claude</span>
   <span class="ws">overview/</span>
     product-pulse-overview.html    <span class="cm"># this page</span></div>
   </footer>

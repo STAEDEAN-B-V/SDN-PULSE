@@ -5,12 +5,26 @@ This repo publishes the STAEDEAN Product Pulse landing page via GitHub Pages
 **https://pulse.staedean.com/**. Repo: `STAEDEAN-B-V/SDN-PULSE`
 (public — do not put secrets or tokens in any file here).
 
-## The one rule
+## The two sanctioned edit surfaces
 
-**Only edit `site/sessions.json` unless the user (Tim, Henry, or Marketing)
-explicitly asks for something else.** Never touch `site/index.html` or its
-`Content-Security-Policy` meta tag as a side effect of a sessions edit — that
-file's CSP is deliberately locked down and changing it needs its own review.
+This repo has exactly two files that Claude edits on a routine, plain-language
+request, each with its own skill:
+
+- **`site/sessions.json`** — session content (dates, topics, registration and
+  recording links). Tim's file. See `.claude/skills/pulse-editor/` and
+  `docs/04-editing-for-tim.md`.
+- **`site/theme.css`** — visual tokens (colours, fonts, spacing, radii) as
+  plain hex values, loaded by `index.html` before its inline style block.
+  Marketing's file. See `.claude/skills/brand-editor/` and
+  `docs/05-brand-changes-for-marketing.md`.
+
+**Only edit one of these two files unless the user (Tim, Henry, or
+Marketing) explicitly asks for something else.** Never touch
+`site/index.html`'s structure, its `Content-Security-Policy` meta tag, or
+its JavaScript as a side effect of a sessions or theme edit — that file's
+structure and CSP are deliberately locked down and changing them needs its
+own review. Everything else in the repo (workflows, scripts, docs) is off
+limits without Henry's explicit go-ahead.
 
 ## `site/sessions.json` schema
 
@@ -74,10 +88,13 @@ live page is **https://pulse.staedean.com/**.
 
 ## Also in this repo (do not edit unless asked)
 
-- `docs/` — runbooks for webinars, HubSpot email, hosting/ops, and Tim's
-  editing guide (`docs/04-editing-for-tim.md`).
+- `docs/` — runbooks for webinars, HubSpot email, hosting/ops, Tim's editing
+  guide (`docs/04-editing-for-tim.md`), and Marketing's brand-change guide
+  (`docs/05-brand-changes-for-marketing.md`).
 - `overview/product-pulse-overview.html` — one-page visual overview (RACI,
   file map).
 - `scripts/` — PowerShell helper (deploy fallback). Webinars are created manually by Tim in Teams; there is no creation script.
 - `.claude/skills/pulse-editor/` — the skill that governs how Claude makes
   routine `sessions.json` edits when Tim asks in plain language.
+- `.claude/skills/brand-editor/` — the skill that governs how Claude makes
+  routine `theme.css` edits when Marketing asks in plain language.

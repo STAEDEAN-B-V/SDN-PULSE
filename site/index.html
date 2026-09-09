@@ -36,78 +36,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Brand tokens (colours, fonts, spacing, radii). Marketing's edit surface — see docs/05-brand-changes-for-marketing.md -->
+<link rel="stylesheet" href="./theme.css">
+
 <style>
 /* ------------------------------------------------------------------
-   STAEDEAN theme tokens — light drop (default)
-   Source: .agents/skills/hallmark/references/themes/staedean.md
+   STAEDEAN component styles. Tokens live in theme.css (loaded above);
+   this block only consumes those custom properties, it does not
+   define colour/spacing tokens itself. One light palette — no dark mode.
    ------------------------------------------------------------------ */
-:root {
-  --color-paper:      oklch(99.0% 0.004 276);
-  --color-paper-2:    oklch(97.0% 0.006 276);
-  --color-paper-band: oklch(32.3% 0.114 257);   /* Sapphire Blue #00316c */
-
-  --color-ink:        oklch(26.9% 0.058 276);   /* Galaxy Black #1f2342 */
-  --color-ink-2:      oklch(45.0% 0.030 276);
-
-  --color-rule:       oklch(91.6% 0.006 276);
-  --color-rule-2:     oklch(94.5% 0.005 276);
-  --color-muted:      oklch(54.1% 0.010 276);
-  --color-neutral:    oklch(70.0% 0.008 276);
-
-  --color-accent:     oklch(75.2% 0.128 188);   /* Miami Teal #17c8be */
-  --color-accent-2:   oklch(78.0% 0.154 58);
-  --color-accent-ink: oklch(26.9% 0.058 276);
-
-  --color-alert:      oklch(67.9% 0.197 27);
-  --color-focus:      oklch(70.0% 0.180 188);
-
-  --font-display: "Gilroy", "Manrope", system-ui, sans-serif;
-  --font-body:    "Aptos", system-ui, "Segoe UI", "Inter", sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace;
-
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-fast: 160ms; --dur-base: 240ms; --dur-slow: 360ms;
-  --radius-card: 10px; --radius-input: 8px; --radius-pill: 999px;
-
-  /* Full-bleed Galaxy band (hero + footer) — dark in both drops */
-  --band-bg:    oklch(26.9% 0.058 276);
-  --band-bg-2:  oklch(31.0% 0.055 276);
-  --band-ink:   oklch(97.0% 0.006 276);
-  --band-ink-2: oklch(80.0% 0.010 276);
-  --band-rule:  oklch(40.0% 0.030 276);
-
-  --shell: 1100px;
-}
-
-/* Galaxy drop — dark mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-paper:      oklch(26.9% 0.058 276);
-    --color-paper-2:    oklch(31.0% 0.055 276);
-    --color-paper-band: oklch(32.3% 0.114 257);
-
-    --color-ink:        oklch(97.0% 0.006 276);
-    --color-ink-2:      oklch(80.0% 0.010 276);
-
-    --color-rule:       oklch(40.0% 0.030 276);
-    --color-rule-2:     oklch(35.0% 0.040 276);
-    --color-muted:      oklch(70.0% 0.012 276);
-    --color-neutral:    oklch(55.0% 0.020 276);
-
-    --color-accent:     oklch(75.2% 0.128 188);
-    --color-accent-2:   oklch(78.0% 0.154 58);
-    --color-accent-ink: oklch(26.9% 0.058 276);
-
-    --color-alert:      oklch(67.9% 0.197 27);
-    --color-focus:      oklch(78.0% 0.180 188);
-
-    --band-bg:    oklch(22.5% 0.055 276);
-    --band-bg-2:  oklch(27.5% 0.055 276);
-    --band-ink:   oklch(97.0% 0.006 276);
-    --band-ink-2: oklch(80.0% 0.010 276);
-    --band-rule:  oklch(38.0% 0.030 276);
-  }
-}
 
 /* ---------------- base ---------------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -121,8 +58,8 @@ body {
   color: var(--color-ink-2);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: var(--body-font-size);
+  line-height: var(--body-line-height);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -138,7 +75,7 @@ h1 { font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 800; }
 h2 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
 h3 { font-size: 1.125rem; letter-spacing: -0.01em; }
 p  { margin: 0 0 1rem; }
-a  { color: inherit; }
+a  { color: var(--color-coral); }
 
 .shell { max-width: var(--shell); margin-inline: auto; padding-inline: 1.5rem; }
 section { padding-block: clamp(3rem, 7vw, 5.5rem); }
@@ -146,22 +83,24 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .eyebrow {
   font-family: var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--eyebrow-letter-spacing);
   font-size: 0.75rem;
-  color: var(--color-muted);
+  font-weight: 700;
+  color: var(--color-ink);
   margin: 0 0 1rem;
   display: block;
 }
 .eyebrow::before {
+  /* The one place teal is still allowed: a small accent dash, not a fill. */
   content: ""; display: inline-block; width: 1.5em; height: 2px;
-  margin-right: 0.6em; vertical-align: middle; background: var(--color-accent);
+  margin-right: 0.6em; vertical-align: middle; background: var(--color-teal);
 }
 
 .h-mark { position: relative; white-space: nowrap; z-index: 0; }
 .h-mark::after {
   content: ""; position: absolute; left: -0.04em; right: -0.04em;
   bottom: 0.02em; height: 0.44em;
-  background: var(--color-accent); opacity: 0.28;
+  background: var(--color-teal); opacity: 0.30;
   border-radius: 2px; z-index: -1;
 }
 
@@ -169,7 +108,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 
 .skip-link {
   position: absolute; left: -9999px; top: 0; z-index: 99;
-  background: var(--color-accent); color: var(--color-accent-ink);
+  background: var(--color-navy); color: #fff;
   padding: 0.7rem 1.1rem; border-radius: 0 0 var(--radius-input) 0; font-weight: 600;
 }
 .skip-link:focus { left: 0; }
@@ -182,10 +121,11 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 /* ---------------- buttons ---------------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-  font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
-  padding: 0.72rem 1.3rem; border-radius: var(--radius-input);
+  font-family: var(--font-body); font-size: 16px; font-weight: 400;
+  padding: 20px; border-radius: var(--radius-input);
   border: 1px solid transparent; text-decoration: none; cursor: pointer;
-  transition: background var(--dur-fast) var(--ease-out),
+  text-transform: none;
+  transition: box-shadow var(--dur-fast) var(--ease-out),
               border-color var(--dur-fast) var(--ease-out),
               color var(--dur-fast) var(--ease-out);
   white-space: nowrap;
@@ -193,14 +133,20 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .btn[hidden], section[hidden] { display: none; }
 /* Belt and braces: keep the HubSpot chat launcher off this page. */
 #hubspot-messages-iframe-container, #hs-web-interactives-floating-container { display: none !important; }
-.btn--primary { background: var(--color-accent); color: var(--color-accent-ink); }
-.btn--primary:hover { background: oklch(70% 0.128 188); }
+/* Primary CTA — the coral gradient fill from staedean.com. Hover is a glow, never a colour swap. */
+.btn--primary { background: var(--btn-primary-bg); color: var(--btn-primary-color); border: none; }
+.btn--primary:hover {
+  box-shadow: 0 4px 14px rgba(250, 90, 79, 0.35), 0 1px 4px rgba(250, 90, 79, 0.45);
+}
 
-.btn--ghost { background: transparent; color: var(--color-ink); border-color: var(--color-rule); }
-.btn--ghost:hover { border-color: var(--color-accent); }
+/* Secondary CTA — staedean.com has no outlined/ghost button, only a plain text link. */
+.btn--ghost {
+  background: transparent; color: var(--color-ink);
+  border: none; padding: 20px 0; text-decoration: underline; text-decoration-color: transparent;
+}
+.btn--ghost:hover { text-decoration-color: currentColor; }
 
-.on-band .btn--ghost { color: var(--band-ink); border-color: var(--band-rule); }
-.on-band .btn--ghost:hover { border-color: var(--color-accent); }
+.on-band .btn--ghost { color: var(--band-ink); }
 
 .btn[aria-disabled="true"],
 .btn:disabled {
@@ -213,9 +159,9 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .band-galaxy h1, .band-galaxy h2, .band-galaxy h3 { color: var(--band-ink); }
 .band-galaxy .eyebrow { color: var(--band-ink-2); }
 
-.band-sapphire { background: var(--color-paper-band); color: oklch(88% 0.02 257); }
-.band-sapphire h2 { color: oklch(99% 0.004 276); }
-.band-sapphire .eyebrow { color: oklch(85% 0.02 257); }
+.band-sapphire { background: var(--color-paper-band); color: var(--band-ink-2); }
+.band-sapphire h2 { color: var(--band-ink); }
+.band-sapphire .eyebrow { color: var(--band-ink-2); }
 
 .band-paper-2 { background: var(--color-paper-2); }
 
@@ -241,7 +187,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 }
 .tile__label {
   font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
-  font-size: 0.7rem; color: var(--color-accent); margin: 0 0 0.9rem;
+  font-size: 0.7rem; color: var(--color-teal); margin: 0 0 0.9rem;
 }
 .tile__day {
   font-family: var(--font-display); font-weight: 800; font-size: 3.4rem; line-height: 1;
@@ -276,10 +222,10 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .speaker {
   display: flex; gap: 1.25rem; align-items: flex-start;
   border: 1px solid var(--color-rule); border-radius: var(--radius-card);
-  padding: 1.5rem; background: var(--color-paper);
+  padding: 2rem; background: var(--color-paper);
   transition: border-color var(--dur-base) var(--ease-out);
 }
-.speaker:hover { border-color: var(--color-accent); }
+.speaker:hover { border-color: var(--color-coral); }
 .speaker img {
   width: 92px; height: 92px; border-radius: var(--radius-card);
   object-fit: cover; flex: none; background: var(--color-paper-2);
@@ -292,7 +238,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 .speaker p { font-size: 0.95rem; }
 .link-accent {
   color: var(--color-ink); text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  border-bottom: 2px solid var(--color-accent); padding-bottom: 1px;
+  border-bottom: 2px solid var(--color-coral); padding-bottom: 1px;
 }
 .link-accent:hover { color: var(--color-ink); border-bottom-color: var(--color-ink); }
 .speaker--empty { align-items: center; justify-content: center; border-style: dashed; color: var(--color-muted); text-align: center; }
@@ -319,7 +265,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 }
 .session__mon {
   font-family: var(--font-display); font-weight: 700; font-size: 0.8rem;
-  text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-accent); margin-top: 0.25rem;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink); margin-top: 0.25rem;
 }
 .session__yr { font-size: 0.72rem; color: var(--color-muted); margin-top: 0.15rem; font-variant-numeric: tabular-nums; }
 .session__title { margin-bottom: 0.35rem; }
@@ -348,12 +294,12 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   overflow: hidden; display: flex; flex-direction: column; background: var(--color-paper);
   transition: border-color var(--dur-base) var(--ease-out);
 }
-.past-card:hover { border-color: var(--color-accent); }
+.past-card:hover { border-color: var(--color-coral); }
 .past-card__thumb {
   display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
   background: var(--color-paper-2); border-bottom: 1px solid var(--color-rule);
 }
-.past-card__body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+.past-card__body { padding: 1.5rem 2rem 2rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
 .past-card__date {
   font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
   letter-spacing: 0.07em; color: var(--color-muted); margin: 0;
@@ -368,35 +314,51 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 @media (min-width: 860px) { .subscribe__grid { grid-template-columns: minmax(0, 1fr) minmax(300px, 420px); } }
 .subscribe p { max-width: 48ch; }
 .form-slot {
-  background: oklch(99% 0.004 276); color: oklch(26.9% 0.058 276);
-  border-radius: var(--radius-card); padding: 1.5rem;
+  background: var(--color-paper); color: var(--color-ink);
+  border-radius: var(--radius-card); padding: 2rem;
 }
 .form-slot__note {
   font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
-  letter-spacing: 0.06em; color: oklch(54.1% 0.010 276); margin: 1rem 0 0;
+  letter-spacing: 0.06em; color: var(--color-muted); margin: 1rem 0 0;
 }
 .form-fallback { display: grid; gap: 0.75rem; }
 .form-fallback label { font-size: 0.85rem; font-weight: 600; }
 .form-fallback input {
   font: inherit; padding: 0.7rem 0.85rem; border-radius: var(--radius-input);
-  border: 1px solid oklch(91.6% 0.006 276); background: #fff; color: inherit; width: 100%;
+  border: 1px solid var(--color-rule); background: #fff; color: inherit; width: 100%;
 }
 
 /* ---------------- footer ---------------- */
-.footer { padding-block: 3rem; }
+/* Slim footer, main-site styling: light background, hairline rule above the copyright bar. */
+.footer { padding-block: 3rem; background: var(--color-paper); color: var(--color-ink); }
 .footer__grid {
   display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem;
   align-items: center; justify-content: space-between;
 }
 .footer img { height: 22px; width: auto; display: block; }
-.footer nav { display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.9rem; }
-.footer a { color: var(--band-ink-2); text-decoration: none; border-bottom: 1px solid transparent; }
-.footer a:hover { color: var(--band-ink); border-bottom-color: var(--color-accent); }
-.footer__fine {
-  margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--band-rule);
-  font-size: 0.82rem; color: var(--band-ink-2);
-  display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between;
+.footer__follow { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.footer__follow-label {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: var(--eyebrow-letter-spacing); color: var(--color-muted);
 }
+.footer__social { display: flex; gap: 0.75rem; list-style: none; margin: 0; padding: 0; }
+.footer__social a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: var(--radius-card);
+  color: var(--color-ink); border: 1px solid var(--color-rule);
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+}
+.footer__social a:hover { color: var(--color-coral); border-color: var(--color-coral); }
+.footer__social svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+.footer__fine {
+  margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-rule);
+  font-size: 0.82rem; color: var(--color-ink);
+  display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; justify-content: space-between; align-items: center;
+}
+.footer__legal { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+.footer__legal a { color: var(--color-ink); font-size: 12px; text-decoration: none; border-bottom: 1px solid transparent; }
+.footer__legal a:hover { color: var(--color-coral); border-bottom-color: var(--color-coral); }
+.footer__copyright { font-size: 12px; color: var(--color-ink); }
 
 /* ---------------- states ---------------- */
 .state {
@@ -575,18 +537,38 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 </main>
 
 <!-- =========================== FOOTER =========================== -->
-<footer class="band-galaxy on-band footer">
+<footer class="footer">
   <div class="shell">
     <div class="footer__grid">
       <img src="./assets/logo-staedean.svg" alt="STAEDEAN" width="463" height="64">
-      <nav aria-label="Footer">
-        <a href="https://www.staedean.com/privacy-policy" rel="noopener">Privacy policy</a>
-        <a href="mailto:productpulse@staedean.com">productpulse@staedean.com</a>
-        <a href="https://www.staedean.com" rel="noopener">staedean.com</a>
-      </nav>
+      <div class="footer__follow">
+        <span class="footer__follow-label">Follow us</span>
+        <ul class="footer__social">
+          <li>
+            <a href="https://twitter.com/STAEDEAN_Inc" rel="noopener" target="_blank" aria-label="STAEDEAN on X">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/company/staedean" rel="noopener" target="_blank" aria-label="STAEDEAN on LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.14 1.45-2.14 2.94v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.youtube.com/@STAEDEAN_Inc" rel="noopener" target="_blank" aria-label="STAEDEAN on YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.6 15.6V8.4l6.4 3.6z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="footer__fine">
-      <span>&copy; <span id="year">2026</span> STAEDEAN. All rights reserved.</span>
+      <ul class="footer__legal">
+        <li><a href="https://staedean.com/privacy-policy" rel="noopener">Privacy Policy</a></li>
+        <li><a href="https://staedean.com/data-protection-measures" rel="noopener">Data Protection Measures</a></li>
+        <li><a href="https://staedean.com/trust-center" rel="noopener">Trust Center</a></li>
+      </ul>
+      <span class="footer__copyright">&copy; <span id="year">2026</span> STAEDEAN</span>
     </div>
   </div>
 </footer>

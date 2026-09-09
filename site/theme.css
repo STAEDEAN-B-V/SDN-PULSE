@@ -1,0 +1,78 @@
+/* ==================================================================
+   Product Pulse — brand tokens (Marketing's edit surface)
+   ------------------------------------------------------------------
+   This file controls how the page LOOKS: colours, fonts, spacing and
+   corner radii. Changing a value below is safe — it cannot break the
+   page layout or its logic.
+
+   Do NOT add CSS rules here. This file holds custom-property (--token)
+   declarations only, inside the single :root block. New selectors,
+   media queries or component rules belong in site/index.html's inline
+   <style> block and need Henry's review.
+
+   Full guide with worked examples: docs/05-brand-changes-for-marketing.md
+   ================================================================== */
+
+:root {
+
+  /* ---------------------------------------------------------------
+     Brand colours
+     Source of truth: staedean.com (inspected live, 2026-09-09).
+     --------------------------------------------------------------- */
+  --color-teal:   #17C8BE; /* Miami Teal — logo + small accent marks (eyebrow dash) ONLY. Never a button colour. */
+  --color-navy:   #1F2342; /* Galaxy Black / navy — headings, dark bands, footer text */
+  --color-coral:  #FA5A4F; /* Coral — default link colour and the darker stop of the primary-button gradient */
+  --color-coral-2: #FC8659; /* Coral-orange — the lighter stop of the primary-button gradient */
+
+  /* ---------------------------------------------------------------
+     Page and bands
+     --------------------------------------------------------------- */
+  --color-paper:      #FFFFFF; /* Page background (body, all light sections) */
+  --color-paper-2:    #F6F6F9; /* Very light near-white used for alternating sections (Speaker, Past pulses) so they read as a distinct block without a hard colour change */
+  --color-paper-band: #1F2342; /* Background of the "Never miss a pulse" band — same navy as the hero/footer bands (staedean.com uses one dark navy, not a separate blue) */
+
+  --band-bg:    #1F2342; /* Full-bleed dark band background — hero header */
+  --band-bg-2:  #262B4D; /* Slightly lighter navy — the "next pulse" date tile sitting on the hero band */
+  --band-ink:   #FFFFFF; /* Headings on a dark band */
+  --band-ink-2: #C7CBDE; /* Secondary/body text on a dark band (hero subtext, tile time, band eyebrows) */
+  --band-rule:  #3A3F63; /* Hairline dividers on a dark band (inside the date tile, above footer-style rules on dark sections) */
+
+  /* ---------------------------------------------------------------
+     Text
+     --------------------------------------------------------------- */
+  --color-ink:    #1F2342; /* Headings (H1/H2/H3) on light backgrounds */
+  --color-ink-2:  #15295A; /* Body copy colour — paragraphs, teasers, list text */
+  --color-muted:  #5B6478; /* Muted/secondary text — meta lines, captions, placeholder notes */
+  --color-rule:   #E4E6ED; /* Hairline border colour on light backgrounds (card borders, section dividers) */
+  --color-alert:  #FA5A4F; /* "Cancelled" badge text/border — reuses brand coral, no separate error red on this page */
+  --color-focus:  #FA5A4F; /* Keyboard focus ring colour. Coral (not teal) so the ring stays clearly visible on both the white page and the dark navy bands — verified >=3:1 contrast in both cases */
+
+  /* ---------------------------------------------------------------
+     Buttons and links
+     --------------------------------------------------------------- */
+  --btn-primary-bg:     linear-gradient(135deg, #FC8659, #FA5A4F); /* Register buttons — the coral fill, same two-stop gradient as staedean.com */
+  --btn-primary-color:  #FFFFFF; /* Register button text colour (white on the coral gradient) */
+
+  /* ---------------------------------------------------------------
+     Shape and spacing
+     --------------------------------------------------------------- */
+  --radius-card:  8px;   /* Corner radius for cards/panels: speaker cards, past-pulse cards, the subscribe form panel */
+  --radius-input: 4px;   /* Corner radius for buttons and form inputs — matches staedean.com's flat 4px buttons */
+  --radius-pill:  999px; /* Fully-rounded shape for the small "Cancelled" badge */
+  --shell:        1240px; /* Max width of the centred page content — matches staedean.com's container width */
+
+  /* ---------------------------------------------------------------
+     Type
+     --------------------------------------------------------------- */
+  --font-display: "Gilroy", "Manrope", system-ui, sans-serif; /* Headings and the big date-tile numerals */
+  --font-body:    "Aptos", system-ui, "Segoe UI", "Inter", sans-serif; /* Body copy, buttons, everything else */
+  --font-mono:    "JetBrains Mono", ui-monospace, "Cascadia Code", monospace; /* Small uppercase labels (eyebrows, meta lines) */
+
+  --body-font-size:   14px;    /* Base paragraph size — matches staedean.com's body copy */
+  --body-line-height: 24.5px;  /* Paragraph line height — 175% of 14px, matches staedean.com */
+  --eyebrow-letter-spacing: 2.88px; /* Letter-spacing on the small uppercase labels above each heading */
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); /* Animation easing for hover/reveal transitions */
+  --dur-fast: 160ms; /* Fast transition duration (hover states) */
+  --dur-base: 240ms; /* Base transition duration (reveal-on-scroll, card borders) */
+}
