@@ -5,122 +5,21 @@
   },
   "sessions": [
     {
-      "id": "pp-2026-11",
-      "date": "2026-11-10T14:00:00+01:00",
-      "title": "Product Pulse November",
-      "teaser": "Where the STAEDEAN portfolio is heading in 2027, one product at a time.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": "https://events.teams.microsoft.com/event/3b2ca53d-7a20-404e-997f-ffca73604d60@2076b213-fb3f-4bcb-996c-c5276d6d7815?source=copyLinkOneEventsShareDialog",
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2026-12",
-      "date": "2026-12-08T14:00:00+01:00",
-      "title": "Product Pulse December",
-      "teaser": "Billing schedules, availability checks, and Rental's newest release notes.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
       "id": "pp-2027-01",
-      "date": "2027-01-12T14:00:00+01:00",
+      "date": "2027-01-29T12:00:00+01:00",
       "title": "Product Pulse January",
-      "teaser": "STAEDEAN's Business Central apps: today's capabilities and the 2027 plan.",
+      "teaser": "Your monthly heartbeat of what's new at STAEDEAN.",
       "speakers": [
         {
           "name": "Tim Hermans",
           "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2027-02",
-      "date": "2027-02-09T14:00:00+01:00",
-      "title": "Product Pulse February",
-      "teaser": "Traceability, catch weight, and quality checks in STAEDEAN Food for D365.",
-      "speakers": [
+        },
         {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
+          "name": "Michiel Toppers",
+          "role": "Chief Product Officer, STAEDEAN"
         }
       ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2027-03",
-      "date": "2027-03-09T14:00:00+01:00",
-      "title": "Product Pulse March",
-      "teaser": "Kanban, production flows and takt time for mixed-mode manufacturers.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2027-04",
-      "date": "2027-04-13T14:00:00+02:00",
-      "title": "Product Pulse April",
-      "teaser": "Onboarding one trading partner in D365, start to finish, live.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2027-05",
-      "date": "2027-05-11T14:00:00+02:00",
-      "title": "Product Pulse May",
-      "teaser": "The twice-yearly tour: every product, what changed, what to check.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
-      "recordingUrl": null,
-      "status": "upcoming"
-    },
-    {
-      "id": "pp-2027-06",
-      "date": "2027-06-08T14:00:00+02:00",
-      "title": "Product Pulse June",
-      "teaser": "Keeping master data clean after go-live, without leaving Dynamics 365.",
-      "speakers": [
-        {
-          "name": "Tim Hermans",
-          "role": "Industry Director, STAEDEAN"
-        }
-      ],
-      "registrationUrl": null,
+      "registrationUrl": "https://events.teams.microsoft.com/event/2f8bdeb4-afac-4426-8c8e-522d48b8aac5@2076b213-fb3f-4bcb-996c-c5276d6d7815?source=copyLinkOneEventsShareDialog",
       "recordingUrl": null,
       "status": "upcoming"
     }

@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>STAEDEAN Product Pulse — 30 minutes of product news, every month</title>
-<meta name="description" content="STAEDEAN Product Pulse is a free 30-minute online session with product news for Dynamics 365 Finance &amp; Supply Chain Management and Business Central. Register for the next pulse.">
+<title>STAEDEAN Product Pulse — 15 minutes of product news, every month</title>
+<meta name="description" content="STAEDEAN Product Pulse is a free 15-minute live online session with product news for Dynamics 365 Finance &amp; Supply Chain Management and Business Central. Register for the next pulse.">
 
 <!-- Open Graph / social -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="STAEDEAN">
 <meta property="og:title" content="STAEDEAN Product Pulse">
-<meta property="og:description" content="30 minutes of product news, every month. Free and online.">
+<meta property="og:description" content="15 minutes of product news, live, every month. Free and online.">
 <meta property="og:url" content="https://pulse.staedean.com/">
 <meta property="og:image" content="https://pulse.staedean.com/assets/logo-staedean.svg">
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="STAEDEAN Product Pulse">
-<meta name="twitter:description" content="30 minutes of product news, every month. Free and online.">
+<meta name="twitter:description" content="15 minutes of product news, live, every month. Free and online.">
 
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://pulse.staedean.com/">
@@ -410,7 +410,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
     <div class="hero__grid">
       <div>
         <span class="eyebrow">STAEDEAN Product Pulse</span>
-        <h1>30 minutes of <span class="h-mark">product news</span>, every month.</h1>
+        <h1>15 minutes of <span class="h-mark">product news</span>, every month.</h1>
         <p class="hero__sub">One short online session where our product team shows what shipped, what is coming, and what it means for your Dynamics 365 environment.</p>
         <div class="hero__actions">
           <a class="btn btn--primary" id="hero-cta" href="#upcoming">Register for the next pulse</a>
@@ -454,7 +454,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
   <!-- ==================== SPEAKER ==================== -->
   <section id="speaker" class="band-paper-2" aria-labelledby="speaker-h">
     <div class="shell reveal">
-      <span class="eyebrow">Your host</span>
+      <span class="eyebrow">Your hosts</span>
       <h2 id="speaker-h">Who you will hear from</h2>
       <div class="speakers">
         <article class="speaker">
@@ -510,7 +510,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
         <div>
           <span class="eyebrow">Never miss a pulse</span>
           <h2 id="subscribe-h">One email a month, nothing else.</h2>
-          <p>Leave your email address and we send you a short invite about ten days before each pulse, with the topic and the registration link. That is the only thing this list is used for, and you can unsubscribe from any of those emails.</p>
+          <p>Leave your email address and we send you a short reminder two days before each pulse, with the topic and the registration link. That is the only thing this list is used for, and you can unsubscribe from any of those emails.</p>
         </div>
         <div class="form-slot">
           <!--
@@ -629,7 +629,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
 
   function timeString(date) {
     var p = parts(date);
-    var t = (p.hour && p.minute) ? p.hour + ":" + p.minute : "14:00";
+    var t = (p.hour && p.minute) ? p.hour + ":" + p.minute : "12:00";
     return t + " " + tzLabel(date);
   }
 
@@ -722,7 +722,7 @@ section { padding-block: clamp(3rem, 7vw, 5.5rem); }
       li.appendChild(d);
 
       var body = el("div", "session__body");
-      var meta = el("p", "session__meta", longDate(s.date) + " · " + timeString(s.date) + " · 30 min");
+      var meta = el("p", "session__meta", longDate(s.date) + " · " + timeString(s.date) + " · 15 min");
       body.appendChild(meta);
       var h3 = el("h3", "session__title", s.title || "Product Pulse");
       body.appendChild(h3);
