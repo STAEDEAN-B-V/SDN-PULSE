@@ -21,8 +21,11 @@ procedure and worked examples.
      or be `null`.
    - `recordingUrl` must be a `youtube.com` or `youtu.be` URL, or `null`.
    - New session `id` follows `pp-YYYY-MM`.
-   - New session `date`: 14:00 Europe/Amsterdam, `+01:00` in winter /
-     `+02:00` in summer, 2nd Tuesday by convention unless Tim says otherwise.
+   - New session `date`: 12:00 Europe/Amsterdam, `+01:00` in winter /
+     `+02:00` in summer, last Friday of the month by convention unless Tim
+     says otherwise. Each pulse is 15 minutes.
+   - New session `speakers`: Tim Hermans (Industry Director, STAEDEAN) and
+     Michiel Toppers (Chief Product Officer, STAEDEAN) unless told otherwise.
 3. **Validate** the resulting JSON before committing:
    `python -c "import json;json.load(open('site/sessions.json'))"` (or the
    Node equivalent from `CLAUDE.md`).
@@ -38,7 +41,7 @@ procedure and worked examples.
 - **Never invent a URL.** If Tim says "add the registration link" without
   pasting one, ask him for it — don't fabricate a Teams or YouTube URL.
 - **Ask if a date is ambiguous.** "Move it to March" without a day is not
-  enough — confirm the exact date (and note the 2nd-Tuesday convention if
+  enough — confirm the exact date (and note the last-Friday convention if
   relevant) before writing it.
 - **Confirm before deleting a session.** Removing an entry from the array is
   the one destructive operation here — ask "just to confirm, delete pp-...
@@ -65,13 +68,13 @@ procedure and worked examples.
 Commit: `sessions: rename November pulse topic to Copilot`
 
 **2. Move a date**
-> "Push the January pulse back one week, to the 19th."
+> "Move the February pulse one week earlier, to the 19th."
 
 ```diff
-- "date": "2027-01-12T14:00:00+01:00",
-+ "date": "2027-01-19T14:00:00+01:00",
+- "date": "2027-02-26T12:00:00+01:00",
++ "date": "2027-02-19T12:00:00+01:00",
 ```
-Commit: `sessions: move January pulse to the 19th`
+Commit: `sessions: move February pulse to the 19th`
 
 **3. Add a registration link**
 > "The December webinar is live, here's the link:
@@ -111,7 +114,7 @@ Commit: `sessions: add recording and mark November pulse past`
 > from the list I sent you."
 
 Append 12 new objects to the `sessions` array, `id` `pp-2027-07` …
-`pp-2028-06` (or whatever range fits the season), 2nd Tuesday 14:00
+`pp-2028-06` (or whatever range fits the season), last Friday 12:00
 Europe/Amsterdam each month with the correct `+01:00`/`+02:00` offset,
 `registrationUrl: null`, `recordingUrl: null`, `status: "upcoming"`, titles
 and teasers from Tim's list (teaser ≤ 80 chars, title ≤ 70 chars — trim with

@@ -1,6 +1,6 @@
 # Product Pulse - webinar runbook
 
-Audience: Tim Hermans (host). No Teams admin or scripting knowledge assumed.
+Audience: Tim Hermans (organizer; co-hosts with Michiel Toppers). No Teams admin or scripting knowledge assumed.
 
 ## Purpose and the one rule
 
@@ -32,9 +32,9 @@ Use the same settings for every one of the 8 webinars so Product Pulse looks and
 
 | Setting | Value |
 | --- | --- |
-| Naming convention | `Product Pulse - <Month YYYY> - <topic>` (e.g. `Product Pulse - October 2026 - Finance module roadmap`) |
-| Duration | 45 minutes |
-| Day/time | Fixed monthly slot, e.g. 2nd Tuesday of the month, **14:00 Europe/Amsterdam** |
+| Naming convention | `Product Pulse Live - <Month YYYY>` (e.g. `Product Pulse Live - January 2027`) |
+| Duration | 15 minutes |
+| Day/time | Last Friday of the month, **12:00 Europe/Amsterdam** |
 | Access level | Public (anyone with the link can register, including people outside STAEDEAN) |
 | Registration fields | Name, work email, company - required. "Which STAEDEAN products do you use?" - optional |
 | Capacity | 1000 |
@@ -50,11 +50,11 @@ Note: capacity, waitlist, manual-approval and the registration field list are se
 1. Open the Teams calendar (Tim's own calendar, not a shared one - Tim must be signed in as himself).
 2. Click **New meeting > Webinar**. [screenshot: New meeting dropdown showing "Webinar"]
 3. **Basic details tab:**
-   - Title: use the naming convention above, e.g. `Product Pulse - October 2026 - Finance module roadmap`.
-   - Date/time: the fixed monthly slot, 45 minutes.
+   - Title: use the naming convention above, e.g. `Product Pulse Live - January 2027`.
+   - Date/time: the last Friday of the month, 12:00, 15 minutes.
    - Time zone: Europe/Amsterdam (Central European Time).
    - Description: 2-3 sentences on what this month's pulse covers. [screenshot: webinar details form]
-4. **Presenters tab:** add Tim as presenter/organizer (default), add the marketing co-organizer.
+4. **Presenters tab:** add Tim as presenter/organizer (default), add Michiel Toppers as presenter, add the marketing co-organizer.
 5. **Registration tab:**
    - Access level: **Public**.
    - Registration fields: keep name, email, company as required; add "Which STAEDEAN products do you use?" as an optional custom question.
@@ -75,11 +75,14 @@ Once all 8 webinars are created and published, open `site/sessions.json` in the 
 
 ```json
 {
-  "id": "2026-10",
-  "date": "2026-10-13T14:00:00+02:00",
-  "title": "Finance module roadmap",
-  "teaser": "What's shipping next in Finance, and why it matters.",
-  "speakers": ["Tim Hermans"],
+  "id": "pp-2027-01",
+  "date": "2027-01-29T12:00:00+01:00",
+  "title": "Product Pulse January",
+  "teaser": "Your monthly heartbeat of what's new at STAEDEAN.",
+  "speakers": [
+    { "name": "Tim Hermans", "role": "Industry Director, STAEDEAN" },
+    { "name": "Michiel Toppers", "role": "Chief Product Officer, STAEDEAN" }
+  ],
   "registrationUrl": "https://events.teams.microsoft.com/event/<webinar-id>@<tenant-id>",
   "recordingUrl": null,
   "status": "upcoming"
@@ -92,7 +95,7 @@ The easiest way to make this edit is to ask Claude in plain language (see `docs/
 
 - [ ] Join 10 minutes early; confirm audio/video and screen share work.
 - [ ] Start recording as soon as the session opens (Teams: More actions > Record and transcribe > Start recording).
-- [ ] Confirm presenter roles: Tim presents, marketing co-organizer manages chat and Q&A queue.
+- [ ] Confirm presenter roles: Tim and Michiel present, marketing co-organizer manages chat and Q&A queue.
 - [ ] Open the Q&A panel; monitor and promote good questions for live answering.
 - [ ] Moderate chat - remove spam/off-topic links, keep discussion on the pulse topic.
 - [ ] At the end, stop recording, thank attendees, mention the recording will be on the landing page.
@@ -102,14 +105,14 @@ The easiest way to make this edit is to ask Claude in plain language (see `docs/
 1. **Find the recording.** It lands in the organizer's (Tim's) OneDrive, in the **Recordings** folder, a few minutes to a few hours after the session ends.
 2. **Download the MP4.**
 3. **Upload to YouTube (unlisted).** Suggested template:
-   - Title: `Product Pulse - <Month YYYY> - <topic>`
+   - Title: `Product Pulse Live - <Month YYYY>`
    - Description:
      ```
      STAEDEAN Product Pulse for <Month YYYY>: <one-line topic summary>.
 
      Watch upcoming pulses and register at https://pulse.staedean.com
 
-     Speaker: Tim Hermans, STAEDEAN
+     Hosts: Tim Hermans and Michiel Toppers, STAEDEAN
      ```
    - Visibility: **Unlisted**.
 4. **Paste the YouTube URL into `sessions.json`** for that session's `recordingUrl`, and set `status` to `past`. Commit and push.

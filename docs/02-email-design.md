@@ -140,11 +140,11 @@ Both emails are written in Tim Hermans's voice: calm, informative, product-news 
 - "Your monthly product update, on the calendar"
 - "12 Product Pulse sessions, one page to track them"
 
-**Preheader:** "30 minutes of STAEDEAN product news, every month. See what's coming and register."
+**Preheader:** "15 minutes of STAEDEAN product news, live, every month. See what's coming and register."
 
 **Copy outline:**
 1. Opening line from Tim, first person: what Product Pulse is and why he's doing it monthly now (product news, roadmap, live Q&A).
-2. One short paragraph: format — 30 minutes, online via Teams, recording available afterwards on the landing page.
+2. One short paragraph: format — 15 minutes, live online via Teams on the last Friday of the month at 12:00 CET, recording available afterwards on the landing page.
 3. Mention that dates for the rest of 2026 are already published, so they can plan ahead.
 4. Single CTA button: **"See upcoming pulses"** → landing page (UTM `utm_content=kickoff`).
 5. Short sign-off from Tim (name, title, no photo needed if already in the template header).
@@ -162,11 +162,11 @@ Both emails are written in Tim Hermans's voice: calm, informative, product-news 
 - "Product Pulse this {day of week}: {topic}"
 - "{date} — this month's Product Pulse: {one-line topic}"
 
-**Preheader:** "{Date} · 30 minutes · Live product news + Q&A with Tim Hermans."
+**Preheader:** "{Date} · 15 minutes · Live product news + Q&A with Tim Hermans and Michiel Toppers."
 
 **Copy outline:**
 1. One-line topic teaser (what's new this month) — pulled from the same `sessions.json` teaser text used on the landing page, for consistency.
-2. Date, time (CET, with a note that Teams shows local time on the registration page), duration (30 min).
+2. Date, time (CET, with a note that Teams shows local time on the registration page), duration (15 min).
 3. One line reminding what they'll get: "what's new, why it matters, live Q&A" (same three pillars as the landing page).
 4. Single CTA button: **"Register for this pulse"** → landing page's upcoming-pulse entry (UTM `utm_content=<month>`), not directly to the Teams registration URL — keeps the landing page as the single source of truth and lets HubSpot's tracking code capture the click-through session.
 5. One line: "Can't make it? Recordings from past pulses are on the same page."
@@ -233,7 +233,7 @@ Document this here for completeness; do not build it unless the recommended path
 | From name | Tim Hermans |
 | From address | Tim's STAEDEAN mailbox (or a monitored marketing alias with Tim's name, if direct replies to his personal inbox aren't desired) |
 | Reply-to | Same as From, or a monitored alias — must be a real, monitored inbox since this is a "calm, personal" send, not a no-reply |
-| Send-time optimization | Use **Adjusted send time** (available on Professional) when scheduling each send — smooths delivery, avoids the "sent within the same minute as 1000s of other portals" deliverability dip. HubSpot's full **Send Time Optimization** (send-per-contact based on individual open history) may require Enterprise or list-size minimums — confirm availability in-portal before relying on it; if unavailable, a single fixed send time (e.g. Tuesday 10:00 CET) is a fine fallback. |
+| Send-time optimization | Use **Adjusted send time** (available on Professional) when scheduling each send — smooths delivery, avoids the "sent within the same minute as 1000s of other portals" deliverability dip. HubSpot's full **Send Time Optimization** (send-per-contact based on individual open history) may require Enterprise or list-size minimums — confirm availability in-portal before relying on it; if unavailable, a single fixed send time (e.g. 10:00 CET on the send day, two days before the pulse) is a fine fallback. |
 | Frequency cap | HubSpot's **email frequency safeguard** (Settings → Marketing → Email → Send Frequency) is an **Enterprise-only** feature — not available on Professional. Since Product Pulse is only 1 email/month plus 1/year, an automated cap adds little value here; the low, predictable cadence is itself the frequency control. No action needed unless the portal is later upgraded to Enterprise for other reasons. |
 
 ---

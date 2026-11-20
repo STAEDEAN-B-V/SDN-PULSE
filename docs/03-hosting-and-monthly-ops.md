@@ -170,12 +170,13 @@ Before (webinar not yet created):
 
 ```json
 {
-  "id": "pp-2026-12",
-  "date": "2026-12-08T14:00:00+01:00",
-  "title": "Rental: contract billing and equipment availability in the December release",
-  "teaser": "What is new in STAEDEAN Rental for D365 F&SCM: billing schedules, availability checks and the fixes customers asked for.",
+  "id": "pp-2027-02",
+  "date": "2027-02-26T12:00:00+01:00",
+  "title": "Product Pulse February",
+  "teaser": "Your monthly heartbeat of what's new at STAEDEAN.",
   "speakers": [
-    { "name": "Tim Hermans", "role": "Industry Director, STAEDEAN" }
+    { "name": "Tim Hermans", "role": "Industry Director, STAEDEAN" },
+    { "name": "Michiel Toppers", "role": "Chief Product Officer, STAEDEAN" }
   ],
   "registrationUrl": null,
   "recordingUrl": null,
